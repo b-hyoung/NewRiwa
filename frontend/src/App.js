@@ -1,24 +1,22 @@
 import logo from './logo.svg';
 import './App.css';
+import { Route,Router, Routes } from 'react-router-dom';
+import Headers from './Components/Headers'
+import MainPage from './Main/MainPage'
+import UserInfoPage from './UserInfo/UserInfoPage'
+import React,{useState} from 'react'
 
 function App() {
+  const [infoPage , setInfoPage] = useState(false)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Headers open={infoPage} />
+      <Routes>
+          <Route path="/" element={<MainPage />} />
+          <Route path="/userInfo" element={<UserInfoPage />} />
+      </Routes>
+    </>
   );
 }
 
