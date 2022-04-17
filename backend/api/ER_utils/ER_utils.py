@@ -15,6 +15,13 @@ def get_Tier_Num(rank_point):
 	else:
 		return 1
 
+def get_season(seasonId):
+	if seasonId == 0:
+		return "일반"
+	seasonNum = (seasonId // 2) + 1
+	seasonName = "" if seasonId % 2 == 1 else "프리"
+	return("{}시즌 {}".format(seasonName, seasonNum))
+
 def get_ER_char_name(charcode:int):
 	return (ER_char_name[charcode])
 

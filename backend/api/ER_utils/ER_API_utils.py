@@ -6,8 +6,8 @@ from api.error_utils import error_msg
 
 from rest_framework import exceptions
 
-from .ER_utils import get_ER_Tier, get_ER_char_name
-from ..models import ER_Base_Model
+from .ER_utils import get_ER_Tier, get_ER_char_name, get_season
+from ..models import ER_Base_Model, ER_Game_Record
 
 def get_ER_userNum(nickname):
 	headers = {"accept": "applications/json", "x-api-key": ER_API_KEY}
@@ -21,6 +21,12 @@ def get_ER_userNum(nickname):
 def get_ER_userstatus(userNum):
 	headers = {"accept": "applications/json", "x-api-key": ER_API_KEY}
 	user_status = "https://open-api.bser.io/v1/user/stats/"+str(userNum)+'/'+str(ER_API_SEASON)
+	res = requests.get(user_status, headers=headers).json()
+	return res
+
+def get_ER_user_games(userNum):
+	headers = {"accept": "applications/json", "x-api-key": ER_API_KEY}
+	user_status = "https://open-api.bser.io/v1/user/games/"+str(userNum)+'/'
 	res = requests.get(user_status, headers=headers).json()
 	return res
 
@@ -48,8 +54,8 @@ def set_ER_api_data(instance:ER_Base_Model):
 	
 	# # 티어는
 	instance.soloTier = get_ER_Tier(int(user_stats["userStats"][ER_userStats_Solo]["mmr"]))
-	# instance.duoTier	= get_ER_Tier(int(user_stats["userStats"][ER_userStats_Duo]["mmr"]))
-	# instance.squadTier= get_ER_Tier(int(user_stats["userStats"][ER_userStats_Squad]["mmr"]))
+	instance.duoTier	= get_ER_Tier(int(user_stats["userStats"][ER_userStats_Duo]["mmr"]))
+	instance.squadTier= get_ER_Tier(int(user_stats["userStats"][ER_userStats_Squad]["mmr"]))
 
 	# 모스트픽이 있지만 모스픽은 솔로에 3가지 듀오에 3가지 스쿼드에 3가지 이렇게 9가지가 있다 그렇다면 어떻게 하는게 좋을까?
 	# 솔로의 3가지만 띄우는게 베스트 라고생각한다 일단 솔로 3가지를 띄우는 방향으로 가겠다.
@@ -67,4 +73,21 @@ def set_ER_api_data(instance:ER_Base_Model):
 	# except IndexError:
 	# 	pass
 	# instance.most_pick = temp
+def set_ER_game_record_data(instance:ER_Game_Record):
+	inckname = instance.nickname
+	userNum=get_ER_userNum(inckname)
 
+	user_games = get_ER_user_games(userNum)
+
+	res = {}
+	for i, content in enumerate(user_games["userGames"]):
+		temp = {}
+		temp["season"] = get_season(content["seasonId"])
+		temp["gameRank"] = content["gameRank"]
+		temp["Kill"] = content["playerKill"]
+		temp["Assistant"] = content["playerAssistant"]
+		temp["monsterKill"] = content["monsterKill"]
+		temp["character"] = get_ER_char_name(content["characterNum"])
+		res[i] = temp
+	
+	return res
