@@ -6,15 +6,16 @@ from rest_framework import viewsets, status, exceptions
 from api.error_utils import error_msg
 
 
-from .serializers import  UserDataCreateSerializer, UserDataSerializer, UserGameRecordSerializer
+from .serializers import  UserDataCreateSerializer, UserDataSerializer, UserGameRecordCreateSerializer, UserGameRecordSerializer
 from ..models import ER_Base_Model, ER_Game_Record
 
 class UserGameViewSet(viewsets.ModelViewSet):
+	queryset = ER_Game_Record.objects.filter().order_by("-id")
 	serializer_class = UserGameRecordSerializer
 
 	#POST
 	def create(self, request):
-		serializer = UserDataCreateSerializer(data=request.data)
+		serializer = UserGameRecordCreateSerializer(data=request.data)
 		if serializer.is_valid():
 			rtn = serializer.create(request, serializer.data)
 			if rtn:

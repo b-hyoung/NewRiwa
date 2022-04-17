@@ -35,7 +35,7 @@ class ER_Base_Model(models.Model):
 	squadTier = models.CharField(max_length=15, null=True, default="Unrank")
 	# averageAssistants = models.FloatField()
 
-	game_record = models.JSONField(read_only=True)
+	# game_record = models.JSONField())
 
 	updated_at = models.DateTimeField(auto_now=True)
 	created_at = models.DateTimeField(auto_now_add=True)

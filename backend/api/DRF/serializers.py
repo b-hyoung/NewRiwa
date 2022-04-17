@@ -1,8 +1,10 @@
+from time import sleep
 from rest_framework import serializers, exceptions
 from api.ER_utils.ER_API_utils import set_ER_api_data, set_ER_game_record_data
 
 from api.models import ER_Base_Model, ER_Game_Record
 from api.models_utils import instance_save
+from ..ER_utils.ER_API_utils import get_ER_user_games, get_ER_userNum
 
 class UserGameRecordSerializer(serializers.ModelSerializer):
 	rank = serializers.IntegerField(read_only=True,)
@@ -25,11 +27,17 @@ class UserGameRecordCreateSerializer(serializers.Serializer):
 	nickname = serializers.CharField()
 
 	def create(self, request, data, commit=True):
-		instance = ER_Game_Record()
-		instance.nickname = data.get("nickname", None)
-		set_ER_game_record_data(instance)
+		nickname = data.get("nickname", None)
+		userNum=get_ER_userNum(nickname)
+		sleep(1)
+		usergames = get_ER_user_games(userNum)
 
-		instance_save(instance, commit)
+		for i, content in enumerate(usergames["userGames"]):
+			instance = ER_Game_Record()
+			instance.nickname = nickname
+			set_ER_game_record_data(instance, userNum, content)
+
+			instance_save(instance, commit)
 		return instance
 	
 	def change(self, request, data, id, commit=True):

@@ -73,21 +73,13 @@ def set_ER_api_data(instance:ER_Base_Model):
 	# except IndexError:
 	# 	pass
 	# instance.most_pick = temp
-def set_ER_game_record_data(instance:ER_Game_Record):
-	inckname = instance.nickname
-	userNum=get_ER_userNum(inckname)
 
-	user_games = get_ER_user_games(userNum)
-
-	res = {}
-	for i, content in enumerate(user_games["userGames"]):
-		temp = {}
-		temp["season"] = get_season(content["seasonId"])
-		temp["gameRank"] = content["gameRank"]
-		temp["Kill"] = content["playerKill"]
-		temp["Assistant"] = content["playerAssistant"]
-		temp["monsterKill"] = content["monsterKill"]
-		temp["character"] = get_ER_char_name(content["characterNum"])
-		res[i] = temp
+def set_ER_game_record_data(instance:ER_Game_Record, userNum, content):
+		instance.rank = content["gameRank"]
+		instance.season = get_season(content["seasonId"])
+		instance.Kills = content["playerKill"]
+		instance.Hunts = content["playerAssistant"]
+		instance.Assistants = content["monsterKill"]
+		instance.character = get_ER_char_name(content["characterNum"])
+		instance.mmr = content["mmrAfter"]
 	
-	return res
