@@ -32,7 +32,7 @@ class UserGameRecordCreateSerializer(serializers.Serializer):
 		sleep(1)
 		usergames = get_ER_user_games(userNum)
 
-		for i, content in enumerate(usergames["userGames"]):
+		for i, content in reversed(list(enumerate(usergames["userGames"]))):
 			instance = ER_Game_Record()
 			instance.nickname = nickname
 			set_ER_game_record_data(instance, userNum, content)

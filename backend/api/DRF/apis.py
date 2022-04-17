@@ -25,7 +25,7 @@ class UserGameViewSet(viewsets.ModelViewSet):
 
 	def list(self, request, *args, **kwargs):
 		nickname = request.query_params.get("nickname",None)
-		queryset = ER_Game_Record.objects.filter(nickname=nickname).order_by("created_at")[:20]
+		queryset = ER_Game_Record.objects.filter(nickname=nickname).order_by("-id")[:20]
 		if not queryset:
 			error_msg = "데이터가 없습니다~"
 			return Response({"msg" : error_msg}, status=status.HTTP_400_BAD_REQUEST)
@@ -34,7 +34,7 @@ class UserGameViewSet(viewsets.ModelViewSet):
 
 
 class UserDataViewSet(viewsets.ModelViewSet):
-	queryset = ER_Base_Model.objects.filter().order_by("-id")
+	queryset = ER_Base_Model.objects.filter().order_by("id")
 	serializer_class = UserDataSerializer
 
 	#POST

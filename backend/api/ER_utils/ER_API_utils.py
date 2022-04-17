@@ -81,5 +81,7 @@ def set_ER_game_record_data(instance:ER_Game_Record, userNum, content):
 		instance.Hunts = content["playerAssistant"]
 		instance.Assistants = content["monsterKill"]
 		instance.character = get_ER_char_name(content["characterNum"])
-		instance.mmr = content["mmrAfter"]
-	
+		try :
+			instance.mmr = content["mmrAfter"]
+		except :
+			instance.mmr = 0

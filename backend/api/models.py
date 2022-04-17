@@ -3,11 +3,20 @@ from django.db import models
 
 class ER_Game_Record(models.Model):
 	nickname = models.CharField(max_length=30)
-	rank = models.IntegerField()
 	season = models.CharField(max_length=10,default=0)
+	# 기본 데이터
+	rank = models.IntegerField()
+
+	#일반2 랭크3
+	# matchingMode = models.CharField(max_length=10)
+	# matchingTeamMode = models.CharField(max_length=10)
 
 	lavel = models.IntegerField(default=1)
 	character = models.CharField(max_length=50)
+	# 나중에 image로 변환 가능
+	# skin = models.CharField(max_length=30)
+	# bestWeapon = models.CharField(max_length=30)
+
 
 	Kills = models.FloatField(null=True,)
 	Hunts = models.FloatField(null=True,)
