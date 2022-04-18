@@ -30,11 +30,61 @@ def get_ER_user_games(userNum):
 	res = requests.get(user_status, headers=headers).json()
 	return res
 
+def ER_user_averageDeal(user_games):
+	data_len = len(user_games["userGames"])
+	sum_data = 0
+	for data in user_games["userGames"]:
+		sum_data = sum_data + data["damageToPlayer"]
+	
+	return sum_data / data_len
+
+def set_ER_averageMastery(instance, user_games):
+	data_len = len(user_games["userGames"])
+	bestWeaponLevel = 0
+	Traplevel = 0
+	Productionlevel = 0
+	Searchlevel = 0
+	Movelevel = 0
+	Strengthlevel = 0
+	Defenselevel = 0
+	Huntinglevel = 0
+
+	for data in user_games["userGames"]:
+		bestWeaponLevel += data["bestWeaponLevel"]
+		Traplevel += data["masteryLevel"]["101"]
+		Productionlevel += data["masteryLevel"]["102"]
+		Searchlevel += data["masteryLevel"]["103"]
+		Movelevel += data["masteryLevel"]["104"]
+		Strengthlevel += data["masteryLevel"]["201"]
+		Defenselevel += data["masteryLevel"]["202"]
+		Huntinglevel += data["masteryLevel"]["204"]
+
+	instance.averagebestWeaponLevel = bestWeaponLevel / data_len
+	instance.averageTraplevel = Traplevel / data_len 
+	instance.averageProductionlevel = Productionlevel / data_len 
+	instance.averageSearchlevel = Searchlevel / data_len 
+	instance.averageMovelevel = Movelevel / data_len 
+	instance.averageStrengthlevel = Strengthlevel / data_len 
+	instance.averageDefenselevel = Defenselevel / data_len 
+	instance.averageHuntinglevel = Huntinglevel / data_len 
+
+	averageProficiency = (\
+	instance.averagebestWeaponLevel + \
+	instance.averageTraplevel + \
+	instance.averageProductionlevel + \
+	instance.averageSearchlevel + \
+	instance.averageMovelevel + \
+	instance.averageStrengthlevel + \
+	instance.averageDefenselevel + \
+	instance.averageHuntinglevel) / 8
+
+	instance.averageProficiency = averageProficiency
+
+
 def set_ER_api_data(instance:ER_User_Info_Model):
 	ER_userStats_Solo = 0
 	ER_userStats_Duo = 1
 	ER_userStats_Squad = 2
-
 	most_one = 0
 	most_two = 1
 	most_squad = 2
@@ -42,22 +92,21 @@ def set_ER_api_data(instance:ER_User_Info_Model):
 	userNum = get_ER_userNum(instance.nickname)
 	sleep(1)
 	user_stats = get_ER_userstatus(userNum)
+	sleep(1)
+	user_games = get_ER_user_games(userNum)
 
 	#평균 K A H
 	instance.averagerank = int(user_stats["userStats"][ER_userStats_Squad]["averageRank"])
 	instance.averageKills = user_stats["userStats"][ER_userStats_Solo]["averageKills"]
 	instance.averageHunts = user_stats["userStats"][ER_userStats_Solo]["averageHunts"]
-	# todo : 추후 game나 이런 api로 들어가서 평균 딜량을 측정등 추가 작업이 필요함으로 일단 보류
-	# instance.averageProficiency = user_stats["userStats"][ER_userStats_Solo]["averageProficiency"]
-	# instance.averageDeal = user_stats["userStats"][ER_userStats_Solo]["averageHunts"]
+	instance.averageAssistants = user_stats["userStats"][ER_userStats_Solo]["averageAssistants"]
+	instance.averageDeal = ER_user_averageDeal(user_games)
+	set_ER_averageMastery(instance, user_games)
 
-	# # 티어는
 	instance.soloTier = get_ER_Tier(int(user_stats["userStats"][ER_userStats_Solo]["mmr"]))
 	instance.duoTier	= get_ER_Tier(int(user_stats["userStats"][ER_userStats_Duo]["mmr"]))
 	instance.squadTier= get_ER_Tier(int(user_stats["userStats"][ER_userStats_Squad]["mmr"]))
 
-	# 모스트픽이 있지만 모스픽은 솔로에 3가지 듀오에 3가지 스쿼드에 3가지 이렇게 9가지가 있다 그렇다면 어떻게 하는게 좋을까?
-	# 솔로의 3가지만 띄우는게 베스트 라고생각한다 일단 솔로 3가지를 띄우는 방향으로 가겠다.
 	most_pick = {}
 	try :
 		most_pick["most_one"] = {
@@ -76,10 +125,19 @@ def set_ER_api_data(instance:ER_User_Info_Model):
 def set_ER_game_record_data(instance:ER_Game_Record, userNum, content):
 		instance.rank = content["gameRank"]
 		instance.season = get_season(content["seasonId"])
+
+		instance.matchingMode = "일반" if content["matchingMode"] == 3 else "랭크"
+		instance.matchingTeamMode = "솔로" if content["matchingTeamMode"] == 1 else "듀오" if content["matchingTeamMode"] == 2 else "스쿼드"
+		
+
+		instance.character = get_ER_char_name(content["characterNum"])
+		instance.characterlevel = content["characterLevel"]
+		instance.bestWeapon = content["bestWeapon"]
+		instance.bestWeaponLevel = content["bestWeaponLevel"]
+		
 		instance.Kills = content["playerKill"]
 		instance.Hunts = content["playerAssistant"]
 		instance.Assistants = content["monsterKill"]
-		instance.character = get_ER_char_name(content["characterNum"])
 		try :
 			instance.mmr = content["mmrAfter"]
 		except :

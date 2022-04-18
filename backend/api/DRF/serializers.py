@@ -7,42 +7,42 @@ from api.models import ER_User_Info_Model, ER_Game_Record
 from api.models_utils import instance_save
 from ..ER_utils.ER_API_utils import get_ER_user_games, get_ER_userNum
 
-class UserDataSerializer(serializers.ModelSerializer):
+class UserInfoSerializer(serializers.ModelSerializer):
 	#평균 ada
+	nickname = serializers.CharField()
 	averagerank = serializers.FloatField(read_only=True)
 	averageKills = serializers.FloatField(read_only=True)
 	averageHunts = serializers.FloatField(read_only=True)
 	averageAssistants = serializers.FloatField(read_only=True)
 	averageDeal = serializers.FloatField(read_only=True)
 	averageProficiency = serializers.FloatField(read_only=True)
+
+	averagebestWeaponLevel = serializers.FloatField(default=1, read_only=True)
+	averagemastery = serializers.JSONField(default='{}', read_only=True)
+
 	#티어
 	soloTier = serializers.CharField(max_length=10, read_only=True)
 	duoTier = serializers.CharField(max_length=10, read_only=True)
 	squadTier = serializers.CharField(max_length=10, read_only=True)
 
 	most_pick = serializers.JSONField(default='{}', read_only=True)
-	# game_record = serializers.JSONField(read_only=True)
 	class Meta:
 		model = ER_User_Info_Model
-		excludes = ("averageDeal", "averageProficiency")
 		fields = ('__all__')
 
-class UserDataCreateSerializer(serializers.Serializer):
+class UserInfoCreateSerializer(serializers.Serializer):
 	nickname = serializers.CharField()
 
 	def create(self, request, data, commit=True):
-		instance = ER_User_Info_Model()
-		instance.nickname = data.get("nickname", None)
-		set_ER_api_data(instance)
-		instance_save(instance, commit)
-
-		return instance
-	
-	def change(self, request, data, id, commit=True):
-		instance = ER_User_Info_Model.objects.filter(id=id).first()
+		nickname = data.get("nickname", None)
+		instance = ER_User_Info_Model.objects.filter(nickname=nickname).first()
+		if not instance:
+			instance = ER_User_Info_Model()
+		instance.nickname = nickname
 
 		set_ER_api_data(instance)
 		instance_save(instance, commit)
+
 		return instance
 
 
@@ -56,8 +56,10 @@ class UserGameRecordSerializer(serializers.ModelSerializer):
 	matchingMode = serializers.CharField(read_only=True, max_length=10) #일반2 랭크3
 	matchingTeamMode = serializers.CharField(read_only=True, max_length=10)
 
-	lavel = serializers.IntegerField(read_only=True,default=1)
-	character = serializers.CharField(read_only=True,max_length=50)
+	character = serializers.CharField(max_length=50, read_only=True)
+	characterlevel = serializers.IntegerField(default=1, read_only=True)
+	bestWeapon = serializers.CharField(max_length=30, read_only=True)
+	bestWeaponLevel = serializers.IntegerField(default=1, read_only=True)
 
 	Kills = serializers.FloatField(read_only=True)
 	Hunts = serializers.FloatField(read_only=True)

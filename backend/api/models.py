@@ -33,7 +33,7 @@ class ER_User_Info_Model(models.Model):
 	averagerank = models.FloatField(null=True,)
 	averageKills = models.FloatField(null=True,)
 	averageHunts = models.FloatField(null=True,)
-	averageAssistants = models.FloatField(null=True,)
+	averageAssistants = models.FloatField(null=True, default=0)
 	averageDeal = models.FloatField(null=True,)
 	averageProficiency = models.FloatField(null=True,)
 
@@ -54,11 +54,13 @@ class ER_Game_Record(models.Model):
 	matchingMode = models.CharField(max_length=10) #일반2 랭크3
 	matchingTeamMode = models.CharField(max_length=10)
 
-	lavel = models.IntegerField(default=1)
 	character = models.CharField(max_length=50)
+	characterlevel = models.IntegerField(default=1)
+	bestWeapon = models.CharField(max_length=30)
+	bestWeaponLevel = models.IntegerField(default=1)
 	# 나중에 image로 변환 가능
 	# skin = models.CharField(max_length=30)
-	# bestWeapon = models.CharField(max_length=30)
+	# bestWeaponLevel = models.CharField(max_length=30)
 
 	Kills = models.FloatField(null=True,)
 	Hunts = models.FloatField(null=True,)

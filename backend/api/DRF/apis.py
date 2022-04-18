@@ -5,50 +5,49 @@ from rest_framework import viewsets, status, exceptions
 
 from api.error_utils import error_msg
 
-from .serializers import  UserDataCreateSerializer, UserDataSerializer, UserGameRecordCreateSerializer, UserGameRecordSerializer
+from .serializers import  UserInfoCreateSerializer, UserInfoSerializer, UserGameRecordCreateSerializer, UserGameRecordSerializer
 from ..models import ER_User_Info_Model, ER_Game_Record
 
-class UserDataViewSet(viewsets.ModelViewSet):
+class UserInfoViewSet(viewsets.ModelViewSet):
 	queryset = ER_User_Info_Model.objects.filter().order_by("-id")
-	serializer_class = UserDataSerializer
+	serializer_class = UserInfoSerializer
 
 	#POST
 	def create(self, request):
-		serializer = UserDataCreateSerializer(data=request.data)
+		#todo 만약 이미 유저가 존재한다면 업데이트를 진행
+		serializer = UserInfoCreateSerializer(data=request.data)
 		if serializer.is_valid():
 			rtn = serializer.create(request, serializer.data)
+			print(rtn)
 			if rtn:
-				return Response(UserDataSerializer(rtn).data, status=status.HTTP_201_CREATED)
+				temp = UserInfoSerializer(rtn).data
+				averagemastery = {
+					"함정" : rtn.averageTraplevel,
+					"제작" : rtn.averageProductionlevel,
+					"탐색" : rtn.averageSearchlevel,
+					"이동" : rtn.averageMovelevel,
+					"체력" : rtn.averageStrengthlevel,
+					"방어" : rtn.averageDefenselevel,
+					"사냥" : rtn.averageHuntinglevel,
+					}
+				temp["averagemastery"] = averagemastery
+				return Response(temp, status=status.HTTP_201_CREATED)
 		else :
 			return Response(error_msg(1), status=status.HTTP_400_BAD_REQUEST)
 
 	#GET
 	def list(self, request, *args, **kwargs):
-		queryset = self.get_queryset()[:20]
-		if not queryset:
-			error_msg = "데이터가 없습니다~"
-			return Response({"msg" : error_msg}, status=status.HTTP_400_BAD_REQUEST)
-		serializer = UserDataSerializer(queryset, many=True)
-		return Response(serializer.data)
+		msg = "의미없는 창 입니다"
+		return Response({"msg" : msg}, status=status.HTTP_400_BAD_REQUEST)
 
-	#PUT
-	def update(self, request, pk=None):
-		serializer = UserDataCreateSerializer(data=request.data)
-		if serializer.is_valid():
-			rtn = serializer.change(request, serializer.data, pk)
-			return Response(UserDataSerializer(rtn).data, status=status.HTTP_201_CREATED)
+	#detail
+	def retrieve(self, request, pk=None):
+		queryset = ER_User_Info_Model.objects.filter(nickname=pk).last()
+		if queryset:
+			serializer = UserInfoSerializer(queryset)
+			return Response(serializer.data, status=status.HTTP_201_CREATED)
 		else :
-			return Response({"msg" : "입력이 유효하지 않습니다."}, status=status.HTTP_400_BAD_REQUEST)
-
-	#DELETE
-	def destroy(self, request,  pk=None,):
-		remove_password = request.query_params.get("remove_password",None)
-		queryset = self.get_queryset().filter(id=pk, remove_password = remove_password)
-		
-		if not queryset.exists():
-			raise exceptions.ValidationError(error_msg(3),code=400)
-		queryset.delete()
-		return Response({"msg": "ok"})
+			return Response(error_msg(5), status=status.HTTP_404_NOT_FOUND)
 
 class UserGameViewSet(viewsets.ModelViewSet):
 	queryset = ER_Game_Record.objects.filter().order_by("-id")
@@ -76,7 +75,7 @@ class UserGameViewSet(viewsets.ModelViewSet):
 		if serializer.is_valid():
 			rtn = serializer.create(request, serializer.data)
 			if rtn:
-				#여기서 rtn을반복문을 돌면서 UserDataSerializer(rtn).data 이걸 json으로 만들자
+				#여기서 rtn을반복문을 돌면서 UserInfoSerializer(rtn).data 이걸 json으로 만들자
 				temp = {}
 				for i, data in enumerate(rtn):
 					temp[i] = UserGameRecordSerializer(data).data 
