@@ -48,6 +48,8 @@ class UserDataCreateSerializer(serializers.Serializer):
 
 
 class UserGameRecordSerializer(serializers.ModelSerializer):
+	nickname = serializers.CharField()
+
 	rank = serializers.IntegerField(read_only=True)
 	season = serializers.CharField(read_only=True,max_length=10,default=0)
 

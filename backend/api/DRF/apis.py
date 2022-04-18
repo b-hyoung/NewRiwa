@@ -9,7 +9,7 @@ from .serializers import  UserDataCreateSerializer, UserDataSerializer, UserGame
 from ..models import ER_User_Info_Model, ER_Game_Record
 
 class UserDataViewSet(viewsets.ModelViewSet):
-	queryset = ER_User_Info_Model.objects.filter().order_by("id")
+	queryset = ER_User_Info_Model.objects.filter().order_by("-id")
 	serializer_class = UserDataSerializer
 
 	#POST
@@ -54,6 +54,22 @@ class UserGameViewSet(viewsets.ModelViewSet):
 	queryset = ER_Game_Record.objects.filter().order_by("-id")
 	serializer_class = UserGameRecordSerializer
 
+	#? 이건 의미없을듯? 일단 보류하자
+	def list(self, request, *args, **kwargs):
+		msg = "의미없는 창 입니다"
+		return Response({"msg" : msg}, status=status.HTTP_400_BAD_REQUEST)
+	
+	def retrieve(self,request, pk=None):
+		queryset = ER_Game_Record.objects.filter(nickname=pk).order_by("-id")[:20]
+		if queryset:
+			temp = {}
+			for i, data in enumerate(queryset):
+				temp[i] = UserGameRecordSerializer(data).data 
+			return Response(temp, status=status.HTTP_201_CREATED)
+		else :
+			print(pk)
+			return Response(error_msg(5), status=status.HTTP_404_NOT_FOUND)
+
 	#POST
 	def create(self, request):
 		serializer = UserGameRecordCreateSerializer(data=request.data)
@@ -68,10 +84,3 @@ class UserGameViewSet(viewsets.ModelViewSet):
 		else :
 			return Response(error_msg(1), status=status.HTTP_400_BAD_REQUEST)
 
-	def list(self, request, nickname, *args, **kwargs):
-		queryset = ER_Game_Record.objects.filter(nickname=nickname).order_by("-id")[:20]
-		if not queryset:
-			error_msg = "데이터가 없습니다~"
-			return Response({"msg" : error_msg}, status=status.HTTP_400_BAD_REQUEST)
-		serializer = UserGameRecordSerializer(queryset, many=True)
-		return Response(serializer.data)
