@@ -33,6 +33,7 @@ class ER_User_Info_Model(models.Model):
 	averagerank = models.FloatField(null=True,)
 	averageKills = models.FloatField(null=True,)
 	averageHunts = models.FloatField(null=True,)
+	averageAssistants = models.FloatField(null=True,)
 	averageDeal = models.FloatField(null=True,)
 	averageProficiency = models.FloatField(null=True,)
 
