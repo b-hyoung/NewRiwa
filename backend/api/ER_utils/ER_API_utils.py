@@ -7,7 +7,7 @@ from api.error_utils import error_msg
 from rest_framework import exceptions
 
 from .ER_utils import get_ER_Tier, get_ER_char_name, get_season
-from ..models import ER_Base_Model, ER_Game_Record
+from ..models import ER_User_Info_Model, ER_Game_Record
 
 def get_ER_userNum(nickname):
 	headers = {"accept": "applications/json", "x-api-key": ER_API_KEY}
@@ -30,7 +30,7 @@ def get_ER_user_games(userNum):
 	res = requests.get(user_status, headers=headers).json()
 	return res
 
-def set_ER_api_data(instance:ER_Base_Model):
+def set_ER_api_data(instance:ER_User_Info_Model):
 	ER_userStats_Solo = 0
 	ER_userStats_Duo = 1
 	ER_userStats_Squad = 2

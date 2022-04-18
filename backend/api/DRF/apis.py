@@ -7,7 +7,7 @@ from api.error_utils import error_msg
 
 
 from .serializers import  UserDataCreateSerializer, UserDataSerializer, UserGameRecordCreateSerializer, UserGameRecordSerializer
-from ..models import ER_Base_Model, ER_Game_Record
+from ..models import ER_User_Info_Model, ER_Game_Record
 
 class UserGameViewSet(viewsets.ModelViewSet):
 	queryset = ER_Game_Record.objects.filter().order_by("-id")
@@ -34,7 +34,7 @@ class UserGameViewSet(viewsets.ModelViewSet):
 
 
 class UserDataViewSet(viewsets.ModelViewSet):
-	queryset = ER_Base_Model.objects.filter().order_by("id")
+	queryset = ER_User_Info_Model.objects.filter().order_by("id")
 	serializer_class = UserDataSerializer
 
 	#POST

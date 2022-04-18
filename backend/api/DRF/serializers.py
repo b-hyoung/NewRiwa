@@ -2,7 +2,7 @@ from time import sleep
 from rest_framework import serializers, exceptions
 from api.ER_utils.ER_API_utils import set_ER_api_data, set_ER_game_record_data
 
-from api.models import ER_Base_Model, ER_Game_Record
+from api.models import ER_User_Info_Model, ER_Game_Record
 from api.models_utils import instance_save
 from ..ER_utils.ER_API_utils import get_ER_user_games, get_ER_userNum
 
@@ -65,7 +65,7 @@ class UserDataSerializer(serializers.ModelSerializer):
 	# most_pick = serializers.JSONField(default='{}', read_only=True)
 	game_record = serializers.JSONField(read_only=True)
 	class Meta:
-		model = ER_Base_Model
+		model = ER_User_Info_Model
 		excludes = ("averageDeal", "averageProficiency")
 		fields = ('__all__')
 
@@ -73,7 +73,7 @@ class UserDataCreateSerializer(serializers.Serializer):
 	nickname = serializers.CharField()
 
 	def create(self, request, data, commit=True):
-		instance = ER_Base_Model()
+		instance = ER_User_Info_Model()
 		instance.nickname = data.get("nickname", None)
 		set_ER_api_data(instance)
 		instance_save(instance, commit)
@@ -81,7 +81,7 @@ class UserDataCreateSerializer(serializers.Serializer):
 		return instance
 	
 	def change(self, request, data, id, commit=True):
-		instance = ER_Base_Model.objects.filter(id=id).first()
+		instance = ER_User_Info_Model.objects.filter(id=id).first()
 
 		set_ER_api_data(instance)
 		instance_save(instance, commit)
