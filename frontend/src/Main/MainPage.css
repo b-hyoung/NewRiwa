@@ -4,14 +4,24 @@
     background: url(../image/test_model.jpg)  center center / cover no-repeat;
     display: inline-block;
 }
+.event_Logo{
+    width: 500px;
+    height:250px;
+    display: flex;
+    text-align: center;
+    margin: 0px auto;
+    margin-top: 270px;
+}
 
+.event_Logo img{
+    object-fit: cover;
+}
 .header{
     width: 600px;
     height: 45px;
     border-radius: 0.2rem;
     display: flex;
-    margin :0 auto; /* 가운데 정렬 */
-    margin-top:320px;
+    margin :0px auto; /* 가운데 정렬 */
     animation-name: fadeOut;
     animation-duration: 1s;
     animation-iteration-count: 1;
@@ -20,7 +30,7 @@
     from {
         width: 20px;
     }to {
-        width: 650px;
+        width: 600px;
 
     }
 }

@@ -14,7 +14,8 @@ function App() {
       <Headers open={infoPage} />
       <Routes>
           <Route path="/" element={<MainPage />} />
-          <Route path="/userInfo" element={<UserInfoPage />} />
+          <Route path="/userInfo/:nickname" element={<UserInfoPage />} >
+            </Route>
       </Routes>
     </>
   );

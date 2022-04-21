@@ -1,0 +1,12 @@
+.pentagon{
+    width: 250px;
+    height: 250px;
+    display: inline-block;
+    margin: 0 auto;
+    
+}
+.pentagon svg{
+    width: 250px;
+    height: 250px;
+}
+
