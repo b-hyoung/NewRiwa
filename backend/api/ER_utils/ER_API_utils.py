@@ -7,7 +7,7 @@ from api.error_utils import error_msg
 from rest_framework import exceptions
 
 from .ER_utils import get_ER_Tier, get_ER_char_name, get_season
-from ..models import ER_User_Info_Model, ER_Game_Record
+from ..models import ER_User_Info_Model, ER_Game_Record, Mastery
 
 def get_ER_userNum(nickname):
 	headers = {"accept": "applications/json", "x-api-key": ER_API_KEY}
@@ -22,12 +22,16 @@ def get_ER_userstatus(userNum):
 	headers = {"accept": "applications/json", "x-api-key": ER_API_KEY}
 	user_status = "https://open-api.bser.io/v1/user/stats/"+str(userNum)+'/'+str(ER_API_SEASON)
 	res = requests.get(user_status, headers=headers).json()
+	if res['code'] == 404:
+		raise exceptions.ValidationError(error_msg(2), code=404)
 	return res
 
 def get_ER_user_games(userNum):
 	headers = {"accept": "applications/json", "x-api-key": ER_API_KEY}
 	user_status = "https://open-api.bser.io/v1/user/games/"+str(userNum)+'/'
 	res = requests.get(user_status, headers=headers).json()
+	if res['code'] == 404:
+		raise exceptions.ValidationError(error_msg(2), code=404)
 	return res
 
 def ER_user_averageDeal(user_games):
@@ -59,26 +63,23 @@ def set_ER_averageMastery(instance, user_games):
 		Defenselevel += data["masteryLevel"]["202"]
 		Huntinglevel += data["masteryLevel"]["204"]
 
-	instance.averagebestWeaponLevel = bestWeaponLevel / data_len
-	instance.averageTraplevel = Traplevel / data_len 
-	instance.averageProductionlevel = Productionlevel / data_len 
-	instance.averageSearchlevel = Searchlevel / data_len 
-	instance.averageMovelevel = Movelevel / data_len 
-	instance.averageStrengthlevel = Strengthlevel / data_len 
-	instance.averageDefenselevel = Defenselevel / data_len 
-	instance.averageHuntinglevel = Huntinglevel / data_len 
+	if instance.mastery_id == None:
+		mastery = Mastery.objects.create(nickname = instance.nickname, mmr = instance.mmr)
+	else:
+		mastery = Mastery.objects.filter(id = instance.mastery_id).first()
+		
+	mastery.averagebestWeaponLevel = bestWeaponLevel / data_len
+	mastery.averageTraplevel = Traplevel / data_len 
+	mastery.averageProductionlevel = Productionlevel / data_len 
+	mastery.averageSearchlevel = Searchlevel / data_len 
+	mastery.averageMovelevel = Movelevel / data_len 
+	mastery.averageStrengthlevel = Strengthlevel / data_len 
+	mastery.averageDefenselevel = Defenselevel / data_len 
+	mastery.averageHuntinglevel = Huntinglevel / data_len 
+	mastery.save()
+	instance.mastery_id = mastery.id
 
-	averageProficiency = (\
-	instance.averagebestWeaponLevel + \
-	instance.averageTraplevel + \
-	instance.averageProductionlevel + \
-	instance.averageSearchlevel + \
-	instance.averageMovelevel + \
-	instance.averageStrengthlevel + \
-	instance.averageDefenselevel + \
-	instance.averageHuntinglevel) / 8
-
-	instance.averageProficiency = averageProficiency
+	instance.averageProficiency = mastery.get_averageProficiency()
 
 
 def set_ER_api_data(instance:ER_User_Info_Model):
@@ -94,7 +95,7 @@ def set_ER_api_data(instance:ER_User_Info_Model):
 	user_stats = get_ER_userstatus(userNum)
 	sleep(1)
 	user_games = get_ER_user_games(userNum)
-
+	instance.mmr = int(user_stats["userStats"][ER_userStats_Solo]["mmr"])
 	#평균 K A H
 	instance.averagerank = int(user_stats["userStats"][ER_userStats_Squad]["averageRank"])
 	instance.averageKills = user_stats["userStats"][ER_userStats_Solo]["averageKills"]
@@ -129,7 +130,6 @@ def set_ER_game_record_data(instance:ER_Game_Record, userNum, content):
 		instance.matchingMode = "일반" if content["matchingMode"] == 3 else "랭크"
 		instance.matchingTeamMode = "솔로" if content["matchingTeamMode"] == 1 else "듀오" if content["matchingTeamMode"] == 2 else "스쿼드"
 		
-
 		instance.character = get_ER_char_name(content["characterNum"])
 		instance.characterlevel = content["characterLevel"]
 		instance.bestWeapon = content["bestWeapon"]

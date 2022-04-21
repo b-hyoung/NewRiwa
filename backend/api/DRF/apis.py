@@ -17,21 +17,15 @@ class UserInfoViewSet(viewsets.ModelViewSet):
 		#todo 만약 이미 유저가 존재한다면 업데이트를 진행
 		serializer = UserInfoCreateSerializer(data=request.data)
 		if serializer.is_valid():
+			nickname = serializer.data.get("nickname")
+			print(ER_User_Info_Model.objects.filter(nickname=nickname))
+			if ER_User_Info_Model.objects.filter(nickname=nickname):
+				print("요기")
+				return(self.retrieve(request, nickname))
+			print("저기")
 			rtn = serializer.create(request, serializer.data)
-			print(rtn)
 			if rtn:
-				temp = UserInfoSerializer(rtn).data
-				averagemastery = {
-					"함정" : rtn.averageTraplevel,
-					"제작" : rtn.averageProductionlevel,
-					"탐색" : rtn.averageSearchlevel,
-					"이동" : rtn.averageMovelevel,
-					"체력" : rtn.averageStrengthlevel,
-					"방어" : rtn.averageDefenselevel,
-					"사냥" : rtn.averageHuntinglevel,
-					}
-				temp["averagemastery"] = averagemastery
-				return Response(temp, status=status.HTTP_201_CREATED)
+				return Response(UserInfoSerializer(rtn).data, status=status.HTTP_201_CREATED)
 		else :
 			return Response(error_msg(1), status=status.HTTP_400_BAD_REQUEST)
 
