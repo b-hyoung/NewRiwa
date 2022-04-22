@@ -3,8 +3,9 @@ from time import sleep
 from rest_framework import serializers, exceptions
 from api.ER_utils.ER_API_utils import set_ER_api_data, set_ER_game_record_data
 
-from api.models import ER_User_Info_Model, ER_Game_Record, Mastery
+from api.models import ER_User_Info_Model, ER_Game_Record, Mastery, ER_Stats_Model
 from api.models_utils import instance_save
+from api.ER_utils.ER_stats import set_ER_stats_data
 from ..ER_utils.ER_API_utils import get_ER_user_games, get_ER_userNum
 
 class MasterySerializer(serializers.ModelSerializer):
@@ -12,6 +13,46 @@ class MasterySerializer(serializers.ModelSerializer):
 		model = Mastery
 		exclude = ("id", "nickname", "mmr")
 
+class UserStatsSerializer(serializers.ModelSerializer):
+	rank = serializers.CharField()
+
+	#맞는 데이터 찾기용
+	matchingMode = serializers.CharField(read_only=True,)
+	matchingTeamMode = serializers.CharField(read_only=True,)
+	season = serializers.CharField(read_only=True,)
+	
+	#캐릭터 정보를 위해서
+	character = serializers.CharField(read_only=True,)
+	lavel = serializers.IntegerField(read_only=True,)
+	bestWeapon = serializers.CharField(read_only=True,)
+	#특성은 나중에
+
+	# 옆의 통계를 위해서
+	survivalTime = serializers.IntegerField(read_only=True,)
+	averagerank = serializers.IntegerField(read_only=True,)
+	averageKills = serializers.FloatField(read_only=True,)
+	averageHunts = serializers.FloatField(read_only=True,)
+	averageAssistants = serializers.FloatField(read_only=True,)
+	averageDeal = serializers.FloatField(read_only=True,)
+	averageProficiency = serializers.FloatField(read_only=True,)
+	class Meta:
+		model = ER_Stats_Model
+		exclude = ("id",)
+
+class UserStatsSerializerCreateSerializer(serializers.Serializer):
+	rank = serializers.CharField()
+
+	def create(self, request, data, commit=True):
+		rank = data.get("rank", None)
+		instance = ER_Stats_Model.objects.filter(rank=rank).first()
+		if not instance:
+			instance =ER_Stats_Model()
+		instance.rank = rank
+		
+		set_ER_stats_data(instance, rank)
+
+		instance_save(instance, commit)
+		return instance
 
 class UserInfoSerializer(serializers.ModelSerializer):
 	#평균 ada
@@ -48,9 +89,9 @@ class UserInfoCreateSerializer(serializers.Serializer):
 		instance.nickname = nickname
 
 		set_ER_api_data(instance)
-		instance_save(instance, commit)
-		# status_updata
+		# ER_status_updata(instance)
 
+		instance_save(instance, commit)
 		return instance
 
 

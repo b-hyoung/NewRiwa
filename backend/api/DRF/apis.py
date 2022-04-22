@@ -5,8 +5,36 @@ from rest_framework import viewsets, status, exceptions
 
 from api.error_utils import error_msg
 
-from .serializers import  UserInfoCreateSerializer, UserInfoSerializer, UserGameRecordCreateSerializer, UserGameRecordSerializer
-from ..models import ER_User_Info_Model, ER_Game_Record
+from .serializers import  UserInfoCreateSerializer, UserInfoSerializer, UserGameRecordCreateSerializer, UserGameRecordSerializer, UserStatsSerializer, UserStatsSerializerCreateSerializer
+from ..models import ER_Stats_Model, ER_User_Info_Model, ER_Game_Record
+
+class UserStatsViewSet(viewsets.ModelViewSet):
+	queryset  = ER_Stats_Model.objects.all()
+	serializer_class = UserStatsSerializer
+
+	def create(self, request):
+		serializer = UserStatsSerializerCreateSerializer(data=request.data)
+		if serializer.is_valid():
+			rtn = serializer.create(request, serializer.data)
+			if rtn:
+				return Response(UserStatsSerializer(rtn).data, status=status.HTTP_201_CREATED)
+		else :
+			return Response(error_msg(1), status=status.HTTP_400_BAD_REQUEST)
+	#GET
+	def list(self, request, *args, **kwargs):
+		queryset = self.get_queryset()
+		serializer = UserStatsSerializer(queryset, many=True)
+		return Response(serializer.data, status=status.HTTP_200_OK)
+
+	#detail
+	def retrieve(self, request, pk=None):
+		queryset = ER_User_Info_Model.objects.filter(nickname=pk).last()
+		if queryset:
+			serializer = UserInfoSerializer(queryset)
+			return Response(serializer.data, status=status.HTTP_201_CREATED)
+		else :
+			return Response(error_msg(5), status=status.HTTP_404_NOT_FOUND)
+
 
 class UserInfoViewSet(viewsets.ModelViewSet):
 	queryset = ER_User_Info_Model.objects.filter().order_by("-id")
@@ -18,11 +46,8 @@ class UserInfoViewSet(viewsets.ModelViewSet):
 		serializer = UserInfoCreateSerializer(data=request.data)
 		if serializer.is_valid():
 			nickname = serializer.data.get("nickname")
-			print(ER_User_Info_Model.objects.filter(nickname=nickname))
 			if ER_User_Info_Model.objects.filter(nickname=nickname):
-				print("요기")
 				return(self.retrieve(request, nickname))
-			print("저기")
 			rtn = serializer.create(request, serializer.data)
 			if rtn:
 				return Response(UserInfoSerializer(rtn).data, status=status.HTTP_201_CREATED)

@@ -100,7 +100,7 @@ class ER_Game_Record(models.Model):
 	bestWeapon = models.CharField(max_length=30)
 	bestWeaponLevel = models.IntegerField(default=1)
 	# 나중에 image로 변환 가능
-	# skin = models.CharField(max_length=30)
+	# skin = models.imagefiled
 	# bestWeaponLevel = models.CharField(max_length=30)
 
 	Kills = models.FloatField(null=True,)

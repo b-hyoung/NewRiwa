@@ -136,8 +136,8 @@ def set_ER_game_record_data(instance:ER_Game_Record, userNum, content):
 		instance.bestWeaponLevel = content["bestWeaponLevel"]
 		
 		instance.Kills = content["playerKill"]
-		instance.Hunts = content["playerAssistant"]
-		instance.Assistants = content["monsterKill"]
+		instance.Hunts = content["monsterKill"]
+		instance.Assistants = content["playerAssistant"]
 		try :
 			instance.mmr = content["mmrAfter"]
 		except :
