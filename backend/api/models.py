@@ -1,8 +1,47 @@
 from django.db import models
 # Create your models here.
 
+"""
+자자 생각해보자고
+
+일단 어떡해 데이터를 쪼갤것이냐 ->
+mmr 별로 쪼개기엔 너무나도 데이터가 방대해 질것 같다.
+그렇기에 티어별로 쪼개서 데이터를 만드는게 맞다고 본다(브실골)
+
+일단 그러면 ER_mastery_model을 만들어서 각각의 데이터를 저장하는것이 조금 이로울거 같다
+왜냐하면 마우스를 가져다 댓을떄 떠야하는 평균 숙련도 데이터도 필요하고
+그걸다 합친 평균 마스터리 레벨도 필요하기 때문이다
+
+
+"""
+
+class Mastery(models.Model):
+	nickname = models.CharField(max_length=30)
+	mmr = models.IntegerField(null=True, default=0)
+
+	averagebestWeaponLevel = models.IntegerField(null=True,)
+	averageTraplevel = models.IntegerField(null=True,)
+	averageProductionlevel = models.IntegerField(null=True,)
+	averageSearchlevel = models.IntegerField(null=True,)
+	averageMovelevel = models.IntegerField(null=True,)
+	averageStrengthlevel = models.IntegerField(null=True,)
+	averageDefenselevel = models.IntegerField(null=True,)
+	averageHuntinglevel = models.IntegerField(null=True,)
+
+	def get_averageProficiency(self):
+		averageProficiency = (\
+		self.averagebestWeaponLevel + \
+		self.averageTraplevel + \
+		self.averageProductionlevel + \
+		self.averageSearchlevel + \
+		self.averageMovelevel + \
+		self.averageStrengthlevel + \
+		self.averageDefenselevel + \
+		self.averageHuntinglevel) / 8
+		return averageProficiency
+
 class ER_Stats_Model(models.Model):
-	mmr = models.IntegerField()
+	rank = models.CharField(max_length=30, null=True)
 
 	#맞는 데이터 찾기용
 	matchingMode = models.CharField(max_length=10)
@@ -27,6 +66,7 @@ class ER_Stats_Model(models.Model):
 class ER_User_Info_Model(models.Model):
 	nickname = models.CharField(max_length=30)
 	most_pick = models.JSONField(default='{}')
+	mmr = models.IntegerField(null=True, default=0)
 	# skin = models.CharField(max_length=30)
 
 	#승률보단 평균 순위로
@@ -37,6 +77,7 @@ class ER_User_Info_Model(models.Model):
 	averageDeal = models.FloatField(null=True,)
 	averageProficiency = models.FloatField(null=True,)
 
+	mastery = models.ForeignKey(Mastery, on_delete=models.CASCADE, related_name="mastery")
 	#티어
 	soloTier = models.CharField(max_length=15, null=True, default="Unrank")
 	duoTier = models.CharField(max_length=15, null=True, default="Unrank")
@@ -66,7 +107,7 @@ class ER_Game_Record(models.Model):
 	Hunts = models.FloatField(null=True,)
 	Assistants = models.FloatField(null=True,)
 
-	mmr = models.IntegerField()
+	mmr = models.IntegerField(null=True, default=0)
 
 	# items = models.CharField()
 

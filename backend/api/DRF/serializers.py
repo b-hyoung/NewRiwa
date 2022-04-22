@@ -3,13 +3,20 @@ from time import sleep
 from rest_framework import serializers, exceptions
 from api.ER_utils.ER_API_utils import set_ER_api_data, set_ER_game_record_data
 
-from api.models import ER_User_Info_Model, ER_Game_Record
+from api.models import ER_User_Info_Model, ER_Game_Record, Mastery
 from api.models_utils import instance_save
 from ..ER_utils.ER_API_utils import get_ER_user_games, get_ER_userNum
+
+class MasterySerializer(serializers.ModelSerializer):
+	class Meta:
+		model = Mastery
+		exclude = ("id", "nickname", "mmr")
+
 
 class UserInfoSerializer(serializers.ModelSerializer):
 	#평균 ada
 	nickname = serializers.CharField()
+	mmr = serializers.IntegerField(read_only=True)
 	averagerank = serializers.FloatField(read_only=True)
 	averageKills = serializers.FloatField(read_only=True)
 	averageHunts = serializers.FloatField(read_only=True)
@@ -17,8 +24,8 @@ class UserInfoSerializer(serializers.ModelSerializer):
 	averageDeal = serializers.FloatField(read_only=True)
 	averageProficiency = serializers.FloatField(read_only=True)
 
-	averagebestWeaponLevel = serializers.FloatField(default=1, read_only=True)
-	averagemastery = serializers.JSONField(default='{}', read_only=True)
+	# averagebestWeaponLevel = serializers.FloatField(default=1, read_only=True)
+	mastery = MasterySerializer(read_only=True)
 
 	#티어
 	soloTier = serializers.CharField(max_length=10, read_only=True)
@@ -42,6 +49,7 @@ class UserInfoCreateSerializer(serializers.Serializer):
 
 		set_ER_api_data(instance)
 		instance_save(instance, commit)
+		# status_updata
 
 		return instance
 

@@ -21,7 +21,7 @@ def get_ER_userNum(nickname):
 	usernick_url = "https://open-api.bser.io/v1/user/nickname?query="+str(nickname)
 	res = requests.get(usernick_url, headers=headers).json()
 	if res['code'] == 404:
-		raise exceptions.ValidationError(error_msg(2), code=400)
+		raise exceptions.ValidationError(error_msg(2), code=404)
 	userNum = res["user"]["userNum"]
 	return userNum
 
