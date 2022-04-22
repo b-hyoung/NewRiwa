@@ -1,21 +1,39 @@
-import React,{useState} from 'react'
+import React, { useState } from 'react'
 import './MainPage.css'
 import { useNavigate } from 'react-router-dom'
-import BaseImg from '../image/test_model.jpg'
-import  event_logo from '../image/Eriwa.png'
+import event_logo from '../image/Eriwa.png'
+import axios from 'axios'
 
 function MainPage() {
     const navigate = useNavigate("");
-    const [nickName,setNickName] = useState("")
+    const [nickName, setNickName] = useState("")
+    const [userData, setUserData] = useState([])
 
     const handleInputChange = (e) => {
         setNickName(e.target.value)
     }
 
     const handleUserInfoClick = () => {
-        navigate(`/userInfo/${nickName}`)
-    }
+        if (nickName.length > 0) {
+            try {
+                axios.post(
+                    'http://127.0.0.1:8000/api/UserGame/',
+                    {
+                        nickname: nickName
+                    },
+                    )
+                    .then(function (response) {
+                        navigate(`/userInfo/${nickName}`)
+                     })
+                    .catch(function (error) { 
+                        navigate(`/userInfo/${nickName}`)
+                     });
 
+            } catch (error) {
+                console.error("에러가 이건가?"+error);
+            }
+        }
+    }
     return (
         <div className='page_wrapper'>
             <div className='event_Logo'>

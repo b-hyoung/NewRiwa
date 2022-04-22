@@ -29,6 +29,7 @@
     color: white;
     text-align: center;
     margin-top: 30px;
+    margin-bottom: 50px;
 }
 .average_content .user_average{
     width: 250px;
@@ -39,3 +40,44 @@
     text-align: center;
     
 }
+
+.user{
+    width: 700px;
+    display: flex;
+    flex-direction: row;
+    border:1px solid white;
+    margin : 0 auto;
+    color: white;
+    padding: 0.5rem 0.5rem;
+    background-color: #474747;
+    margin-top: 10px;
+    border-left: 5px solid greenyellow;
+    border-right: 5px solid skyblue;
+}
+.user .second .char{
+    width: 50px;
+    height: 50px;
+    border-radius: 5rem;
+    border : white 1px solid
+}
+
+.user .third{
+    width: 150px !important;
+    padding-top: 5px;
+}
+
+.user .third .user_kah{
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.user .sixth{
+    width: 150px;
+}
+.user .seventh{
+    width: 30 !important;
+}
+.user div{
+    width: 100px;
+}
+

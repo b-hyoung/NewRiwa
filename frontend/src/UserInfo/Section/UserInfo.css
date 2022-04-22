@@ -1,4 +1,4 @@
-.user{
+/* .user{
     width: 700px;
     display: flex;
     flex-direction: row;
@@ -8,8 +8,8 @@
     color: white;
     padding: 0.5rem 0.5rem;
     background-color: #474747;
-}
-.user .sixth{
+} */
+/* .user .sixth{
     width: 150px;
 }
 .user .second .char{
@@ -20,8 +20,6 @@
 }
 .user .seventh{
     width: 50 !important;
-}
+} */
 
-.user div{
-    width: 100px;
-}
+

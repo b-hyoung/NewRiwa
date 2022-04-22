@@ -15,11 +15,11 @@ function Headers() {
   return (
     <Navbar className="top_logo" collapseOnSelect expand="lg" variant="dark">
       <Container style={{height : 60 , fontSize : 18}}>
-        <Navbar.Brand onClick={handleMainClick}><img src={Eriwa_Logo} style={{ width:"200px" }} /></Navbar.Brand>
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Brand className="img_logo" onClick={handleMainClick}><img src={Eriwa_Logo} /></Navbar.Brand>
+        <Navbar.Toggle   aria-controls="responsive-navbar-nav" style={{width:"50px",height:"40px",marginTop:"-20px"}} />
         <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="me-auto">
-            <Nav.Link href="#features">랭킹</Nav.Link>
+          <Nav className="me-auto" >
+            <Nav.Link  href="#features" >랭킹</Nav.Link>
             <Nav.Link href="#pricing">루트</Nav.Link>
           </Nav>
           {/* <Nav>

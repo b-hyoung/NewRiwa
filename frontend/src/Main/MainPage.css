@@ -1,7 +1,7 @@
 .page_wrapper{
     width: 100%;
     height: 1072px;
-    background: url(../image/test_model.jpg)  center center / cover no-repeat;
+    background: url(../image/ER_Main.png)  center center / cover no-repeat;
     display: inline-block;
 }
 .event_Logo{
@@ -10,11 +10,12 @@
     display: flex;
     text-align: center;
     margin: 0px auto;
-    margin-top: 270px;
+    margin-top: 200px;
 }
 
 .event_Logo img{
     object-fit: cover;
+    margin-left: 20px;
 }
 .header{
     width: 600px;
