@@ -1,4 +1,4 @@
-from api.ER_utils.ER_utils import get_Tier
+from api.ER_utils.ER_Data_base_utils2 import get_Tier
 from ..models import ER_Stats_Model, ER_User_Info_Model, ER_Game_Record, Mastery
 
 def set_ER_stats_data(instance:ER_Stats_Model, rank):

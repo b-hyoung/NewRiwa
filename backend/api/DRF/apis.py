@@ -1,11 +1,12 @@
 from django.http import Http404
 
 from rest_framework.response import Response
-from rest_framework import viewsets, status, exceptions
+from rest_framework import viewsets, status
 
 from api.error_utils import error_msg
+from api.DRF.User_serializers import UserStatsSerializer, UserStatsSerializerCreateSerializer, UserInfoSerializer, UserInfoCreateSerializer
 
-from .serializers import  UserInfoCreateSerializer, UserInfoSerializer, UserGameRecordCreateSerializer, UserGameRecordSerializer, UserStatsSerializer, UserStatsSerializerCreateSerializer
+from .Game_serializers import  UserGameRecordCreateSerializer, UserGameRecordSerializer
 from ..models import ER_Stats_Model, ER_User_Info_Model, ER_Game_Record
 
 class UserStatsViewSet(viewsets.ModelViewSet):
@@ -35,7 +36,6 @@ class UserStatsViewSet(viewsets.ModelViewSet):
 		else :
 			return Response(error_msg(5), status=status.HTTP_404_NOT_FOUND)
 
-
 class UserInfoViewSet(viewsets.ModelViewSet):
 	queryset = ER_User_Info_Model.objects.filter().order_by("-id")
 	serializer_class = UserInfoSerializer
@@ -46,8 +46,8 @@ class UserInfoViewSet(viewsets.ModelViewSet):
 		serializer = UserInfoCreateSerializer(data=request.data)
 		if serializer.is_valid():
 			nickname = serializer.data.get("nickname")
-			if ER_User_Info_Model.objects.filter(nickname=nickname):
-				return(self.retrieve(request, nickname))
+			# if ER_User_Info_Model.objects.filter(nickname=nickname):
+			# 	return(self.retrieve(request, nickname))
 			rtn = serializer.create(request, serializer.data)
 			if rtn:
 				return Response(UserInfoSerializer(rtn).data, status=status.HTTP_201_CREATED)
