@@ -1,3 +1,4 @@
+from email.policy import default
 from django.db import models
 # Create your models here.
 
@@ -14,6 +15,14 @@ mmr 별로 쪼개기엔 너무나도 데이터가 방대해 질것 같다.
 
 
 """
+
+class ItemModels(models.Model):
+	Weapon = models.IntegerField(null=True,)
+	Haed = models.IntegerField(null=True,)
+	Clothes = models.IntegerField(null=True,)
+	Arm = models.IntegerField(null=True,)
+	Leg = models.IntegerField(null=True,)
+	Accessories = models.IntegerField(null=True,)
 
 class Mastery(models.Model):
 	nickname = models.CharField(max_length=30)
@@ -40,6 +49,21 @@ class Mastery(models.Model):
 		self.averageHuntinglevel) / 8
 		return averageProficiency
 
+class MostPick(models.Model):
+	nickname = models.CharField(max_length=30, null=False)
+	matchingTeamMode = models.CharField(max_length=10, null=False)
+	season = models.CharField(max_length=10,default=0, null=True)
+
+	most_one_charName = models.CharField(null=True,max_length=30)
+	most_one_charImage = models.ImageField(null=True,)
+	most_one_averageRank = models.IntegerField(null=True,)
+
+	most_two_char = models.IntegerField(null=True,)
+	most_two_averageRank = models.IntegerField(null=True,)
+
+	most_three_char = models.IntegerField(null=True,)
+	most_three_averageRank = models.IntegerField(null=True,)
+
 class ER_Stats_Model(models.Model):
 	rank = models.CharField(max_length=30, null=True)
 
@@ -65,9 +89,7 @@ class ER_Stats_Model(models.Model):
 
 class ER_User_Info_Model(models.Model):
 	nickname = models.CharField(max_length=30)
-	most_pick = models.JSONField(default='{}')
 	mmr = models.IntegerField(null=True, default=0)
-	# skin = models.CharField(max_length=30)
 
 	#승률보단 평균 순위로
 	averagerank = models.FloatField(null=True,)
@@ -77,7 +99,9 @@ class ER_User_Info_Model(models.Model):
 	averageDeal = models.FloatField(null=True,)
 	averageProficiency = models.FloatField(null=True,)
 
+	mostpick = models.ForeignKey(MostPick, on_delete=models.CASCADE, related_name="mostpick", null=True)
 	mastery = models.ForeignKey(Mastery, on_delete=models.CASCADE, related_name="mastery")
+	
 	#티어
 	soloTier = models.CharField(max_length=15, null=True, default="Unrank")
 	duoTier = models.CharField(max_length=15, null=True, default="Unrank")
@@ -89,6 +113,7 @@ class ER_User_Info_Model(models.Model):
 class ER_Game_Record(models.Model):
 	#데이터를 찾기위한 nickname
 	nickname = models.CharField(max_length=30)
+	
 
 	season = models.CharField(max_length=10,default=0)
 	rank = models.IntegerField()
@@ -96,6 +121,7 @@ class ER_Game_Record(models.Model):
 	matchingTeamMode = models.CharField(max_length=10)
 
 	character = models.CharField(max_length=50)
+	charImage = models.ImageField(null=True,)
 	characterlevel = models.IntegerField(default=1)
 	bestWeapon = models.CharField(max_length=30)
 	bestWeaponLevel = models.IntegerField(default=1)
@@ -109,7 +135,7 @@ class ER_Game_Record(models.Model):
 
 	mmr = models.IntegerField(null=True, default=0)
 
-	# items = models.CharField()
+	items = models.ForeignKey(ItemModels, on_delete=models.CASCADE)
 
 	updated_at = models.DateTimeField(auto_now=True)
 	created_at = models.DateTimeField(auto_now_add=True)

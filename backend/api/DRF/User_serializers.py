@@ -1,17 +1,20 @@
-from email.policy import default
-from time import sleep
-from rest_framework import serializers, exceptions
-from api.ER_utils.ER_API_utils import set_ER_api_data, set_ER_game_record_data
 
-from api.models import ER_User_Info_Model, ER_Game_Record, Mastery, ER_Stats_Model
+from rest_framework import serializers
+from api.ER_utils.ER_API_utils import set_ER_api_data
+
+from api.models import ER_User_Info_Model, Mastery, ER_Stats_Model, MostPick
 from api.models_utils import instance_save
 from api.ER_utils.ER_stats import set_ER_stats_data
-from ..ER_utils.ER_API_utils import get_ER_user_games, get_ER_userNum
 
 class MasterySerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Mastery
 		exclude = ("id", "nickname", "mmr")
+
+class MostpickSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = MostPick
+		exclude = ("id", "nickname")
 
 class UserStatsSerializer(serializers.ModelSerializer):
 	rank = serializers.CharField()
@@ -28,13 +31,14 @@ class UserStatsSerializer(serializers.ModelSerializer):
 	#특성은 나중에
 
 	# 옆의 통계를 위해서
-	survivalTime = serializers.IntegerField(read_only=True,)
 	averagerank = serializers.IntegerField(read_only=True,)
 	averageKills = serializers.FloatField(read_only=True,)
 	averageHunts = serializers.FloatField(read_only=True,)
 	averageAssistants = serializers.FloatField(read_only=True,)
 	averageDeal = serializers.FloatField(read_only=True,)
 	averageProficiency = serializers.FloatField(read_only=True,)
+	survivalTime = serializers.IntegerField(read_only=True,)
+
 	class Meta:
 		model = ER_Stats_Model
 		exclude = ("id",)
@@ -48,9 +52,7 @@ class UserStatsSerializerCreateSerializer(serializers.Serializer):
 		if not instance:
 			instance =ER_Stats_Model()
 		instance.rank = rank
-		
 		set_ER_stats_data(instance, rank)
-
 		instance_save(instance, commit)
 		return instance
 
@@ -67,13 +69,13 @@ class UserInfoSerializer(serializers.ModelSerializer):
 
 	# averagebestWeaponLevel = serializers.FloatField(default=1, read_only=True)
 	mastery = MasterySerializer(read_only=True)
+	mostpick = MostpickSerializer(read_only=True)
 
 	#티어
 	soloTier = serializers.CharField(max_length=10, read_only=True)
 	duoTier = serializers.CharField(max_length=10, read_only=True)
 	squadTier = serializers.CharField(max_length=10, read_only=True)
 
-	most_pick = serializers.JSONField(default='{}', read_only=True)
 	class Meta:
 		model = ER_User_Info_Model
 		fields = ('__all__')
@@ -87,60 +89,9 @@ class UserInfoCreateSerializer(serializers.Serializer):
 		if not instance:
 			instance = ER_User_Info_Model()
 		instance.nickname = nickname
-
-		set_ER_api_data(instance)
+		matchingTeamMode = request.GET.get("matchingTeamMode",1)
+		set_ER_api_data(instance, matchingTeamMode)
 		# ER_status_updata(instance)
-
-		instance_save(instance, commit)
-		return instance
-
-
-
-class UserGameRecordSerializer(serializers.ModelSerializer):
-	nickname = serializers.CharField()
-
-	rank = serializers.IntegerField(read_only=True)
-	season = serializers.CharField(read_only=True,max_length=10,default=0)
-
-	matchingMode = serializers.CharField(read_only=True, max_length=10) #일반2 랭크3
-	matchingTeamMode = serializers.CharField(read_only=True, max_length=10)
-
-	character = serializers.CharField(max_length=50, read_only=True)
-	characterlevel = serializers.IntegerField(default=1, read_only=True)
-	bestWeapon = serializers.CharField(max_length=30, read_only=True)
-	bestWeaponLevel = serializers.IntegerField(default=1, read_only=True)
-
-	Kills = serializers.FloatField(read_only=True)
-	Hunts = serializers.FloatField(read_only=True)
-	Assistants = serializers.FloatField(read_only=True)
-
-	mmr = serializers.IntegerField(read_only=True)
-
-	class Meta:
-		model = ER_Game_Record
-		fields = ('__all__')
-
-class UserGameRecordCreateSerializer(serializers.Serializer):
-	nickname = serializers.CharField()
-
-	def create(self, request, data, commit=True):
-		nickname = data.get("nickname", None)
-		userNum=get_ER_userNum(nickname)
-		sleep(1)
-		usergames = get_ER_user_games(userNum)
-
-		for i, content in reversed(list(enumerate(usergames["userGames"]))):
-			instance = ER_Game_Record()
-			instance.nickname = nickname
-			set_ER_game_record_data(instance, userNum, content)
-
-			instance_save(instance, commit)
-		return ER_Game_Record.objects.filter(nickname=nickname).order_by("-id")[:20]
-	
-	def change(self, request, data, id, commit=True):
-		instance = ER_Game_Record.objects.filter(id=id).first()
-
-		set_ER_api_data(instance)
 
 		instance_save(instance, commit)
 		return instance
