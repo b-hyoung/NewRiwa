@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './MainPage.css'
 import { useNavigate } from 'react-router-dom'
-import event_logo from '../image/Eriwa.png'
+import event_logo from '../image/Logo/EventLogo.png'
 import axios from 'axios'
 
 function MainPage() {

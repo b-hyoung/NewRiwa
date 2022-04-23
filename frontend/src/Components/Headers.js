@@ -3,7 +3,7 @@ import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import Container from 'react-bootstrap/Container'
 import { useNavigate } from 'react-router-dom'
-import Eriwa_Logo from '../image/4_.png'
+import Eriwa_Logo from '../image/Logo/MainLogo.png'
 import './Headers.css'
 
 function Headers() {

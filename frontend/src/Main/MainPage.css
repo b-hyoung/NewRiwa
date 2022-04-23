@@ -1,7 +1,7 @@
 .page_wrapper{
     width: 100%;
     height: 1072px;
-    background: url(../image/ER_Main.png)  center center / cover no-repeat;
+    background: url(../image/Background/ER_Main.png)  center center / cover no-repeat;
     display: inline-block;
 }
 .event_Logo{

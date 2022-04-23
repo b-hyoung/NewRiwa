@@ -21,39 +21,57 @@
     margin:20px 20px
 }
 
-.average_content{
+.pentagon_content{
     margin: 0 auto;
-    width: 700px;
+    width: 1050px;
     height: 300px;
     border: 1px solid white;
     color: white;
-    text-align: center;
+    text-align: left;
     margin-top: 30px;
     margin-bottom: 50px;
+    padding-left: 100px;
 }
-.average_content .user_average{
+
+.pentagon_content .user_Stat{
     width: 250px;
     height: 250px;
     border-radius: 25rem;
     border:white 1px solid;
-    display: inline-block;
-    text-align: center;
+}
+
+.user_Content{
+    width: 1055px;
+    margin: 0px auto;
     
+}
+.user_Content .user_Infos{
+    display: inline-block;
+    width: 240px;
+    height: 250px;
+    border: solid white 1px;
+}
+
+.user_GameLog{
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 15px;
 }
 
 .user{
-    width: 700px;
+    width: 800px;
     display: flex;
     flex-direction: row;
     border:1px solid white;
-    margin : 0 auto;
+    margin : 0px auto;
     color: white;
     padding: 0.5rem 0.5rem;
     background-color: #474747;
-    margin-top: 10px;
     border-left: 5px solid greenyellow;
     border-right: 5px solid skyblue;
+    margin-bottom: 10px;
 }
+
 .user .second .char{
     width: 50px;
     height: 50px;

@@ -7,6 +7,7 @@ import { useLocation } from "react-router-dom";
 import axios from 'axios'
 import { useParams } from 'react-router-dom';
 import ErrorPage from './Section/ErrorPage'
+import User_GameLog from './Section/User_GameLog'
 
 function UserinfoPage() {
 
@@ -36,23 +37,29 @@ function UserinfoPage() {
     <div className='page_wrap'>
       {useError === false ? (
         <>
-          {/* <header className='headers'>
+          <header className='headers'>
             <div className='user_name'>
               {nickname}
             </div>
-          </header> */}
-          <div className='average_content'>
+          </header>
+          <div className='pentagon_content'>
             <div>MainBlock</div>
-            <div className='user_average'>
+            <div className='user_Stat'>
               <Pentagon />
             </div>
           </div>
-          <div className='users_Content'>
+
+          <div className='user_Content'>
+            <div className='user_Infos'>
+              <User_GameLog useData={userData} />
+            </div>
+
+            <div className='user_GameLog'>
             {userData && Object.keys(userData).map(item => (
               <div className='user'>
                 <div className='first'>
                   <div style={{ fontWeight: "bold", fontSize: "20px" }}>#{userData[item].rank}</div>
-                  <div>{userData[item].season}</div>
+                  <div>{userData[item].matchingMode}</div>
                   <div>6시간 전</div>
                 </div>
                 <div className='second'>
@@ -81,6 +88,7 @@ function UserinfoPage() {
               </div>
             ))}
           </div>
+      </div>
         </>
       ) : (
         <div>
