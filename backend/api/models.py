@@ -135,7 +135,7 @@ class ER_Game_Record(models.Model):
 
 	mmr = models.IntegerField(null=True, default=0)
 
-	items = models.ForeignKey(ItemModels, on_delete=models.CASCADE)
+	items = models.ForeignKey(ItemModels, on_delete=models.CASCADE, null=True)
 
 	updated_at = models.DateTimeField(auto_now=True)
 	created_at = models.DateTimeField(auto_now_add=True)

@@ -46,8 +46,8 @@ class UserInfoViewSet(viewsets.ModelViewSet):
 		serializer = UserInfoCreateSerializer(data=request.data)
 		if serializer.is_valid():
 			nickname = serializer.data.get("nickname")
-			# if ER_User_Info_Model.objects.filter(nickname=nickname):
-			# 	return(self.retrieve(request, nickname))
+			if ER_User_Info_Model.objects.filter(nickname=nickname):
+				return(self.retrieve(request, nickname))
 			rtn = serializer.create(request, serializer.data)
 			if rtn:
 				return Response(UserInfoSerializer(rtn).data, status=status.HTTP_201_CREATED)
@@ -85,7 +85,6 @@ class UserGameViewSet(viewsets.ModelViewSet):
 				temp[i] = UserGameRecordSerializer(data).data 
 			return Response(temp, status=status.HTTP_201_CREATED)
 		else :
-			print(pk)
 			return Response(error_msg(5), status=status.HTTP_404_NOT_FOUND)
 
 	#POST

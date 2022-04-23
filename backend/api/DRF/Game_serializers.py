@@ -21,13 +21,15 @@ class UserGameRecordSerializer(serializers.ModelSerializer):
 	character = serializers.CharField(max_length=50, read_only=True)
 	characterlevel = serializers.IntegerField(default=1, read_only=True)
 	bestWeapon = serializers.CharField(max_length=30, read_only=True)
+	bestWeaponLevel = serializers.CharField(max_length=30, read_only=True)
 
 	Kills = serializers.FloatField(read_only=True)
 	Hunts = serializers.FloatField(read_only=True)
 	Assistants = serializers.FloatField(read_only=True)
 
 	mmr = serializers.IntegerField(read_only=True)
-
+	# todo item serializer 추가해야됨
+	items = serializers.IntegerField(read_only=True)
 	class Meta:
 		model = ER_Game_Record
 		fields = ('__all__')
