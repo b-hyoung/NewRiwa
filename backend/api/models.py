@@ -121,7 +121,7 @@ class ER_Game_Record(models.Model):
 	matchingTeamMode = models.CharField(max_length=10)
 
 	character = models.CharField(max_length=50)
-	charImage = models.ImageField(null=True,)
+	# charImage = models.ImageField(null=True,)
 	characterlevel = models.IntegerField(default=1)
 	bestWeapon = models.CharField(max_length=30)
 	bestWeaponLevel = models.IntegerField(default=1)
