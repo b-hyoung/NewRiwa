@@ -1,12 +1,19 @@
 .pentagon{
     width: 250px;
     height: 250px;
-    display: inline-block;
+    display: flex;
     margin: 0 auto;
-    
 }
-.pentagon svg{
-    width: 250px;
-    height: 250px;
+
+.pentagon svg g line, .pentagon svg g circle , .pentagon svg g path{
+    transform:translate(125,125);
+
+}
+
+.pentagon svg g circle{
+    size: 180;
+    stroke: white;
+    fill: none;
+
 }
 
