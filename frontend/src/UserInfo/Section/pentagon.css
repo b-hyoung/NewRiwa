@@ -3,17 +3,109 @@
     height: 250px;
     display: flex;
     margin: 0 auto;
+    position: relative;
+    margin-top: 75px;
 }
 
-.pentagon svg g line, .pentagon svg g circle , .pentagon svg g path{
-    transform:translate(125,125);
-
+.pentagon svg{
+    transform: scale(1.5);
 }
-
 .pentagon svg g circle{
     size: 180;
     stroke: white;
     fill: none;
 
 }
+.rank{
+    font-weight: bold;
+}
+.text_kill , .text_test{
+    width: 130px;
+    position: absolute;
+    left: 20px !important;
+    top: 25px
+}
+.text_demage, .text_mastery{
+    width: 130px;
+    position: absolute;
+    left: 5px !important;
+    top: 25px
+}
+.text_survive{
+    width: 130px;
+    position:absolute;
+    top: 25px;
+    left:-5px;
+}
 
+
+.rank_survive {
+    position: absolute;
+    top: -60px;
+    left: 83px;
+    display: flex;
+    flex-direction: column;
+    -webkit-box-align: center;
+    align-items: center;
+    width: 85px;
+}
+.rank_kill {
+    position: absolute;
+    top: 40px;
+    left: 245px;
+    display: flex;
+    flex-direction: column;
+    -webkit-box-align: center;
+    align-items: center;
+    width: 85px;
+}
+.rank_demage {
+    position: absolute;
+    top: 240px;
+    left: 170px;
+    display: flex;
+    flex-direction: column;
+    -webkit-box-align: center;
+    align-items: center;
+    width: 85px;
+}
+.rank_mastery {
+    position: absolute;
+    top: 240px;
+    left: -5px;
+    display: flex;
+    flex-direction: column;
+    -webkit-box-align: center;
+    align-items: center;
+    width: 85px;
+}
+.rank_test{
+    position: absolute;
+    top: 40px;
+    left: -80px;
+    display: flex;
+    flex-direction: column;
+    -webkit-box-align: center;
+    align-items: center;
+    width: 85px;
+}
+
+.avg_tier{
+    position: absolute;
+    top: -60px;
+    left: 320px;
+    width: 130px;
+}
+
+.avg_tier .colume{
+    display: flex;
+    width: 130px;
+    flex-direction: row;
+}
+.avg_tier .colume .test_{
+    border:1px solid white;
+    width:15px;
+    height:15px;
+    margin-top: 5px;
+    margin-right:5px;
+}

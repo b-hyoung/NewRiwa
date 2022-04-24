@@ -2,13 +2,14 @@ import React, { useState ,useEffect } from 'react'
 
 function User_GameLog({ useData }) {
     const [userData , setUserData] = useState(useData);
-
+    console.log(useData)
 
     return (
         <>
-            <div className='tier'> </div>
-            <div className='tier'>{userData}</div>
-            {console.log(userData)}
+        <div style={{color:"white"}}>
+           여기에 뭐넣을래
+
+        </div>
         </>
     )
 }

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import './UserInfoPage.css'
-import UserInfo from './Section/UserInfo'
 import Pentagon from './Section/Pentagon'
 import queryString from 'query-string'
 import { useLocation } from "react-router-dom";
@@ -8,15 +7,24 @@ import axios from 'axios'
 import { useParams } from 'react-router-dom';
 import ErrorPage from './Section/ErrorPage'
 import User_GameLog from './Section/User_GameLog'
+import User_Stat from './Section/User_Stat'
 
 function UserinfoPage() {
 
   const { nickname } = useParams();
   const [userData, setUserData] = useState([])
+  const [userRecode, setUserRecode] = useState("")
+  const [userRecodeImg, setUserRecodeImg] = useState("")
   const [useError, setUserError] = useState(false)
 
 
   useEffect(() => {
+    getUserGame()
+    getUserRecode()
+  }, [])
+
+
+  const getUserGame = () => {
     try {
       axios.get(
         'http://127.0.0.1:8000/api/UserGame/' + nickname + '/')
@@ -29,26 +37,44 @@ function UserinfoPage() {
     } catch (error) {
       console.error(error);
     }
-  }, [])
-
-  console.log(userData)
+  }
+  const getUserRecode = () => {
+    try {
+      axios.post(
+        'http://127.0.0.1:8000/api/Userdata/'
+        ,{
+          nickname : nickname
+        },
+        )
+        .then(response => {
+          setUserRecode(response.data)
+          setUserRecodeImg(response.data.mostpick)
+        })
+        .catch(error => {
+          setUserError(true)
+        })
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   return (
     <div className='page_wrap'>
       {useError === false ? (
         <>
           <header className='headers'>
+            <img src={require("../image/Background/YukiSama.png")}  />
+            {/* <img src={require("../image/Char/icon/Yuki.png")} style={{width:"200px", height:"200px"}} /> */}
             <div className='user_name'>
               {nickname}
             </div>
           </header>
           <div className='pentagon_content'>
-            <div>MainBlock</div>
-
             <div className='user_Stat'>
-                  <Pentagon />
+                  <Pentagon name={nickname}/>
+                  <User_Stat name={userRecode} />
             </div>
-
+            
           </div>
           <div className='user_Content'>
             <div className='user_Infos'>

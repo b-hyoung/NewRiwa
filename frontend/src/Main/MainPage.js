@@ -27,8 +27,8 @@ function MainPage() {
                      })
                     .catch(function (error) { 
                         navigate(`/userInfo/${nickName}`)
+                        console.log(error)
                      });
-
             } catch (error) {
                 console.error("에러가 이건가?"+error);
             }
