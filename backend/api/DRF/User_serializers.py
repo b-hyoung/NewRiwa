@@ -1,20 +1,11 @@
 
 from rest_framework import serializers
-from api.ER_utils.ER_API_utils import set_ER_api_data
+from api.ER_utils.ER_API_setter import set_ER_api_data, set_ER_stats_data
 
-from api.models import ER_User_Info_Model, Mastery, ER_Stats_Model, MostPick
+from api.models import ER_User_Info_Model, ER_Stats_Model
 from api.models_utils import instance_save
-from api.ER_utils.ER_stats import set_ER_stats_data
-
-class MasterySerializer(serializers.ModelSerializer):
-	class Meta:
-		model = Mastery
-		exclude = ("id", "nickname", "mmr")
-
-class MostpickSerializer(serializers.ModelSerializer):
-	class Meta:
-		model = MostPick
-		exclude = ("id", "nickname")
+from api.DRF.Base_serialzers import MasterySerializer, MostpickSerializer
+from api.ER_utils.ER_DB_stats_utils import ER_status_update
 
 class UserStatsSerializer(serializers.ModelSerializer):
 	rank = serializers.CharField()
@@ -78,7 +69,7 @@ class UserInfoSerializer(serializers.ModelSerializer):
 
 	class Meta:
 		model = ER_User_Info_Model
-		fields = ('__all__')
+		exclude = ("id", "userNum", "updated_at", "created_at")
 
 class UserInfoCreateSerializer(serializers.Serializer):
 	nickname = serializers.CharField()
@@ -91,7 +82,7 @@ class UserInfoCreateSerializer(serializers.Serializer):
 		instance.nickname = nickname
 		matchingTeamMode = request.GET.get("matchingTeamMode",1)
 		set_ER_api_data(instance, matchingTeamMode)
-		# ER_status_updata(instance)
+		ER_status_update(instance)
 
 		instance_save(instance, commit)
 		return instance

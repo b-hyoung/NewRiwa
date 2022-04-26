@@ -1,4 +1,4 @@
-from .ER_Data_base import ER_char_name, ER_Tier
+from .ER_DB import ER_char_name, ER_Tier
 
 def get_Tier(rank_point):
 	Tier = ER_Tier[rank_point]
@@ -27,7 +27,6 @@ def get_ER_char_name(charcode:int):
 
 def get_ER_Tier(mmr:int):
 	rank = mmr // 400
-
 	Tier = get_Tier(rank)
 	Tier_num = get_Tier_Num(mmr % 400)
 	league_point = (rank % 100) + 1

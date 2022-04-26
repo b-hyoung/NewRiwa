@@ -17,6 +17,7 @@ mmr 별로 쪼개기엔 너무나도 데이터가 방대해 질것 같다.
 """
 
 class ItemModels(models.Model):
+	charName = models.CharField(null=True,max_length=30)
 	Weapon = models.IntegerField(null=True,)
 	Haed = models.IntegerField(null=True,)
 	Clothes = models.IntegerField(null=True,)
@@ -64,7 +65,12 @@ class MostPick(models.Model):
 	most_three_char = models.IntegerField(null=True,)
 	most_three_averageRank = models.IntegerField(null=True,)
 
+# 게임의 전체통계를 위한 데이터
+# 랭크에 대한 몇가지 평균을 제시한다.
+# todo : 누군가가 검색되거나 전적갱신을 진행했을 경우에 대한 행동을 적어야한다.
+# todo : 너무 낮은 데이터나 터무니 없이 높은 데이터를 제거할 것이다.
 class ER_Stats_Model(models.Model):
+	#랭크 맞음 Gold, Silver ...
 	rank = models.CharField(max_length=30, null=True)
 
 	#맞는 데이터 찾기용
@@ -76,9 +82,11 @@ class ER_Stats_Model(models.Model):
 	character = models.CharField(max_length=50)
 	lavel = models.IntegerField(default=1)
 	bestWeapon = models.CharField(max_length=30)
-	#특성은 나중에
+	#item
+	#특성
+	#루트
+	# 
 
-	# 옆의 통계를 위해서
 	survivalTime = models.IntegerField(null=True,)
 	averagerank = models.IntegerField(null=True,)
 	averageKills = models.FloatField(null=True,)
@@ -89,6 +97,7 @@ class ER_Stats_Model(models.Model):
 
 class ER_User_Info_Model(models.Model):
 	nickname = models.CharField(max_length=30)
+	userNum = models.CharField(max_length=20, null=False)
 	mmr = models.IntegerField(null=True, default=0)
 
 	#승률보단 평균 순위로
@@ -100,7 +109,7 @@ class ER_User_Info_Model(models.Model):
 	averageProficiency = models.FloatField(null=True,)
 
 	mostpick = models.ForeignKey(MostPick, on_delete=models.CASCADE, related_name="mostpick", null=True)
-	mastery = models.ForeignKey(Mastery, on_delete=models.CASCADE, related_name="mastery")
+	mastery = models.ForeignKey(Mastery, on_delete=models.CASCADE, related_name="mastery", null=True)
 	
 	#티어
 	soloTier = models.CharField(max_length=15, null=True, default="Unrank")

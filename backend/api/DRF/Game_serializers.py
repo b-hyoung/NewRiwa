@@ -1,13 +1,10 @@
-from email.policy import default
 from time import sleep
-from django.conf import settings
-from rest_framework import serializers, exceptions
-from api.ER_utils.ER_API_utils import set_ER_api_data, set_ER_game_record_data
+from rest_framework import serializers
+from api.ER_utils.ER_API_setter import set_ER_api_data, set_ER_game_record_data
 
 from api.models import ER_Game_Record
 from api.models_utils import instance_save
-from api.ER_utils.ER_stats import set_ER_stats_data
-from ..ER_utils.ER_API_utils import get_ER_user_games, get_ER_userNum
+from ..ER_utils.ER_API_getter import get_ER_user_games, get_ER_userNum
 
 class UserGameRecordSerializer(serializers.ModelSerializer):
 	nickname = serializers.CharField()
