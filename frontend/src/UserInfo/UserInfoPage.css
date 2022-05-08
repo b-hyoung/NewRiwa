@@ -4,33 +4,11 @@
     background-color: rgb(31, 31, 31);
 }
 
-.page_wrap .headers{
+/* .page_wrap .headers{
     width: 100%;
     height: 250px;
     margin-bottom: 50px;
-
 }
-.headers img{
-    float: right;
-    size: auto;
-    width: 210px;
-    height: 250px;
-    margin-top: 20px;
-    object-fit: cover;
-    margin-right: 50px;
-    opacity: 1 !important;
-}
-.page_wrap .headers::after{
-    width: 100%;
-    height: 250px;
-    position: absolute;
-    content: "";
-    background-image: url("../image/Background/Docks.jpg");
-    opacity: 0.3;
-    top:96px;
-    left: 0px;
-}
-
 
 .page_wrap .headers .user_name{
     font-size: 18px;
@@ -40,6 +18,14 @@
     color: white;
     float: left;
     margin:20px 20px
+} */
+
+.page_wrap .select_tier .selected_tier{
+    width: 100px;
+    font-size: 15px;
+    color: black;
+    padding: 1px 5px 1px 4px;
+    opacity: 0.8;
 }
 
 .pentagon_content{
@@ -66,6 +52,20 @@
     margin: 0px auto;
     
 }
+
+.user_Stat .char{
+    size: auto;
+    width: 210px;
+    height: 250px;
+    object-fit: cover;
+    opacity: 0.8 !important;
+    position: absolute;
+    top: 70px;
+    left: 750px;
+}
+
+
+
 .user_Content .user_Infos{
     display: inline-block;
     width: 240px;
@@ -86,29 +86,84 @@
     border:1px solid white;
     margin : 0px auto;
     color: white;
-    padding: 0.5rem 0.5rem;
+    padding-left: 0.5rem;
+    padding-top: 0.1rem;
     background-color: #474747;
     border-left: 5px solid greenyellow;
     border-right: 5px solid skyblue;
     margin-bottom: 10px;
 }
 
-.user .second .char{
-    width: 50px;
-    height: 50px;
-    border-radius: 5rem;
-    border : white 1px solid
+.user .second, .third ,  .forth , .fifth , .sixth , .seventh{
+    margin-top: 10px;
+    font-weight: 200;
+} 
+.user .first{
+    margin-top: 5px;
 }
+
+
+.user .second .char_img{
+    width: 70px;
+    height: 70px;
+    border-radius: 5rem;
+    margin-top: -27px !important;
+    background-color: black
+
+    
+}
+
+.user .second .charLevel{
+    position: relative;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border: solid rgb(255, 255, 255) 1px;
+    text-align: center;
+    background-color: #474747;
+    color: white;
+    top: 50px;
+    font-size: 15px;
+}
+
+
+.user .second .char_wephon{
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    object-fit: cover;
+    position: relative;
+    top: -20px;
+    left: 43px;
+}
+
+.ability , .sub_ability{
+    width: 30px;
+    height: 30px;
+    border: solid white 1px;
+    border-radius : 50%;
+    top: -40px;
+    left: 50px;
+    margin-top: 17px;
+}
+.sub_ability{
+    margin-top: 5px !important;
+}
+
 
 .user .third{
     width: 150px !important;
-    padding-top: 5px;
+}
+
+.user .third , .user .forth{
+    margin-top: 20px;
 }
 
 .user .third .user_kah{
     font-weight: bold;
     font-size: 20px;
 }
+
 
 .user .sixth{
     width: 150px;
@@ -117,6 +172,6 @@
     width: 30 !important;
 }
 .user div{
-    width: 100px;
+    width: 105px;
 }
 

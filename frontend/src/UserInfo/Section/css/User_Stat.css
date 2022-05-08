@@ -1,0 +1,17 @@
+.userTier{
+    position: absolute;
+    top: 0px;
+    left: 500px;
+    /* width: 150px;
+    height: 150px;
+    border-radius: 50%; */
+    display: flex;
+}
+
+
+.userTier img {
+    object-fit: cover;
+    width: 100px;
+    height: 100px;
+    margin-top: 15px;
+}

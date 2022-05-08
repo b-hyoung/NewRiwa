@@ -7,7 +7,8 @@ import axios from 'axios'
 import { useParams } from 'react-router-dom';
 import ErrorPage from './Section/ErrorPage'
 import User_GameLog from './Section/User_GameLog'
-import User_Stat from './Section/User_Stat'
+import User_Stats from './Section/User_Stat'
+import Form from 'react-bootstrap/Form'
 
 function UserinfoPage() {
 
@@ -20,15 +21,16 @@ function UserinfoPage() {
 
   useEffect(() => {
     getUserGame()
-    getUserRecode()
+    getUserInfo()
   }, [])
 
 
   const getUserGame = () => {
     try {
       axios.get(
-        'http://127.0.0.1:8000/api/UserGame/' + nickname + '/')
+        'http://127.0.0.1:8000/api/UserGameRecord/' + nickname + '/')
         .then(response => {
+          console.log(response)
           setUserData(response.data);
         })
         .catch(error => {
@@ -38,15 +40,16 @@ function UserinfoPage() {
       console.error(error);
     }
   }
-  const getUserRecode = () => {
+  const getUserInfo = () => {
     try {
       axios.post(
-        'http://127.0.0.1:8000/api/Userdata/'
-        ,{
-          nickname : nickname
+        'http://127.0.0.1:8000/api/UserInfo/'
+        , {
+          nickname: nickname
         },
-        )
+      )
         .then(response => {
+          console.log(response)
           setUserRecode(response.data)
           setUserRecodeImg(response.data.mostpick)
         })
@@ -57,49 +60,88 @@ function UserinfoPage() {
       console.error(error);
     }
   }
+  // const getTierInfo = () => {
+  //   try{
+  //     axios.post(
+  //       'http://127.0.0.1:8000/api/UserStats/'
+  //     ,{
+  //       rank : userData.
+  //     }
+  //       )
+  //   }
+  // }
 
   return (
     <div className='page_wrap'>
       {useError === false ? (
         <>
-          <header className='headers'>
-            <img src={require("../image/Background/YukiSama.png")}  />
-            {/* <img src={require("../image/Char/icon/Yuki.png")} style={{width:"200px", height:"200px"}} /> */}
-            <div className='user_name'>
-              {nickname}
-            </div>
-          </header>
+          <div className='select_tier'>
+            <Form.Select className='selected_tier'>
+              <option>Open this select menu</option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </Form.Select>
+          </div>
+          {/* <img src={require("../image/Char/icon/Yuki.png")} style={{width:"200px", height:"200px"}} /> */}
+          <div className='user_name'>
+            {nickname}
+          </div>
           <div className='pentagon_content'>
             <div className='user_Stat'>
-                  <Pentagon name={nickname}/>
-                  <User_Stat name={userRecode} />
+              <Pentagon name={nickname} />
+              <img className='char' src={require("../image/Background/YukiSama.png")} />
+              <User_Stats />
             </div>
-            
           </div>
           <div className='user_Content'>
             <div className='user_Infos'>
               <User_GameLog useData={userData} />
             </div>
-
             <div className='user_GameLog'>
               {userData && Object.keys(userData).map(item => (
                 <div className='user'>
                   <div className='first'>
-                    <div style={{ fontWeight: "bold", fontSize: "20px" }}>#{userData[item].rank}</div>
+                  {userData[item].rank === 1 &&
+                    <>
+                      <div style={{ fontWeight: "bold", fontSize: "20px" , color:"yellow"}}>#{userData[item].rank}</div>
+                    </>
+                  }
+                  {userData[item].rank === 2 && 
+                    <>
+                    <div style={{ fontWeight: "bold", fontSize: "20px" , color:"orange"}}>#{userData[item].rank}</div>
+                    </>
+                  }
+                  {userData[item].rank === 3 && 
+                    <>
+                    <div style={{ fontWeight: "bold", fontSize: "20px" , color:"skyblue"}}>#{userData[item].rank}</div>
+                    </>
+                  }
+                  {userData[item].rank > 3 && 
+                    <>
+                    <div style={{ fontWeight: "bold", fontSize: "20px" , color:"silver"}}>#{userData[item].rank}</div>
+                    </>
+                  }
+                  
                     <div>{userData[item].matchingMode}</div>
                     <div>6시간 전</div>
                   </div>
                   <div className='second'>
-                    <div className='char'></div>
-                    <div className='char_wephon'>무기 스킬</div>
+                    <div className='charLevel'>{userData[item].bestWeaponLevel}</div>
+                    <img className='char_img' src={require("../image/Char/icon/Yuki.png")} /> 
+                    <img className='char_wephon' src={require("../image/WeaponMastery/07. Sniper Rifle.png")} />
                   </div>
+                  <div style={{display : "block" , width : "70px" }}>
+                    <img className='ability' src={require("../image/Ability/Havoc/Frailty Infliction.png")} />
+                    <img className='sub_ability' src={require("../image/Ability/Fortification/Diamond Shard.png")} />
+                    </div>
                   <div className='third'>
-                    <div style={{ fontSize: "15px" }}>K/A/H</div>
+                    <div style={{ fontSize: "15px" , textAlign:"left !important" , marginBottom:"-4px" }}>K/A/H</div>
                     <div className='user_kah'>{userData[item].Kills}/{userData[item].Assistants}/{userData[item].Hunts}</div>
                   </div>
                   <div className='forth'>
-                    <div>MMR</div>
-                    <div>{userData[item].mmr}</div>
+                    <div style={{marginBottom:"-4px"}}>MMR</div>
+                    <div style={{fontWeight : "bold" , fontSize:"20px"}}>{userData[item].mmr}</div>
                   </div>
                   <div className='fifth'>
                     <div>Route</div>

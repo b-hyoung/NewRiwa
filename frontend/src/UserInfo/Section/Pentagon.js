@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from 'react'
-import './pentagon.css'
+import './css/pentagon.css'
 
 function Pentagon({name}) {
     const [survTemp, setServTemp] = useState("")
@@ -13,30 +13,30 @@ function Pentagon({name}) {
     const [thiRank,setThiRank] =useState("B+")
     const [forRank,setForRank] =useState("S")
     const [fifRank,setFifRank] =useState("A")
+    
+    //생존시간 , 판수 , 딜량 , 랭크
 
-   /*  
-    const getSurviveRank = () => {
-        if(유저생존평균값 > 골드생존평균값){
-            setFirRank("S")
-        }else if(유저값 > 평균값){
-            setFirRank("A+");
-        }else if(유저값 > 평균값){
-            setFirRank("A");
-        }else if(유저값 > 평균값){
-            setFirRank("B+");
-        }else if(유저값 > 평균값){
-            setFirRank("B");
-        }else if(유저값 > 평균값){
-            setFirRank("C+");
-        }else if(유저값 > 평균값){
-            setFirRank("C");
-        }else if(유저값 > 평균값){
-            setFirRank("D");
-        }else if(유저값 > 평균값){
-            setFirRank("F");
-        }
-    }
-    */
+    // const getSurviveRank = () => {
+    //     if(유저생존평균값 > 골드생존평균값){
+    //         setFirRank("S")
+    //     }else if(유저값 > 평균값){
+    //         setFirRank("A+");
+    //     }else if(유저값 > 평균값){
+    //         setFirRank("A");
+    //     }else if(유저값 > 평균값){
+    //         setFirRank("B+");
+    //     }else if(유저값 > 평균값){
+    //         setFirRank("B");
+    //     }else if(유저값 > 평균값){
+    //         setFirRank("C+");
+    //     }else if(유저값 > 평균값){
+    //         setFirRank("C");
+    //     }else if(유저값 > 평균값){
+    //         setFirRank("D");
+    //     }else if(유저값 > 평균값){
+    //         setFirRank("F");
+    //     }
+    // }
    /*
        const getKillRank = () => {
        if(유저킬평균값 > 골드킬평균값){

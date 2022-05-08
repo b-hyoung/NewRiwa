@@ -17,7 +17,7 @@ function MainPage() {
         if (nickName.length > 0) {
             try {
                 axios.post(
-                    'http://127.0.0.1:8000/api/UserGame/',
+                    'http://127.0.0.1:8000/api/UserGameRecord/',
                     {
                         nickname: nickName
                     },
