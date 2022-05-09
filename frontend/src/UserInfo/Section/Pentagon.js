@@ -17,23 +17,23 @@ function Pentagon({name}) {
     //생존시간 , 판수 , 딜량 , 랭크
 
     // const getSurviveRank = () => {
-    //     if(유저생존평균값 > 골드생존평균값){
+    //     if(유저생존평균값 >= 골드생존평균값*(0.25*8)){
     //         setFirRank("S")
-    //     }else if(유저값 > 평균값){
+    //     }else if(유저값 >= 평균값*(0.25*7)){
     //         setFirRank("A+");
-    //     }else if(유저값 > 평균값){
+    //     }else if(유저값 >= 평균값*(0.25*6)){
     //         setFirRank("A");
-    //     }else if(유저값 > 평균값){
+    //     }else if(유저값 >= 평균값*(0.25*5)){
     //         setFirRank("B+");
-    //     }else if(유저값 > 평균값){
+    //     }else if(유저값 >= 평균값*(0.25*4)){
     //         setFirRank("B");
-    //     }else if(유저값 > 평균값){
+    //     }else if(유저값 >= 평균값*(0.25*3)){
     //         setFirRank("C+");
-    //     }else if(유저값 > 평균값){
+    //     }else if(유저값 >= 평균값*(0.25*2)){
     //         setFirRank("C");
-    //     }else if(유저값 > 평균값){
+    //     }else if(유저값 >= 평균값*(0.25*2){
     //         setFirRank("D");
-    //     }else if(유저값 > 평균값){
+    //     }else if(유저값 < 평균값*0.25){
     //         setFirRank("F");
     //     }
     // }
@@ -249,7 +249,6 @@ function Pentagon({name}) {
         getTestCom();
     }, [])
     
-
     
     return (
         <div className="pentagon">

@@ -1,0 +1,136 @@
+
+.detail_top{
+    width: 100%;
+    background-color: rgba(255, 247, 247, 0.053);
+    color: white;
+    font-weight: bold;
+    
+}
+
+.detail_view{
+    display: flex;
+    flex-direction: row;
+    padding-top: 10px;
+    
+    
+}
+
+.detail_view div{
+    width: 100px;
+    
+}
+
+.detail_view .detail_rank{
+    width: 30px !important;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 15px;
+    color: gold;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.detail_view .detail_char_image{
+    width: 60px;
+    position: relative;
+}
+
+.detail_char_image .char_img{
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    background-image: url(../../../image/Background/ER_Main.png);
+
+}
+.detail_char_image .char_wephon{
+    position: absolute;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    top: 33px;
+    left: 30px;
+}
+
+.detail_view .detail_ability{
+    width: 40px;
+    display: flex;
+    flex-direction: column;
+    margin-top:-15px;
+}
+
+.detail_ability .ability{
+    width: 25px;
+    height: 25px;
+    margin-bottom: -3px;
+}
+
+.detail_ability .sub_ability{
+    width: 25px;
+    height: 25px;
+}
+
+.detail_view .detail_info{
+    width: 180px;
+    display: flex;
+    flex-direction: row;
+    font-size: 13px;
+    color: white;
+    margin-left: -10px;
+    margin-top: 4px;
+}
+.detail_view .detail_info img{
+    object-fit: cover;
+    width: 40px;
+    height: 45px;
+    border-radius:50%;
+    background-color: black;
+}
+
+.detail_view .detail_demage{
+    width: 120px;
+    color: white;
+    font-size: 14px;
+    margin-top: 3px;
+    font-weight: 500;
+}
+
+.detail_view .detail_demage .demage_bar{
+    width:100%;
+    height: 10px;
+    border-radius: 7px;
+    background-color: gray;
+    margin-top: 5px;
+}
+
+.detail_view .detail_item{
+    margin-left: 30px;
+    margin-top: 5px;
+    width:150px;
+}
+
+.detail_view .detail_item div{
+    display: inline-block;
+    width: 38px;
+    height: 25px;
+    background-color: aqua;
+    margin-right: 4px;
+}
+
+
+
+@keyframes fadeOut2{
+    from {
+        height: 0px;
+    }to {
+        height: 110px;
+
+    }
+}
+@keyframes fadeIn2{
+    from {
+        height: 110px;
+    }to {
+        height: 0px;
+
+    }
+}
