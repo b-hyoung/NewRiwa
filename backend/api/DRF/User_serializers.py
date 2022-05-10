@@ -4,7 +4,9 @@ from api.ER_utils.ER_API_setter import set_ER_api_data, set_ER_stats_data
 
 from api.models import ER_User_Info_Model, ER_Stats_Model
 from api.models_utils import instance_save
-from api.DRF.Base_serialzers import MasterySerializer, MostpickSerializer
+from api.DRF.Base_serialzers import (
+	MasterySerializer, MostpickSerializer, TraitSerializer, ItemSerializer
+	)
 from api.ER_utils.ER_DB_stats_utils import ER_status_update
 
 class UserStatsSerializer(serializers.ModelSerializer):
@@ -22,16 +24,19 @@ class UserStatsSerializer(serializers.ModelSerializer):
 	#특성은 나중에
 
 	# 옆의 통계를 위해서
-	averagerank = serializers.IntegerField(read_only=True,)
+	averageRanking = serializers.FloatField(read_only=True,)
 	averageKills = serializers.FloatField(read_only=True,)
 	averageHunts = serializers.FloatField(read_only=True,)
 	averageAssistants = serializers.FloatField(read_only=True,)
 	averageDeal = serializers.FloatField(read_only=True,)
 	averageProficiency = serializers.FloatField(read_only=True,)
-	survivalTime = serializers.IntegerField(read_only=True,)
+
+	averageTrait = TraitSerializer(read_only=True)
+	averageItem = ItemSerializer(read_only=True)
 
 	class Meta:
 		model = ER_Stats_Model
+		# fields = "__all__"
 		exclude = ("id",)
 
 class UserStatsSerializerCreateSerializer(serializers.Serializer):
@@ -39,11 +44,13 @@ class UserStatsSerializerCreateSerializer(serializers.Serializer):
 
 	def create(self, request, data, commit=True):
 		rank = data.get("rank", None)
+		matchingTeamMode = request.GET.get("matchingTeamMode", 1)
+
 		instance = ER_Stats_Model.objects.filter(rank=rank).first()
 		if not instance:
 			instance =ER_Stats_Model()
 		instance.rank = rank
-		set_ER_stats_data(instance, rank)
+		set_ER_stats_data(instance, rank, matchingTeamMode)
 		instance_save(instance, commit)
 		return instance
 
@@ -51,7 +58,8 @@ class UserInfoSerializer(serializers.ModelSerializer):
 	#평균 ada
 	nickname = serializers.CharField()
 	mmr = serializers.IntegerField(read_only=True)
-	averagerank = serializers.FloatField(read_only=True)
+
+	averageRanking = serializers.FloatField(read_only=True)
 	averageKills = serializers.FloatField(read_only=True)
 	averageHunts = serializers.FloatField(read_only=True)
 	averageAssistants = serializers.FloatField(read_only=True)

@@ -7,7 +7,7 @@ from api.ER_utils.ER_API_utils import ER_user_averageDeal
 from api.error_utils import error_msg
 
 from .ER_DB_utils_transfom import get_ER_Tier, get_ER_char_name, get_season
-from ..models import ER_Stats_Model, ER_User_Info_Model, ER_Game_Record, Mastery, MostPick
+from ..models import ER_Stats_Model, ER_User_Info_Model, ER_Game_Record_Model, ItemModel, MasteryModel, MostPickModel
 
 from rest_framework import exceptions
 
@@ -33,9 +33,9 @@ def set_ER_averageMastery(instance:ER_Stats_Model, user_games):
 		Huntinglevel += data["masteryLevel"]["204"]
 
 	if instance.mastery_id == None:
-		mastery = Mastery.objects.create(nickname = instance.nickname, mmr = instance.mmr)
+		mastery = MasteryModel.objects.create(nickname = instance.nickname, mmr = instance.mmr)
 	else:
-		mastery = Mastery.objects.filter(id = instance.mastery_id).first()
+		mastery = MasteryModel.objects.filter(id = instance.mastery_id).first()
 		
 	mastery.averagebestWeaponLevel = bestWeaponLevel / data_len
 	mastery.averageTraplevel = Traplevel / data_len 
@@ -52,9 +52,9 @@ def set_ER_averageMastery(instance:ER_Stats_Model, user_games):
 
 def set_ER_mostpick(instance:ER_User_Info_Model, userstats, matchingTeamMode):
 	if instance.mostpick_id == None:
-		temp_mostpick = MostPick.objects.create(nickname = instance.nickname, matchingTeamMode=matchingTeamMode)
+		temp_mostpick = MostPickModel.objects.create(nickname = instance.nickname, matchingTeamMode=matchingTeamMode)
 	else:
-		temp_mostpick = MostPick.objects.filter(id = instance.mastery_id).first()
+		temp_mostpick = MostPickModel.objects.filter(id = instance.mastery_id).first()
 
 	try :
 		list_index = matchingTeamMode-1
@@ -100,7 +100,7 @@ def set_ER_api_data(instance:ER_User_Info_Model, matchingTeamMode):
 	instance.mmr = int(user_stats["userStats"][ER_userStats_Solo]["mmr"])
 	#평균 K A H
 	print(instance.nickname)
-	instance.averagerank = int(user_stats["userStats"][ER_userStats_Solo]["averageRank"])
+	instance.averageRanking = int(user_stats["userStats"][ER_userStats_Solo]["averageRank"])
 	instance.averageKills = user_stats["userStats"][ER_userStats_Solo]["averageKills"]
 	instance.averageHunts = user_stats["userStats"][ER_userStats_Solo]["averageHunts"]
 	instance.averageAssistants = user_stats["userStats"][ER_userStats_Solo]["averageAssistants"]
@@ -112,8 +112,8 @@ def set_ER_api_data(instance:ER_User_Info_Model, matchingTeamMode):
 	# instance.duoTier	= get_ER_Tier(int(user_stats["userStats"][ER_userStats_Duo]["mmr"]))
 	# instance.squadTier= get_ER_Tier(int(user_stats["userStats"][ER_userStats_Squad]["mmr"]))
 
-def set_ER_game_record_data(instance:ER_Game_Record, userNum, content):
-		instance.rank = content["gameRank"]
+def set_ER_game_record_data(instance:ER_Game_Record_Model, userNum, content):
+		instance.ranking = content["gameRank"]
 		instance.season = get_season(content["seasonId"])
 
 		instance.matchingMode = "일반" if content["matchingMode"] == 2 else "랭크"
@@ -127,13 +127,26 @@ def set_ER_game_record_data(instance:ER_Game_Record, userNum, content):
 		instance.Kills = content["playerKill"]
 		instance.Hunts = content["monsterKill"]
 		instance.Assistants = content["playerAssistant"]
+
+      # "traitFirstCore": 7200201,
+      # "traitFirstSub": [
+      #   7210101,
+      #   7210201
+      # ],
+      # "traitSecondSub": [
+      #   7010101,
+      #   7010401
+      # ],
+		instance.items = set_ER_items(content["equipment"], instance.character)
+		# instance.Trait = content[""]
+		instance.Route = content["routeIdOfStart"]
 		
 		try :
 			instance.mmr = content["mmrAfter"]
 		except :
 			instance.mmr = 0
 
-def set_ER_stats_data(instance:ER_Stats_Model, rank):
+def set_ER_stats_data(instance:ER_Stats_Model, rank, matchingTeamMode="1"):
 	'''
 	mmr을 랭크고 변환하고
 	filter로 mmr이 비슷한것들을 가져온다 (골드, 실버,...)
@@ -155,8 +168,24 @@ def set_ER_stats_data(instance:ER_Stats_Model, rank):
 		averageHunts += i.averageHunts
 		averageProficiency += i.averageProficiency
 
+	instance.averageRanking = 9 if matchingTeamMode == "1" else 4.5 if matchingTeamMode == "2" else 3
+
 	instance.averageKills = averageKills/solo_len
 	instance.averageHunts = averageHunts/solo_len
 	instance.averageAssistants = averageAssistants/solo_len
 	instance.averageDeal = averageDeal/solo_len
 	instance.averageProficiency = averageProficiency/solo_len
+
+
+def set_ER_items(data, char):
+	instance = ItemModel.objects.create()
+	instance.charName = char
+	instance.Weapon = data.get("0")
+	instance.Haed = data.get("1")
+	instance.Clothes = data.get("2")
+	instance.Arm = data.get("3")
+	instance.Leg = data.get("4")
+	instance.Accessories = data.get("5")
+	instance.save()
+	return instance
+# def set_ER_Trait():

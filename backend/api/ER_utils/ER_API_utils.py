@@ -4,4 +4,4 @@ def ER_user_averageDeal(user_games):
 	for data in user_games["userGames"]:
 		sum_data = sum_data + data["damageToPlayer"]
 	
-	return sum_data / data_len
+	return round(sum_data / data_len, 2)
