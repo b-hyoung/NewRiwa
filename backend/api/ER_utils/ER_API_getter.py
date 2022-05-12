@@ -1,3 +1,4 @@
+from time import sleep
 import requests
 from Eriwa.settings import ER_API_KEY, ER_API_SEASON
 from api.error_utils import error_msg
@@ -11,6 +12,7 @@ def get_ER_userNum(nickname):
 	if res['code'] == 404:
 		raise exceptions.ValidationError(error_msg(2), code=400)
 	userNum = res["user"]["userNum"]
+	sleep(1)
 	return userNum
 
 def get_ER_userstatus(userNum):
@@ -19,6 +21,7 @@ def get_ER_userstatus(userNum):
 	res = requests.get(user_status, headers=headers).json()
 	if res['code'] == 404:
 		raise exceptions.ValidationError(error_msg(2), code=404)
+	sleep(1)
 	return res
 
 def get_ER_user_games(userNum, _next=None):
@@ -27,6 +30,7 @@ def get_ER_user_games(userNum, _next=None):
 	res = requests.get(user_status, headers=headers, params={"next" : _next}).json()
 	if res['code'] == 404:
 		raise exceptions.ValidationError(error_msg(2), code=404)
+	sleep(1)
 	return res
 
 def get_ER_game(gameId, next=None):
@@ -35,6 +39,7 @@ def get_ER_game(gameId, next=None):
 	res = requests.get(user_status, headers=headers).json()
 	if res['code'] == 404:
 		raise exceptions.ValidationError(error_msg(2), code=404)
+	sleep(1)
 	return res
 
 def	get_ER_games(gameId, _next=None):
@@ -43,4 +48,5 @@ def	get_ER_games(gameId, _next=None):
 	res = requests.get(user_status, headers=headers).json()
 	if res['code'] == 404:
 		raise exceptions.ValidationError(error_msg(2), code=404)
+	sleep(1)
 	return res

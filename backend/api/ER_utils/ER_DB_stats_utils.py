@@ -1,17 +1,15 @@
-from time import sleep
 
 from api.ER_utils.ER_API_getter import (
 	get_ER_userNum,get_ER_user_games, get_ER_games
 )
 from api.ER_utils.ER_DB_utils_transfom import get_ER_Tier
-from api.ER_utils.ER_API_setter import set_ER_api_data
+from api.ER_utils.ER_API_setter import set_ER_info_data
 from api.models_utils import instance_save
 from ..models import ER_Stats_Model, ER_User_Info_Model
 
 def ER_status_update(instance:ER_User_Info_Model):
 	#1. 랭크게임가져오기 
 	userNum = get_ER_userNum(instance.nickname)
-	sleep(1)
 	_next = None
 	solo_gameId = 0
 	duo_gameId = None
@@ -21,7 +19,6 @@ def ER_status_update(instance:ER_User_Info_Model):
 	# 솔로 데이터 만 일단 하는걸로 하는데 나중에는... 모든게 1개이상일때까지 기다리기
 	while solo_gameId  < 1:
 		user_games = get_ER_user_games(userNum, _next)
-		sleep(1)
 		for games in user_games["userGames"]:
 			if games["matchingMode"] == 3:
 				if games["matchingTeamMode"] == 1 :
@@ -54,7 +51,7 @@ def ER_status_update(instance:ER_User_Info_Model):
 		temp_instanse = ER_User_Info_Model.objects.filter(userNum=_usernum).first()
 		if temp_instanse == None:
 			temp_instanse = ER_User_Info_Model.objects.create(userNum=_usernum, nickname=_nickname)
-			set_ER_api_data(temp_instanse, 1)
+			set_ER_info_data(temp_instanse, 1)
 			instance_save(temp_instanse, True)
 		else :
 			print("유저 데이터가 있습니다")

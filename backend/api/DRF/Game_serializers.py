@@ -1,6 +1,5 @@
-from time import sleep
 from rest_framework import serializers
-from api.ER_utils.ER_API_setter import set_ER_api_data, set_ER_game_record_data
+from api.ER_utils.ER_API_setter import set_ER_info_data, set_ER_game_record_data
 
 from api.models import ER_Game_Record_Model
 from api.models_utils import instance_save
@@ -43,7 +42,6 @@ class UserGameRecordCreateSerializer(serializers.Serializer):
 	def create(self, request, data, commit=True):
 		nickname = data.get("nickname", None)
 		userNum=get_ER_userNum(nickname)
-		sleep(1)
 		usergames = get_ER_user_games(userNum)
 
 		for i, content in reversed(list(enumerate(usergames["userGames"]))):
@@ -57,7 +55,7 @@ class UserGameRecordCreateSerializer(serializers.Serializer):
 	def change(self, request, data, id, commit=True):
 		instance = ER_Game_Record_Model.objects.filter(id=id).first()
 
-		set_ER_api_data(instance)
+		set_ER_info_data(instance)
 
 		instance_save(instance, commit)
 		return instance

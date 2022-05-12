@@ -46,17 +46,16 @@ class MasteryModel(models.Model):
 
 class MostPickModel(models.Model):
 	nickname = models.CharField(max_length=30, null=False)
-	matchingTeamMode = models.CharField(max_length=10, null=False)
+	matchingTeamMode = models.CharField(max_length=10, null=True)
 	season = models.CharField(max_length=10,default=0, null=True)
 
 	most_one_charName = models.CharField(null=True,max_length=30)
-	most_one_charImage = models.ImageField(null=True,)
 	most_one_averageRank = models.IntegerField(null=True,)
 
-	most_two_char = models.IntegerField(null=True,)
+	most_two_charName = models.CharField(null=True,max_length=30)
 	most_two_averageRank = models.IntegerField(null=True,)
 
-	most_three_char = models.IntegerField(null=True,)
+	most_three_charName = models.CharField(null=True,max_length=30)
 	most_three_averageRank = models.IntegerField(null=True,)
 
 # 통계 데이터

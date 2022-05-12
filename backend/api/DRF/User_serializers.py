@@ -1,6 +1,6 @@
 
 from rest_framework import serializers
-from api.ER_utils.ER_API_setter import set_ER_api_data, set_ER_stats_data
+from api.ER_utils.ER_API_setter import set_ER_info_data, set_ER_stats_data
 
 from api.models import ER_User_Info_Model, ER_Stats_Model
 from api.models_utils import instance_save
@@ -88,9 +88,9 @@ class UserInfoCreateSerializer(serializers.Serializer):
 		if not instance:
 			instance = ER_User_Info_Model()
 		instance.nickname = nickname
-		matchingTeamMode = request.GET.get("matchingTeamMode",1)
-		set_ER_api_data(instance, matchingTeamMode)
-		ER_status_update(instance)
+		matchingTeamMode = int(request.GET.get("matchingTeamMode", 1))
+		set_ER_info_data(instance, matchingTeamMode)
+		# ER_status_update(instance)
 
 		instance_save(instance, commit)
 		return instance
