@@ -116,6 +116,7 @@ def set_ER_game_record_data(instance:ER_Game_Record_Model, userNum, content):
 		instance.ranking = content["gameRank"]
 		instance.season = get_season(content["seasonId"])
 
+		instance.gameId = content["gameId"]
 		instance.matchingMode = "일반" if content["matchingMode"] == 2 else "랭크"
 		instance.matchingTeamMode = "솔로" if content["matchingTeamMode"] == 1 else "듀오" if content["matchingTeamMode"] == 2 else "스쿼드"
 		
@@ -189,3 +190,13 @@ def set_ER_items(data, char):
 	instance.save()
 	return instance
 # def set_ER_Trait():
+
+
+# def set_ER_items_image(data):
+# 	print(data)
+# 	(data["Weapon"])
+# 	(data["Haed"])
+# 	(data["Clothes"])
+# 	(data["Arm"])
+# 	(data["Leg"])
+# 	(data["Accessories"])

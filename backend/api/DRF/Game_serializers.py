@@ -16,6 +16,7 @@ class UserGameRecordSerializer(serializers.ModelSerializer):
 	matchingMode = serializers.CharField(read_only=True, max_length=10) #일반2 랭크3
 	matchingTeamMode = serializers.CharField(read_only=True, max_length=10)
 
+	gameId = serializers.IntegerField(read_only = True)
 	character = serializers.CharField(max_length=50, read_only=True)
 	characterlevel = serializers.IntegerField(default=1, read_only=True)
 	bestWeapon = serializers.CharField(max_length=30, read_only=True)

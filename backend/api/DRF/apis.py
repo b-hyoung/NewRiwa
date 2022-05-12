@@ -3,6 +3,7 @@ from rest_framework import viewsets, status
 
 from api.error_utils import error_msg
 from api.DRF.User_serializers import UserStatsSerializer, UserStatsSerializerCreateSerializer, UserInfoSerializer, UserInfoCreateSerializer
+from api.ER_utils.ER_API_setter import set_ER_items_image
 
 from .Game_serializers import  UserGameRecordCreateSerializer, UserGameRecordSerializer
 from ..models import ER_Stats_Model, ER_User_Info_Model, ER_Game_Record_Model
@@ -75,14 +76,17 @@ class UserGameViewSet(viewsets.ModelViewSet):
 	def create(self, request):
 		serializer = UserGameRecordCreateSerializer(data=request.data)
 		if serializer.is_valid():
+
+			nickname = serializer.data.get("nickname")
+			if ER_Game_Record_Model.objects.filter(nickname=nickname):
+				return(self.retrieve(request, nickname))
+
 			rtn = serializer.create(request, serializer.data)
 			if rtn:
-				nickname = serializer.data.get("nickname")
-				if ER_Game_Record_Model.objects.filter(nickname=nickname):
-					return(self.retrieve(request, nickname))
 				temp = {}
 				for i, data in enumerate(rtn):
-					temp[i] = UserGameRecordSerializer(data).data 
+					temp[i] = UserGameRecordSerializer(data).data
+					temp[i]["itemImage"] = set_ER_items_image(temp[i]["items"])
 				return Response(temp, status=status.HTTP_201_CREATED)
 		else :
 			return Response(error_msg(1), status=status.HTTP_400_BAD_REQUEST)

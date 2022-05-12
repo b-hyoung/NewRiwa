@@ -124,6 +124,7 @@ class ER_Game_Record_Model(models.Model):
 	matchingMode = models.CharField(max_length=10) #일반2 랭크3
 	matchingTeamMode = models.CharField(max_length=10)
 
+	gameId = models.IntegerField(null=True)
 	character = models.CharField(max_length=50)
 	characterlevel = models.IntegerField(default=1)
 	bestWeapon = models.CharField(max_length=30)
