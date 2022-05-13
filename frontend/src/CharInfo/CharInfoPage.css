@@ -1,0 +1,70 @@
+.charInfoPage{
+    width: 1300px;
+    height: 1300px;
+    display: flex;
+    flex-direction: row;
+    margin: 0 auto;
+    padding-top: 100px;
+}
+
+.molaa{
+    background-color: rgb(31, 31, 31);
+}
+
+
+
+.charInfoPage .search_Char{
+    width: 280px;
+    height: 200px;
+    border: 1px solid white;
+    margin-right: 50px;
+}
+
+.char_Info{
+    width: 1000px;
+    height: 800px;
+    border: 1px solid white;
+}
+
+.select_Char{
+    width: 40px;
+    height: 40px;
+    padding: 0.4rem 0.4rem;
+    margin-left: 7px;
+    margin-top:5px;
+}
+
+.search_input{
+    width:95%;
+    border:1px solid white;
+    border-radius: 5px;
+    margin-top: 5px;
+    margin-left: 6px;
+    background-color: gray;
+
+}
+
+.search_input::placeholder{
+    font-size: 13px;
+    color: white;
+}
+
+.select_Char .most_name{
+    width: 40px;
+    height: 40px;
+    font-size: 13px;
+    color: rgb(202, 202, 202);
+}
+
+.select_Char .most_img{
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    background-color: bisque;
+
+}
+
+.char_Info .charMain_Info{
+    height: 300px;
+    border-bottom: 1px solid white;
+}

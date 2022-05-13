@@ -19,6 +19,8 @@ function User_Stat() {
     setSelectTier(e.target.value)
   }
 
+  
+
   // const getSelTier = () =>{
   //   if(selectTier === 1){
   //     setTierData("솔로 데이터")

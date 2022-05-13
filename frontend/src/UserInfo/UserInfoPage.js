@@ -16,17 +16,21 @@ function UserinfoPage() {
   const { nickname } = useParams();
   const [userData, setUserData] = useState([])
   const [userRecode, setUserRecode] = useState("")
-  const [userRecodeImg, setUserRecodeImg] = useState("")
   const [useError, setUserError] = useState(false)
   const [clickButton, setClickButton] = useState(false)
   const [clickIndex, setClickIndex] = useState("")
   const [toggleState,setToggleState] = useState(1)
+  const [arr , setArr] = useState([])
+  const [tierInfo,setTierInfo] = useState([]);
 
-  useEffect(() => {
+  useEffect(() => { 
     getUserGame()
-    // getUserInfo()
-    // getTierInfo()
-  }, [])
+    getUserInfo()
+  }, []) 
+
+  useEffect(() => { 
+    getTierInfo() 
+  }, [userData,arr[0]]) 
 
 
   const getUserGame = () => {
@@ -35,7 +39,7 @@ function UserinfoPage() {
         'http://127.0.0.1:8000/api/UserGameRecord/' + nickname + '/')
         .then(response => {
           console.log(response)
-          setUserData(response.data);
+          setUserRecode(response.data);
         })
         .catch(error => {
           setUserError(true)
@@ -55,8 +59,7 @@ function UserinfoPage() {
       )
         .then(response => {
           console.log(response)
-          setUserRecode(response.data)
-          setUserRecodeImg(response.data.mostpick)
+          setUserData(response.data)
         })
         .catch(error => {
           setUserError(true)
@@ -67,25 +70,31 @@ function UserinfoPage() {
   }
 
   const getTierInfo = () => {
-    try {
-      axios.post(
-        'http://127.0.0.1:8000/api/UserStats/'
-        , {
-          rank: "Bronz"
-        },
-      )
-        .then(response => {
-          console.log(response)
-
-        })
-    } catch (error) {
-      console.log(error)
+    if(userData.soloTier !== undefined){
+      setArr(userData.soloTier.split(" "))
     }
-  }
-
-  const handleClickOpen = (e, index) => {
-    e.preventDefault();
-    if (clickButton === true) {
+    if(arr[0] !== undefined){
+      try { 
+        axios.post(
+          'http://127.0.0.1:8000/api/UserStats/'
+          , {
+            rank: arr[0]
+          },
+          )
+          .then(response => {
+            console.log(response.data)
+            setTierInfo(response.data)
+            
+          })
+        } catch (error) {
+          console.log(error)
+        }
+    }
+    }
+    
+    const handleClickOpen = (e, index) => {
+      e.preventDefault(); 
+      if (clickButton === true) {
       setClickButton(false);
       setClickIndex(index)
     } else if (clickButton === false) {
@@ -96,17 +105,17 @@ function UserinfoPage() {
 
   const toggleTabs = (index) => {
     setToggleState(index)
-    if(index === 1){
-      setUserData("전체")
-    }else if(index === 2){
-      setUserData("일반")
-    }else if(index === 3){
-      setUserData("솔로")
-    }else if(index === 4){
-      setUserData("듀오")
-    }else if(index === 5){
-      setUserData("스쿼드")
-    }
+    // if(index === 1){
+    //   setUserData("전체")
+    // }else if(index === 2){
+    //   setUserData("일반")
+    // }else if(index === 3){
+    //   setUserData("솔로")
+    // }else if(index === 4){
+    //   setUserData("듀오")
+    // }else if(index === 5){
+    //   setUserData("스쿼드")
+    // }
   }
 
   
@@ -121,8 +130,8 @@ function UserinfoPage() {
           </div>
           <div className='pentagon_content'>
             <div className='user_Stat'>
-              <Pentagon name={nickname} />
-              <img className='char' src={require("../image/Background/YukiSama.png")} />
+              <Pentagon name={nickname} infoTier={tierInfo}  dataUser={userData} usertier={arr[0]} />
+              <img className='char' src={require("../image/Background/jackie_half.png")} />
               <User_Stats />
             </div>
           </div>
@@ -143,36 +152,36 @@ function UserinfoPage() {
             </div>
 
             <div className='user_GameLog'>
-              {userData && Object.keys(userData).map((item, index) => (
+              {userRecode && Object.keys(userRecode).map((item, index) => (
                 <div>
                   <div className='user'>
                     <div className='first'>
-                      {userData[item].rank === 1 &&
+                      {userRecode[item].rank === 1 &&
                         <>
-                          <div style={{ fontWeight: "bold", fontSize: "20px", color: "yellow" }}>#{userData[item].rank}</div>
+                          <div style={{ fontWeight: "bold", fontSize: "20px", color: "yellow" }}>#{userRecode[item].rank}</div>
                         </>
                       }
-                      {userData[item].rank === 2 &&
+                      {userRecode[item].rank === 2 &&
                         <>
-                          <div style={{ fontWeight: "bold", fontSize: "20px", color: "orange" }}>#{userData[item].rank}</div>
+                          <div style={{ fontWeight: "bold", fontSize: "20px", color: "orange" }}>#{userRecode[item].rank}</div>
                         </>
                       }
-                      {userData[item].rank === 3 &&
+                      {userRecode[item].rank === 3 &&
                         <>
-                          <div style={{ fontWeight: "bold", fontSize: "20px", color: "skyblue" }}>#{userData[item].rank}</div>
+                          <div style={{ fontWeight: "bold", fontSize: "20px", color: "skyblue" }}>#{userRecode[item].rank}</div>
                         </>
                       }
-                      {userData[item].rank > 3 &&
+                      {userRecode[item].rank > 3 &&
                         <>
-                          <div style={{ fontWeight: "bold", fontSize: "20px", color: "silver" }}>#{userData[item].rank}</div>
+                          <div style={{ fontWeight: "bold", fontSize: "20px", color: "silver" }}>#{userRecode[item].rank}</div>
                         </>
                       }
 
-                      <div>{userData[item].matchingMode}</div>
+                      <div>{userRecode[item].matchingMode}</div>
                       <div>6시간 전</div>
                     </div>
                     <div className='second'>
-                      <div className='charLevel'>{userData[item].bestWeaponLevel}</div>
+                      <div className='charLevel'>{userRecode[item].bestWeaponLevel}</div>
                       <img className='char_img' src={require("../image/Char/icon/Yuki.png")} />
                       <img className='char_wephon' src={require("../image/WeaponMastery/07. Sniper Rifle.png")} />
                     </div>
@@ -182,11 +191,11 @@ function UserinfoPage() {
                     </div>
                     <div className='third'>
                       <div style={{ fontSize: "15px", textAlign: "left !important", marginBottom: "-4px" }}>K/A/H</div>
-                      <div className='user_kah'>{userData[item].Kills}/{userData[item].Assistants}/{userData[item].Hunts}</div>
+                      <div className='user_kah'>{userRecode[item].Kills}/{userRecode[item].Assistants}/{userRecode[item].Hunts}</div>
                     </div>
                     <div className='forth'>
                       <div style={{ marginBottom: "-4px" }}>MMR</div>
-                      <div style={{ fontWeight: "bold", fontSize: "20px" }}>{userData[item].mmr}</div>
+                      <div style={{ fontWeight: "bold", fontSize: "20px" }}>{userRecode[item].mmr}</div>
                     </div>
                     <div className='fifth'>
                       <div>Route</div>

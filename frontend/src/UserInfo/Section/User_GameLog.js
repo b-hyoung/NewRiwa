@@ -1,9 +1,7 @@
 import React, { useState ,useEffect } from 'react'
 import './css/User_GameLog.css'
 
-function User_GameLog({ useData }) {
-    const [userData , setUserData] = useState(useData);
-    console.log(useData)
+function User_GameLog() {
 
     return (
         <>
