@@ -1,6 +1,6 @@
 from Eriwa.settings import ER_API_SEASON
 
-from api.ER_utils.ER_DB_utils_image import get_ER_char_image
+from api.ER_utils.ER_DB_utils_image import get_ER_charicon_image
 from api.ER_utils.ER_API_getter import get_ER_userNum, get_ER_user_games, get_ER_userstatus
 from api.error_utils import error_msg
 from api.ER_utils.ER_base_setter import set_ER_graph_data
@@ -13,25 +13,27 @@ from rest_framework import exceptions
 def set_mostpick_data(mostpick_model, matchingTeamMode, userstats):
 	matchingTeamMode = matchingTeamMode - 1
 	try :
-		mostpick_model.most_one_charcode = \
-			userstats["userStats"][matchingTeamMode]["characterStats"][0]["characterCode"]
+		mostpick_model.most_one_charcode = userstats["userStats"][matchingTeamMode]["characterStats"][0]["characterCode"]
 	except IndexError:
-		mostpick_model.most_one_charcode = \
-			userstats["userStats"]["characterStats"][0]["characterCode"]
+		try:
+			mostpick_model.most_one_charcode = userstats["userStats"]["characterStats"][0]["characterCode"]
+		except TypeError:
+			pass
+	try :
+		mostpick_model.most_two_charcode = userstats["userStats"][matchingTeamMode]["characterStats"][1]["characterCode"]
+	except IndexError:
+		try:
+			mostpick_model.most_two_charcode = userstats["userStats"]["characterStats"][1]["characterCode"]
+		except TypeError:
+			pass
 
 	try :
-		mostpick_model.most_two_charcode = \
-			userstats["userStats"][matchingTeamMode]["characterStats"][1]["characterCode"]
+		mostpick_model.most_three_charcode = userstats["userStats"][matchingTeamMode]["characterStats"][2]["characterCode"]
 	except IndexError:
-		mostpick_model.most_two_charcode = \
-			userstats["userStats"]["characterStats"][1]["characterCode"]
-
-	try :
-		mostpick_model.most_three_charcode = \
-			userstats["userStats"][matchingTeamMode]["characterStats"][2]["characterCode"]
-	except IndexError:
-		mostpick_model.most_three_charcode = \
-			userstats["userStats"]["characterStats"][2]["characterCode"]
+		try:
+			mostpick_model.most_three_charcode = userstats["userStats"]["characterStats"][2]["characterCode"]
+		except TypeError:
+			pass
 
 def set_ER_mostpick(instance:ER_User_Info_Model, userstats, matchingTeamMode):
 	if instance.mostpick_id == None:

@@ -88,9 +88,9 @@ class UserInfoCreateSerializer(serializers.Serializer):
 		nickname = data.get("nickname", None)
 		instance = ER_User_Info_Model.objects.filter(nickname=nickname).first()
 		if not instance:
-			instance = ER_User_Info_Model().objects.create(nickname=nickname)
+			instance = ER_User_Info_Model.objects.create(nickname=nickname)
 		matchingTeamMode = int(request.GET.get("matchingTeamMode", 1))
-
+	
 		set_ER_info_data(instance, matchingTeamMode)
 		# ER_status_update(instance)
 

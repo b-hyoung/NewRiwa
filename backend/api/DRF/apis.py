@@ -5,6 +5,7 @@ from api.error_utils import error_msg
 from api.DRF.User_serializers import UserStatsSerializer, UserStatsSerializerCreateSerializer, UserInfoSerializer, UserInfoCreateSerializer
 from api.DRF.Base_serialzers import MostpickSerializer
 from api.ER_utils.ER_Serializer_setter import set_mostpick_Serializer
+from api.ER_utils.ER_DB_utils_image import get_ER_charhalf_image
 # from api.ER_utils.ER_API_setter import set_ER_items_image
 
 from .Game_serializers import  UserGameRecordCreateSerializer, UserGameRecordSerializer
@@ -48,13 +49,14 @@ class UserInfoViewSet(viewsets.ModelViewSet):
 		serializer = UserInfoCreateSerializer(data=request.data)
 		if serializer.is_valid():
 			#리디렉트
-			# nickname = serializer.data.get("nickname")
-			# if ER_User_Info_Model.objects.filter(nickname=nickname):
-			# 	return(self.retrieve(request, nickname))
+			nickname = serializer.data.get("nickname")
+			if ER_User_Info_Model.objects.filter(nickname=nickname):
+				return(self.retrieve(request, nickname))
 			rtn = serializer.create(request, serializer.data)
 			if rtn:
 				temp = UserInfoSerializer(rtn).data
 				temp["mostpick"] = set_mostpick_Serializer(rtn.mostpick)
+				temp["mainCharImg"] = get_ER_charhalf_image(rtn.mostpick.most_one_charcode)
 				return Response(temp, status=status.HTTP_201_CREATED)
 		else :
 			return Response(error_msg(1), status=status.HTTP_400_BAD_REQUEST)
