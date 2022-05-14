@@ -3,6 +3,8 @@ from rest_framework import viewsets, status
 
 from api.error_utils import error_msg
 from api.DRF.User_serializers import UserStatsSerializer, UserStatsSerializerCreateSerializer, UserInfoSerializer, UserInfoCreateSerializer
+from api.DRF.Base_serialzers import MostpickSerializer
+from api.ER_utils.ER_Serializer_setter import set_mostpick_Serializer
 # from api.ER_utils.ER_API_setter import set_ER_items_image
 
 from .Game_serializers import  UserGameRecordCreateSerializer, UserGameRecordSerializer
@@ -51,7 +53,9 @@ class UserInfoViewSet(viewsets.ModelViewSet):
 			# 	return(self.retrieve(request, nickname))
 			rtn = serializer.create(request, serializer.data)
 			if rtn:
-				return Response(UserInfoSerializer(rtn).data, status=status.HTTP_201_CREATED)
+				temp = UserInfoSerializer(rtn).data
+				temp["mostpick"] = set_mostpick_Serializer(rtn.mostpick)
+				return Response(temp, status=status.HTTP_201_CREATED)
 		else :
 			return Response(error_msg(1), status=status.HTTP_400_BAD_REQUEST)
 

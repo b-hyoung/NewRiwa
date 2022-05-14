@@ -7,10 +7,15 @@ class MasterySerializer(serializers.ModelSerializer):
 		model = MasteryModel
 		exclude = ("id", "nickname", "mmr")
 
-class MostpickSerializer(serializers.ModelSerializer):
-	class Meta:
-		model = MostPickModel
-		exclude = ("id", "nickname")
+class MostpickSerializer(serializers.Serializer):
+	most_one_charName = serializers.CharField(max_length=30, read_only=True)
+	most_one_charimg = serializers.ImageField(read_only=True)
+
+	most_two_charName = serializers.CharField(max_length=30, read_only=True)
+	most_two_charimg = serializers.ImageField(read_only=True)
+
+	most_three_charName = serializers.CharField(max_length=30, read_only=True)
+	most_three_charimg = serializers.ImageField(read_only=True)
 
 class ItemSerializer(serializers.ModelSerializer):
 	class Meta:

@@ -1,4 +1,5 @@
 
+from email.policy import default
 from rest_framework import serializers
 from api.ER_utils.ER_API_setter import set_ER_info_data, set_ER_stats_data
 
@@ -36,7 +37,6 @@ class UserStatsSerializer(serializers.ModelSerializer):
 
 	class Meta:
 		model = ER_Stats_Model
-		# fields = "__all__"
 		exclude = ("id",)
 
 class UserStatsSerializerCreateSerializer(serializers.Serializer):
@@ -66,6 +66,8 @@ class UserInfoSerializer(serializers.ModelSerializer):
 	averageDeal = serializers.FloatField(read_only=True)
 	averageProficiency = serializers.FloatField(read_only=True)
 
+	mainCharImg = serializers.ImageField(default=None,read_only=True)
+
 	# averagebestWeaponLevel = serializers.FloatField(default=1, read_only=True)
 	mastery = MasterySerializer(read_only=True)
 	mostpick = MostpickSerializer(read_only=True)
@@ -86,9 +88,9 @@ class UserInfoCreateSerializer(serializers.Serializer):
 		nickname = data.get("nickname", None)
 		instance = ER_User_Info_Model.objects.filter(nickname=nickname).first()
 		if not instance:
-			instance = ER_User_Info_Model()
-		instance.nickname = nickname
+			instance = ER_User_Info_Model().objects.create(nickname=nickname)
 		matchingTeamMode = int(request.GET.get("matchingTeamMode", 1))
+
 		set_ER_info_data(instance, matchingTeamMode)
 		# ER_status_update(instance)
 

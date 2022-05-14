@@ -13,31 +13,25 @@ from rest_framework import exceptions
 def set_mostpick_data(mostpick_model, matchingTeamMode, userstats):
 	matchingTeamMode = matchingTeamMode - 1
 	try :
-		mostpick_model.most_one_charName = get_ER_char_name(
+		mostpick_model.most_one_charcode = \
 			userstats["userStats"][matchingTeamMode]["characterStats"][0]["characterCode"]
-		)
 	except IndexError:
-		mostpick_model.most_one_charName = get_ER_char_name(
+		mostpick_model.most_one_charcode = \
 			userstats["userStats"]["characterStats"][0]["characterCode"]
-		)
 
 	try :
-		mostpick_model.most_two_charName = get_ER_char_name(
+		mostpick_model.most_two_charcode = \
 			userstats["userStats"][matchingTeamMode]["characterStats"][1]["characterCode"]
-		)
 	except IndexError:
-		mostpick_model.most_one_charName = get_ER_char_name(
+		mostpick_model.most_two_charcode = \
 			userstats["userStats"]["characterStats"][1]["characterCode"]
-		)
 
 	try :
-		mostpick_model.most_three_charName = get_ER_char_name(
+		mostpick_model.most_three_charcode = \
 			userstats["userStats"][matchingTeamMode]["characterStats"][2]["characterCode"]
-		)
 	except IndexError:
-		mostpick_model.most_three_charName = get_ER_char_name(
+		mostpick_model.most_three_charcode = \
 			userstats["userStats"]["characterStats"][2]["characterCode"]
-		)
 
 def set_ER_mostpick(instance:ER_User_Info_Model, userstats, matchingTeamMode):
 	if instance.mostpick_id == None:
@@ -47,10 +41,9 @@ def set_ER_mostpick(instance:ER_User_Info_Model, userstats, matchingTeamMode):
 
 	temp_mostpick.season = ER_API_SEASON
 	temp_mostpick.matchingTeamMode = matchingTeamMode
-
 	set_mostpick_data(temp_mostpick, matchingTeamMode, userstats)
-
 	temp_mostpick.save()
+
 	instance.mostpick_id = temp_mostpick.id
 
 def set_ER_info_data(instance:ER_User_Info_Model, matchingTeamMode=1):
