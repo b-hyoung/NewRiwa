@@ -49,9 +49,9 @@ class UserInfoViewSet(viewsets.ModelViewSet):
 		serializer = UserInfoCreateSerializer(data=request.data)
 		if serializer.is_valid():
 			#리디렉트
-			nickname = serializer.data.get("nickname")
-			if ER_User_Info_Model.objects.filter(nickname=nickname):
-				return(self.retrieve(request, nickname))
+			# nickname = serializer.data.get("nickname")
+			# if ER_User_Info_Model.objects.filter(nickname=nickname):
+			# 	return(self.retrieve(request, nickname))
 			rtn = serializer.create(request, serializer.data)
 			if rtn:
 				temp = UserInfoSerializer(rtn).data
