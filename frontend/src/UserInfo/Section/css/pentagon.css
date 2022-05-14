@@ -99,7 +99,7 @@
 
 .avg_tier .colume{
     display: flex;
-    width: 130px;
+    width: 200px;
     flex-direction: row;
 }
 .avg_tier .colume .test_{

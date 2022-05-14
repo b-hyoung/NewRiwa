@@ -38,6 +38,7 @@
 .userTier .avg_info div{
     width: 300px;
 }
+
 span.info_log{
     float:right;
     font-size:13px;
@@ -51,4 +52,5 @@ span.info_log{
     background-color: gray;
     border-radius: 3px;
     margin-top: 7px;
+    margin-bottom: 5px;
 }

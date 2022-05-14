@@ -11,6 +11,7 @@ import User_Stats from './Section/User_Stat'
 import Form from 'react-bootstrap/Form'
 import Log_Detail from './Section/Log_Detail'
 
+
 function UserinfoPage() {
 
   const { nickname } = useParams();
@@ -22,6 +23,8 @@ function UserinfoPage() {
   const [toggleState,setToggleState] = useState(1)
   const [arr , setArr] = useState([])
   const [tierInfo,setTierInfo] = useState([]);
+
+  const publicUrl = process.env.PUBLIC_URL;
 
   useEffect(() => { 
     getUserGame()
@@ -124,14 +127,14 @@ function UserinfoPage() {
     <div className='page_wrap'>
       {useError === false ? (
         <>
-          {/* <img src={require("../image/Char/icon/Yuki.png")} style={{width:"200px", height:"200px"}} /> */}
           <div className='user_name'>
             {nickname}
           </div>
           <div className='pentagon_content'>
             <div className='user_Stat'>
               <Pentagon name={nickname} infoTier={tierInfo}  dataUser={userData} usertier={arr[0]} />
-              <img className='char' src={require("../image/Background/jackie_half.png")} />
+              <img className='char' src={`${process.env.PUBLIC_URL}${userData.mainCharImg}`} />
+              {/* <img className='char' src={require('../image/Char/Full/Full.png')} style={{transform:"rotate(90deg)" , transform:"scaleX(-1)"}} /> */}
               <User_Stats />
             </div>
           </div>
@@ -148,7 +151,7 @@ function UserinfoPage() {
             </div>
 
             <div className='user_Infos'>
-              <User_GameLog useData={userData} />
+              <User_GameLog useData={userData} mostData={userData.mostpick} />
             </div>
 
             <div className='user_GameLog'>
