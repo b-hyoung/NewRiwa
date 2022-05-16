@@ -6,6 +6,7 @@ from api.DRF.User_serializers import UserStatsSerializer, UserStatsSerializerCre
 from api.DRF.Base_serialzers import MostpickSerializer
 from api.ER_utils.ER_Serializer_setter import set_mostpick_Serializer
 from api.ER_utils.ER_DB_utils_image import get_ER_charhalf_image
+from api.ER_utils.ER_DB_utils_transfom import get_season
 # from api.ER_utils.ER_API_setter import set_ER_items_image
 
 from .Game_serializers import  UserGameRecordCreateSerializer, UserGameRecordSerializer
@@ -57,6 +58,7 @@ class UserInfoViewSet(viewsets.ModelViewSet):
 				temp = UserInfoSerializer(rtn).data
 				temp["mostpick"] = set_mostpick_Serializer(rtn.mostpick)
 				temp["mainCharImg"] = get_ER_charhalf_image(rtn.mostpick.most_one_charcode)
+				temp["season"] = get_season(int(temp["seasonId"]))
 				return Response(temp, status=status.HTTP_201_CREATED)
 		else :
 			return Response(error_msg(1), status=status.HTTP_400_BAD_REQUEST)
@@ -64,8 +66,10 @@ class UserInfoViewSet(viewsets.ModelViewSet):
 	def retrieve(self, request, pk=None):
 		queryset = ER_User_Info_Model.objects.filter(nickname=pk).last()
 		if queryset:
-			serializer = UserInfoSerializer(queryset)
-			return Response(serializer.data, status=status.HTTP_201_CREATED)
+			temp = UserInfoSerializer(queryset).data
+			temp["mostpick"] = set_mostpick_Serializer(queryset.mostpick)
+			temp["mainCharImg"] = get_ER_charhalf_image(queryset.mostpick.most_one_charcode)
+			return Response(temp, status=status.HTTP_201_CREATED)
 		else :
 			return Response(error_msg(5), status=status.HTTP_404_NOT_FOUND)
 

@@ -62,6 +62,7 @@ def set_ER_info_data(instance:ER_User_Info_Model, matchingTeamMode=1):
 	user_games = get_ER_user_games(userNum)
 
 	instance.mmr = int(user_stats["userStats"][ER_userStats_Solo]["mmr"])
+	instance.seasonId = int(user_stats["userStats"][ER_userStats_Solo]["seasonId"])
 	set_ER_graph_data(instance, user_stats, user_games, matchingTeamMode)
 	set_ER_mostpick(instance, user_stats, matchingTeamMode)
 	try :
@@ -105,7 +106,7 @@ def set_ER_game_record_data(instance:ER_Game_Record_Model, userNum, content):
 		except :
 			instance.mmr = 0
 
-def set_ER_stats_data(instance:ER_Stats_Model, rank, matchingTeamMode="1"):
+def set_ER_stats_data(instance:ER_Stats_Model, rank, matchingTeamMode=1):
 	'''
 	mmr을 랭크고 변환하고
 	filter로 mmr이 비슷한것들을 가져온다 (골드, 실버,...)
@@ -127,7 +128,7 @@ def set_ER_stats_data(instance:ER_Stats_Model, rank, matchingTeamMode="1"):
 		averageHunts += i.averageHunts
 		averageProficiency += i.averageProficiency
 
-	instance.averageRanking = 9 if matchingTeamMode == "1" else 4.5 if matchingTeamMode == "2" else 3
+	instance.averageRanking = 9 if matchingTeamMode == 1 else 4.5 if matchingTeamMode == 2 else 3
 
 	instance.averageKills = averageKills/solo_len
 	instance.averageHunts = averageHunts/solo_len

@@ -14,8 +14,7 @@ class UserStatsSerializer(serializers.ModelSerializer):
 	rank = serializers.CharField()
 
 	#맞는 데이터 찾기용
-	matchingMode = serializers.CharField(read_only=True,)
-	matchingTeamMode = serializers.CharField(read_only=True,)
+	matchingTeamMode = serializers.IntegerField(read_only=True,)
 	season = serializers.CharField(read_only=True,)
 	
 	#캐릭터 정보를 위해서
@@ -49,6 +48,7 @@ class UserStatsSerializerCreateSerializer(serializers.Serializer):
 		instance = ER_Stats_Model.objects.filter(rank=rank).first()
 		if not instance:
 			instance =ER_Stats_Model()
+		instance.matchingTeamMode = matchingTeamMode
 		instance.rank = rank
 		set_ER_stats_data(instance, rank, matchingTeamMode)
 		instance_save(instance, commit)
@@ -58,6 +58,9 @@ class UserInfoSerializer(serializers.ModelSerializer):
 	#평균 ada
 	nickname = serializers.CharField()
 	mmr = serializers.IntegerField(read_only=True)
+	matchingTeamMode = serializers.IntegerField(read_only=True)
+	season = serializers.IntegerField(default=0, read_only=True)
+	seasonId = serializers.CharField(max_length=10,default=0, read_only=True)
 
 	averageRanking = serializers.FloatField(read_only=True)
 	averageKills = serializers.FloatField(read_only=True)
@@ -90,7 +93,7 @@ class UserInfoCreateSerializer(serializers.Serializer):
 		if not instance:
 			instance = ER_User_Info_Model.objects.create(nickname=nickname)
 		matchingTeamMode = int(request.GET.get("matchingTeamMode", 1))
-	
+		instance.matchingTeamMode = matchingTeamMode
 		set_ER_info_data(instance, matchingTeamMode)
 		# ER_status_update(instance)
 

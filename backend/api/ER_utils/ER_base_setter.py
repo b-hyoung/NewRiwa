@@ -42,8 +42,8 @@ def set_ER_averageMastery(instance:ER_Stats_Model, user_games):
 	return mastery.get_averageProficiency()
 
 def set_ER_graph_data(instance, user_stats, user_games, ER_user_status_mode:int):
-	ER_user_status_mode = ER_user_status_mode- 1
-	instance.averageRanking = int(user_stats["userStats"][ER_user_status_mode]["averageRank"])
+	ER_user_status_mode = ER_user_status_mode - 1
+	instance.averageRanking = user_stats["userStats"][ER_user_status_mode]["averageRank"]
 	instance.averageKills = user_stats["userStats"][ER_user_status_mode]["averageKills"]
 	instance.averageHunts = user_stats["userStats"][ER_user_status_mode]["averageHunts"]
 	instance.averageAssistants = user_stats["userStats"][ER_user_status_mode]["averageAssistants"]

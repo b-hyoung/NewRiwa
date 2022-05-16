@@ -42,7 +42,7 @@ class MasteryModel(models.Model):
 		self.averageStrengthlevel + \
 		self.averageDefenselevel + \
 		self.averageHuntinglevel) / 8
-		return averageProficiency
+		return round(averageProficiency,2)
 
 class MostPickModel(models.Model):
 	nickname = models.CharField(max_length=30, null=False)
@@ -64,8 +64,7 @@ class ER_Stats_Model(models.Model):
 	rank = models.CharField(max_length=30, null=True)
 
 	#맞는 데이터 찾기용
-	matchingMode = models.CharField(max_length=10)
-	matchingTeamMode = models.CharField(max_length=10)
+	matchingTeamMode = models.IntegerField(max_length=10, null=True)
 	season = models.CharField(max_length=10,default=0)
 	
 	#캐릭터 정보를 위해서
@@ -90,6 +89,8 @@ class ER_User_Info_Model(models.Model):
 	# 식별용 데이터
 	nickname = models.CharField(max_length=30)
 	userNum = models.CharField(max_length=20, null=False)
+	matchingTeamMode = models.IntegerField(max_length=10, null=True)
+	seasonId = models.IntegerField(max_length=10,default=0)
 	mmr = models.IntegerField(null=True, default=0)
 
 	#티어
