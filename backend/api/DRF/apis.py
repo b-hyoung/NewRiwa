@@ -15,9 +15,8 @@ class UserStatsViewSet(viewsets.ModelViewSet):
 	serializer_class = UserStatsSerializer
 
 	def list(self, request, *args, **kwargs):
-		queryset = self.get_queryset()
-		serializer = UserStatsSerializer(queryset, many=True)
-		return Response(serializer.data, status=status.HTTP_200_OK)
+		msg = "검색창입니다."
+		return Response({"msg" : msg}, status=status.HTTP_400_BAD_REQUEST)
 
 	def create(self, request):
 		serializer = UserStatsSerializerCreateSerializer(data=request.data)

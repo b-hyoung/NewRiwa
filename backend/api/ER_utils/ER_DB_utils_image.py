@@ -15,12 +15,12 @@ def get_ER_charhalf_image(charcode:int):
 def get_ER_WeaponImg(itemcode:int):
 	if itemcode == None:
 		return None
-	return ("image/Item/Weapon/" + ER_Items[itemcode])
+	return ("/image/Item/Weapon/" + ER_Items[itemcode])
 
 def get_ER_AmorImg(itemcode:int):
 	if itemcode == None:
 		return None
-	return ("image/Item/Amor/"+ ER_Items[itemcode])
+	return ("/image/Item/Amor/"+ ER_Items[itemcode])
 
 def get_ER_ItemsImg(items:ItemModel):
 	ItemsImage = {}
