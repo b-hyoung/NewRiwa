@@ -4,8 +4,8 @@ from rest_framework import viewsets, status
 from api.error_utils import error_msg
 from api.DRF.User_serializers import UserStatsSerializer, UserStatsSerializerCreateSerializer, UserInfoSerializer, UserInfoCreateSerializer
 from api.ER_utils.ER_Serializer_setter import set_mostpick_Serializer
-from api.ER_utils.ER_DB_utils_image import get_ER_charhalf_image, get_ER_ItemsImg
-from api.ER_utils.ER_DB_utils_transfom import get_season
+from api.ER_utils.ER_DB_utils_image import get_ER_charhalf_image, get_ER_ItemsImg, get_ER_charicon_image
+from api.ER_utils.ER_DB_utils_transfom import get_season, get_ER_char_name
 
 from .Game_serializers import  UserGameRecordCreateSerializer, UserGameRecordSerializer
 from ..models import ER_Stats_Model, ER_User_Info_Model, ER_Game_Record_Model
@@ -94,6 +94,8 @@ class UserGameViewSet(viewsets.ModelViewSet):
 				for i, data in enumerate(rtn):
 					temp[i] = UserGameRecordSerializer(data).data
 					temp[i]["itemImage"] = get_ER_ItemsImg(data.items)
+					temp[i]["charname"] = get_ER_char_name(data.charnum)
+					temp[i]["charImg"] = get_ER_charicon_image(data.charnum)
 				return Response(temp, status=status.HTTP_201_CREATED)
 		else :
 			return Response(error_msg(1), status=status.HTTP_400_BAD_REQUEST)

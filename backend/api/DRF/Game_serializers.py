@@ -16,7 +16,8 @@ class UserGameRecordSerializer(serializers.ModelSerializer):
 	matchingTeamMode = serializers.CharField(read_only=True, max_length=10)
 
 	gameId = serializers.IntegerField(read_only = True)
-	character = serializers.CharField(max_length=50, read_only=True)
+	charImg = serializers.ImageField(read_only=True)
+	charname = serializers.CharField(max_length=50, read_only=True)
 	characterlevel = serializers.IntegerField(default=1, read_only=True)
 	bestWeapon = serializers.CharField(max_length=30, read_only=True)
 	bestWeaponLevel = serializers.CharField(max_length=30, read_only=True)
@@ -32,7 +33,7 @@ class UserGameRecordSerializer(serializers.ModelSerializer):
 
 	class Meta:
 		model = ER_Game_Record_Model
-		exclude = ("id", "updated_at", "created_at", "items")
+		exclude = ("id", "updated_at", "created_at", "items","charnum")
 		
 
 class UserGameRecordCreateSerializer(serializers.Serializer):
@@ -40,7 +41,7 @@ class UserGameRecordCreateSerializer(serializers.Serializer):
 
 	def create(self, request, data, commit=True):
 		nickname = data.get("nickname", None)
-		userNum=get_ER_userNum(nickname)
+		userNum = get_ER_userNum(nickname)
 		usergames = get_ER_user_games(userNum)
 
 		for i, content in reversed(list(enumerate(usergames["userGames"]))):

@@ -80,7 +80,7 @@ def set_ER_game_record_data(instance:ER_Game_Record_Model, userNum, content):
 		instance.matchingMode = "일반" if content["matchingMode"] == 2 else "랭크"
 		instance.matchingTeamMode = "솔로" if content["matchingTeamMode"] == 1 else "듀오" if content["matchingTeamMode"] == 2 else "스쿼드"
 		
-		instance.character = get_ER_char_name(content["characterNum"])
+		instance.charcode = content["characterNum"]
 		instance.characterlevel = content["characterLevel"]
 		instance.bestWeapon = content["bestWeapon"]
 		instance.bestWeaponLevel = content["bestWeaponLevel"]
@@ -98,7 +98,7 @@ def set_ER_game_record_data(instance:ER_Game_Record_Model, userNum, content):
       #   7010101,
       #   7010401
       # ],
-		instance.items = set_ER_items(content["equipment"], instance.character)
+		instance.items = set_ER_items(content["equipment"], instance.charnum)
 		# instance.Trait = content[""]
 		instance.Route = content["routeIdOfStart"]
 		try :
@@ -137,9 +137,9 @@ def set_ER_stats_data(instance:ER_Stats_Model, rank, matchingTeamMode=1):
 	instance.averageProficiency = averageProficiency/solo_len
 
 
-def set_ER_items(data, char):
+def set_ER_items(data, charnum):
 	instance = ItemModel.objects.create()
-	instance.charName = char
+	instance.charnum = charnum
 	instance.Weapon = data.get("0")
 	instance.Haed = data.get("1")
 	instance.Clothes = data.get("2")

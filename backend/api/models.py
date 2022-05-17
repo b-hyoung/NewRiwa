@@ -11,7 +11,7 @@ class TraitModel(models.Model):
 	SecondSub_two = models.IntegerField(null=True)
 
 class ItemModel(models.Model):
-	charName = models.CharField(null=True,max_length=30)
+	charnum = models.IntegerField(null=True,)
 	Weapon = models.IntegerField(null=True,)
 	Haed = models.IntegerField(null=True,)
 	Clothes = models.IntegerField(null=True,)
@@ -125,7 +125,7 @@ class ER_Game_Record_Model(models.Model):
 	matchingTeamMode = models.CharField(max_length=10)
 
 	gameId = models.IntegerField(null=True)
-	character = models.CharField(max_length=50)
+	charnum = models.IntegerField(null=True)
 	characterlevel = models.IntegerField(default=1)
 	bestWeapon = models.CharField(max_length=30)
 	bestWeaponLevel = models.IntegerField(default=1)
