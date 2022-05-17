@@ -17,6 +17,7 @@ function UserinfoPage() {
   const { nickname } = useParams();
   const [userData, setUserData] = useState([])
   const [userRecode, setUserRecode] = useState("")
+  const [userRecodeImage, setUserRecodeImage] = useState("")
   const [useError, setUserError] = useState(false)
   const [clickButton, setClickButton] = useState(false)
   const [clickIndex, setClickIndex] = useState("")
@@ -35,11 +36,18 @@ function UserinfoPage() {
     getTierInfo() 
   }, [userData,arr[0]]) 
 
+  useEffect(() => { 
+    if(userRecode !== null){
+      setUserRecodeImage(userRecode.itemImage) 
+      console.log("얘 실행됐냐?")
+    }
+  }, [userRecode]) 
+
 
   const getUserGame = () => {
     try {
       axios.get(
-        'http://127.0.0.1:8000/api/UserGameRecord/' + nickname + '/')
+        'http://127.0.0.1:8000/api/UserGameRecord/'+nickname+'/')
         .then(response => {
           console.log(response)
           setUserRecode(response.data);
@@ -87,8 +95,7 @@ function UserinfoPage() {
           .then(response => {
             console.log(response.data)
             setTierInfo(response.data)
-            
-          })
+      })
         } catch (error) {
           console.log(error)
         }
@@ -125,6 +132,7 @@ function UserinfoPage() {
 
   return (
     <div className='page_wrap'>
+      {console.log(userRecodeImage)}
       {useError === false ? (
         <>
           <div className='user_name'>
@@ -159,24 +167,24 @@ function UserinfoPage() {
                 <div>
                   <div className='user'>
                     <div className='first'>
-                      {userRecode[item].rank === 1 &&
+                      {userRecode[item].ranking === 1 &&
                         <>
-                          <div style={{ fontWeight: "bold", fontSize: "20px", color: "yellow" }}>#{userRecode[item].rank}</div>
+                          <div style={{ fontWeight: "bold", fontSize: "20px", color: "yellow" }}>#{userRecode[item].ranking}</div>
                         </>
                       }
-                      {userRecode[item].rank === 2 &&
+                      {userRecode[item].ranking === 2 &&
                         <>
-                          <div style={{ fontWeight: "bold", fontSize: "20px", color: "orange" }}>#{userRecode[item].rank}</div>
+                          <div style={{ fontWeight: "bold", fontSize: "20px", color: "orange" }}>#{userRecode[item].ranking}</div>
                         </>
                       }
-                      {userRecode[item].rank === 3 &&
+                      {userRecode[item].ranking === 3 &&
                         <>
-                          <div style={{ fontWeight: "bold", fontSize: "20px", color: "skyblue" }}>#{userRecode[item].rank}</div>
+                          <div style={{ fontWeight: "bold", fontSize: "20px", color: "skyblue" }}>#{userRecode[item].ranking}</div>
                         </>
                       }
-                      {userRecode[item].rank > 3 &&
+                      {userRecode[item].ranking > 3 &&
                         <>
-                          <div style={{ fontWeight: "bold", fontSize: "20px", color: "silver" }}>#{userRecode[item].rank}</div>
+                          <div style={{ fontWeight: "bold", fontSize: "20px", color: "silver" }}>#{userRecode[item].ranking}</div>
                         </>
                       }
 
@@ -205,12 +213,12 @@ function UserinfoPage() {
                       <div style={{ fontSize: "13px" }}><a href='#' style={{ textDecoration: "none", backgroundColor: "none", color: "white" }}>567655</a></div>
                     </div>
                     <div className='sixth'>
-                      <div></div>
-                      <div></div>
-                      <div></div>
-                      <div></div>
-                      <div></div>
-                      <div></div>
+                      <div><img src={`${process.env.PUBLIC_URL}${userRecode[item].itemImage.WeaponImg}`} /></div>
+                      <div><img src={`${process.env.PUBLIC_URL}${userRecode[item].itemImage.Clothes}`} /></div>
+                      <div><img src={`${process.env.PUBLIC_URL}${userRecode[item].itemImage.Head}`} /></div>
+                      <div><img src={`${process.env.PUBLIC_URL}${userRecode[item].itemImage.Arm}`} /></div>
+                      <div><img src={`${process.env.PUBLIC_URL}${userRecode[item].itemImage.Leg}`} /></div>
+                      <div><img src={`${process.env.PUBLIC_URL}${userRecode[item].itemImage.Accessories}`} /></div>
                     </div>
                     <div className='seventh'>
                       <button onClick={(e) => handleClickOpen(e, index)}>/''/</button>

@@ -17,13 +17,13 @@ function Pentagon({ name, infoTier, dataUser , usertier }) {
     //생존시간 , 판수 , 딜량 , 랭크
     // 등수 
     const getSurviveRank = () => {
-        if (infoTier.averageRanking / dataUser.averageRanking * 100 >= 200) {
+        if (infoTier.averageRanking / dataUser.averageRanking * 100 >= 150) {
             setFirRank("S")
-        } else if (infoTier.averageRanking / dataUser.averageRanking * 100 >= 175) {
+        } else if (infoTier.averageRanking / dataUser.averageRanking * 100 >= 140) {
             setFirRank("A+");
-        } else if (infoTier.averageRanking / dataUser.averageRanking * 100 >= 150) {
+        } else if (infoTier.averageRanking / dataUser.averageRanking * 100 >= 130) {
             setFirRank("A");
-        } else if (infoTier.averageRanking / dataUser.averageRanking * 100 >= 125) {
+        } else if (infoTier.averageRanking / dataUser.averageRanking * 100 >= 115) {
             setFirRank("B+");
         } else if (infoTier.averageRanking / dataUser.averageRanking * 100 >= 100) {
             setFirRank("B");
@@ -40,88 +40,89 @@ function Pentagon({ name, infoTier, dataUser , usertier }) {
 
     //킬
     const getKillRank = () => {
-        if (infoTier.averageKills / dataUser.averageKills * 100 >= 200) {
+        if (dataUser.averageKills / infoTier.averageKills * 100 >= 150) {
             setSenRank("S")
-        } else if (infoTier.averageKills / dataUser.averageKills * 100 >= 175) {
+        } else if (dataUser.averageKills / infoTier.averageKills * 100 >= 140) {
             setSenRank("A+");
-        } else if (infoTier.averageKills / dataUser.averageKills * 100 >= 150) {
+        } else if (dataUser.averageKills / infoTier.averageKills * 100 >= 150) {
             setSenRank("A");
-        } else if (infoTier.averageKills / dataUser.averageKills * 100 >= 125) {
+        } else if (dataUser.averageKills / infoTier.averageKills * 100 >= 115) {
             setSenRank("B+");
-        } else if (infoTier.averageKills / dataUser.averageKills * 100 >= 100) {
+        } else if (dataUser.averageKills / infoTier.averageKills * 100 >= 100) {
             setSenRank("B");
-        } else if (infoTier.averageKills / dataUser.averageKills * 100 >= 75) {
+        } else if (dataUser.averageKills / infoTier.averageKills * 100 >= 75) {
             setSenRank("C+");
-        } else if (infoTier.averageKills / dataUser.averageKills * 100 >= 50) {
+        } else if (dataUser.averageKills / infoTier.averageKills * 100 >= 50) {
             setSenRank("C");
-        } else if (infoTier.averageKills / dataUser.averageKills * 100 >= 25) {
+        } else if (dataUser.averageKills / infoTier.averageKills * 100 >= 25) {
             setSenRank("D");
-        } else if (infoTier.averageKills / dataUser.averageKills * 100 <= 12.5) {
+        } else if (dataUser.averageKills / infoTier.averageKills * 100 <= 12.5) {
             setSenRank("F");
         }
     }
 
     //데미지
     const getDemageRank = () => {
-        if (infoTier.averageDeal / dataUser.averageDeal * 100 >= 200) {
+        if (dataUser.averageDeal / infoTier.averageDeal * 100 >= 150) {
             setThiRank("S")
-        } else if (infoTier.averageDeal / dataUser.averageDeal * 100 >= 175) {
+        } else if (dataUser.averageDeal / infoTier.averageDeal * 100 >= 140) {
             setThiRank("A+");
-        } else if (infoTier.averageDeal / dataUser.averageDeal * 100 >= 150) {
+            console.log(dataUser.averageDeal + "유저입니다")
+        } else if (dataUser.averageDeal / infoTier.averageDeal * 100 >= 150) {
             setThiRank("A");
-        } else if (infoTier.averageDeal / dataUser.averageDeal * 100 >= 125) {
+        } else if (dataUser.averageDeal / infoTier.averageDeal * 100 >= 115) {
             setThiRank("B+");
-        } else if (infoTier.averageDeal / dataUser.averageDeal * 100 >= 100) {
+        } else if (dataUser.averageDeal / infoTier.averageDeal * 100 >= 100) {
             setThiRank("B");
-        } else if (infoTier.averageDeal / dataUser.averageDeal * 100 >= 75) {
+        } else if (dataUser.averageDeal / infoTier.averageDeal * 100 >= 75) {
             setThiRank("C+");
-        } else if (infoTier.averageDeal / dataUser.averageDeal * 100 >= 50) {
+        } else if (dataUser.averageDeal / infoTier.averageDeal * 100 >= 50) {
             setThiRank("C");
-        } else if (infoTier.averageDeal / dataUser.averageDeal * 100 >= 25) {
+        } else if (dataUser.averageDeal / infoTier.averageDeal * 100 >= 25) {
             setThiRank("D");
-        } else if (infoTier.averageDeal / dataUser.averageDeal * 100 <= 12.5) {
+        } else if (dataUser.averageDeal / infoTier.averageDeal * 100 <= 12.5) {
             setThiRank("F");
         }
     }
     const getMasteryRank = () => {
-        if (infoTier.averageProficiency / dataUser.averageProficiency * 100 >= 200) {
+        if (dataUser.averageProficiency / infoTier.averageProficiency * 100 >= 150) {
             setForRank("S")
-        } else if (infoTier.averageProficiency / dataUser.averageProficiency * 100 >= 175) {
+        } else if (dataUser.averageProficiency / infoTier.averageProficiency * 100 >= 140) {
             setForRank("A+");
-        } else if (infoTier.averageProficiency / dataUser.averageProficiency * 100 >= 150) {
+        } else if (dataUser.averageProficiency / infoTier.averageProficiency * 100 >= 150) {
             setForRank("A");
-        } else if (infoTier.averageProficiency / dataUser.averageProficiency * 100 >= 125) {
+        } else if (dataUser.averageProficiency / infoTier.averageProficiency * 100 >= 115) {
             setForRank("B+");
-        } else if (infoTier.averageProficiency / dataUser.averageProficiency * 100 >= 100) {
+        } else if (dataUser.averageProficiency / infoTier.averageProficiency * 100 >= 100) {
             setForRank("B");
-        } else if (infoTier.averageProficiency / dataUser.averageProficiency * 100 >= 75) {
+        } else if (dataUser.averageProficiency / infoTier.averageProficiency * 100 >= 75) {
             setForRank("C+");
-        } else if (infoTier.averageProficiency / dataUser.averageProficiency * 100 >= 50) {
+        } else if (dataUser.averageProficiency / infoTier.averageProficiency * 100 >= 50) {
             setForRank("C");
-        } else if (infoTier.averageProficiency / dataUser.averageProficiency * 100 >= 25) {
+        } else if (dataUser.averageProficiency / infoTier.averageProficiency * 100 >= 25) {
             setForRank("D");
-        } else if (infoTier.averageProficiency / dataUser.averageProficiency * 100 <= 12.5) {
+        } else if (dataUser.averageProficiency / infoTier.averageProficiency * 100 <= 12.5) {
             setForRank("F");
         }
     }
     const getTestRank = () => {
-        if (infoTier.averageHunts / dataUser.averageHunts * 100 >= 200) {
+        if (dataUser.averageHunts / infoTier.averageHunts * 100 >= 150) {
             setFifRank("S")
-        } else if (infoTier.averageHunts / dataUser.averageHunts * 100 >= 175) {
+        } else if (dataUser.averageHunts / infoTier.averageHunts * 100 >= 140) {
             setFifRank("A+");
-        } else if (infoTier.averageHunts / dataUser.averageHunts * 100 >= 150) {
+        } else if (dataUser.averageHunts / infoTier.averageHunts * 100 >= 150) {
             setFifRank("A");
-        } else if (infoTier.averageHunts / dataUser.averageHunts * 100 >= 125) {
+        } else if (dataUser.averageHunts / infoTier.averageHunts * 100 >= 115) {
             setFifRank("B+");
-        } else if (infoTier.averageHunts / dataUser.averageHunts * 100 >= 100) {
+        } else if (dataUser.averageHunts / infoTier.averageHunts * 100 >= 100) {
             setFifRank("B");
-        } else if (infoTier.averageHunts / dataUser.averageHunts * 100 >= 75) {
+        } else if (dataUser.averageHunts / infoTier.averageHunts * 100 >= 75) {
             setFifRank("C+");
-        } else if (infoTier.averageHunts / dataUser.averageHunts * 100 >= 50) {
+        } else if (dataUser.averageHunts / infoTier.averageHunts * 100 >= 50) {
             setFifRank("C");
-        } else if (infoTier.averageHunts / dataUser.averageHunts * 100 >= 25) {
+        } else if (dataUser.averageHunts / infoTier.averageHunts * 100 >= 25) {
             setFifRank("D");
-        } else if (infoTier.averageHunts / dataUser.averageHunts * 100 <= 12.5) {
+        } else if (infoTier.averageHunts / infoTier.averageHunts * 100 <= 12.5) {
             setFifRank("F");
         }
     }
@@ -153,7 +154,7 @@ function Pentagon({ name, infoTier, dataUser , usertier }) {
         } else if (senRank === "A+") {
             setKillTemp("78 , -25")
         } else if (senRank === "A") {
-            setKillTemp("-64.5 , 21")
+            setKillTemp("64.5 , -21")
         } else if (senRank === "B+") {
             setKillTemp("52.5 , -17")
         } else if (senRank === "B") {
@@ -218,7 +219,7 @@ function Pentagon({ name, infoTier, dataUser , usertier }) {
         } else if (fifRank === "A") {
             setTestTemp("-64.7 ,  -21.0")
         } else if (fifRank === "B+") {
-            setTestTemp("-47 , -15")
+            setTestTemp("-53 , -18")
         } else if (fifRank === "B") {
             setTestTemp("-42 ,  -13")
         } else if (fifRank === "C+") {
@@ -339,19 +340,19 @@ function Pentagon({ name, infoTier, dataUser , usertier }) {
 
             <svg>
                 <g>
-                    <circle r="22.5px" opacity="0.2" transform="translate(125,125)" ></circle>
-                    <circle r="45px" opacity="0.2" transform="translate(125,125)" ></circle>
-                    <circle r="67.5px" opacity="0.2" transform="translate(125,125)" ></circle>
-                    <circle r="90px" opacity="0.4" transform="translate(125,125)" ></circle>
+                    <circle r="22.5px" opacity="0.2" transform="translate(115,115)" ></circle>
+                    <circle r="45px" opacity="0.2" transform="translate(115,115)" ></circle>
+                    <circle r="67.5px" opacity="0.2" transform="translate(115,115)" ></circle>
+                    <circle r="90px" opacity="0.4" transform="translate(115,115)" ></circle>
 
-                    <line transform="translate(125,125)" x="0" y="0" x2="0" y2="-90" stroke='white' />
-                    <line transform="translate(125,125)" x2="85.5" y2="-28" x="0" y="0" stroke='white' ></line>
-                    <line transform="translate(125,125)" x2="53" y2="73" x="0" y="0" stroke='white'></line>
-                    <line transform="translate(125,125)" x2="-53" y2="73" x="0" y="0" stroke='white' ></line>
-                    <line transform="translate(125,125)" x2="-85.5" y2="-27.5" x="0" y="0" stroke='white' ></line>
+                    <line transform="translate(115,115)" x="0" y="0" x2="0" y2="-90" stroke='white' />
+                    <line transform="translate(115,115)" x2="85.5" y2="-28" x="0" y="0" stroke='white' ></line>
+                    <line transform="translate(115,115)" x2="53" y2="73" x="0" y="0" stroke='white'></line>
+                    <line transform="translate(115,115)" x2="-53" y2="73" x="0" y="0" stroke='white' ></line>
+                    <line transform="translate(115,115)" x2="-85.5" y2="-27.5" x="0" y="0" stroke='white' ></line>
 
-                    <path d="M 2,-45 L42,-13 L26,36 L-26,36 L-42,-13.5 Z" stroke='orange' fill='none' transform="translate(125,125)"></path>
-                    <path d={"M " + survTemp + " L" + killTemp + " " + demageTemp + "   " + masteryTemp + "   " + testTemp + " Z"} stroke='aqua' fill='yellow' opacity="0.4" transform="translate(125,125)"></path>
+                    <path d="M 2,-45 L42,-13 L26,36 L-26,36 L-42,-13.5 Z" stroke='orange' fill='none' transform="translate(115,115)"></path>
+                    <path d={"M " + survTemp + " L" + killTemp + " " + demageTemp + "   " + masteryTemp + "   " + testTemp + " Z"} stroke='aqua' fill='yellow' opacity="0.4" transform="translate(115,115)"></path>
                 </g>
             </svg>
         </div>
