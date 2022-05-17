@@ -25,7 +25,7 @@ def get_ER_AmorImg(itemcode:int):
 def get_ER_ItemsImg(items:ItemModel):
 	ItemsImage = {}
 	ItemsImage["WeaponImg"] = get_ER_WeaponImg(items.Weapon)
-	ItemsImage["Haed"] = get_ER_AmorImg(items.Haed)
+	ItemsImage["Head"] = get_ER_AmorImg(items.Haed)
 	ItemsImage["Clothes"] = get_ER_AmorImg(items.Clothes)
 	ItemsImage["Arm"] = get_ER_AmorImg(items.Arm)
 	ItemsImage["Leg"] = get_ER_AmorImg(items.Leg)

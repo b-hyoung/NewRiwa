@@ -185,7 +185,7 @@ function UserinfoPage() {
                     </div>
                     <div className='second'>
                       <div className='charLevel'>{userRecode[item].bestWeaponLevel}</div>
-                      <img className='char_img' src={require("../image/Char/icon/Yuki.png")} />
+                      {/* <img className='char_img' src={require("../image/Char/icon/Yuki.png")} /> */}
                       <img className='char_wephon' src={require("../image/WeaponMastery/07. Sniper Rifle.png")} />
                     </div>
                     <div style={{ display: "block", width: "70px" }}>
