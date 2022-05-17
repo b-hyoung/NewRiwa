@@ -31,9 +31,3 @@ def get_ER_ItemsImg(items:ItemModel):
 	ItemsImage["Leg"] = get_ER_AmorImg(items.Leg)
 	ItemsImage["Accessories"] = get_ER_AmorImg(items.Accessories)
 	return ItemsImage
-
-# def get_ER_itemsa_Amor_image(itemcode:int):
-# 	return ("image/item/Amor" + )
-
-# def get_ER_itemsa_Weapon_image(itemcode:int):
-# 	return ("image/item/Weapon/" + )

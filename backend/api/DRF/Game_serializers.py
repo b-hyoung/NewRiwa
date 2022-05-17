@@ -32,7 +32,7 @@ class UserGameRecordSerializer(serializers.ModelSerializer):
 
 	class Meta:
 		model = ER_Game_Record_Model
-		exclude = ("id", )
+		exclude = ("id", "items")
 		
 
 class UserGameRecordCreateSerializer(serializers.Serializer):
