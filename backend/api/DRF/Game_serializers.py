@@ -26,13 +26,13 @@ class UserGameRecordSerializer(serializers.ModelSerializer):
 	Assistants = serializers.FloatField(read_only=True)
 
 	mmr = serializers.IntegerField(read_only=True)
-	items = ItemSerializer(read_only=True)
+	# items = ItemSerializer(read_only=True)
 	Trait = TraitSerializer(read_only=True)
 	Route = serializers.IntegerField(read_only=True)
 
 	class Meta:
 		model = ER_Game_Record_Model
-		exclude = ("id", "items")
+		exclude = ("id", "updated_at", "created_at", "items")
 		
 
 class UserGameRecordCreateSerializer(serializers.Serializer):

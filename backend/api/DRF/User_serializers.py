@@ -36,7 +36,7 @@ class UserStatsSerializer(serializers.ModelSerializer):
 
 	class Meta:
 		model = ER_Stats_Model
-		exclude = ("id",)
+		exclude = ("id", "seasonId")
 
 class UserStatsSerializerCreateSerializer(serializers.Serializer):
 	rank = serializers.CharField()
@@ -82,7 +82,7 @@ class UserInfoSerializer(serializers.ModelSerializer):
 
 	class Meta:
 		model = ER_User_Info_Model
-		exclude = ("id", "userNum", "updated_at", "created_at")
+		exclude = ("id", "userNum","updated_at", "created_at")
 
 class UserInfoCreateSerializer(serializers.Serializer):
 	nickname = serializers.CharField()

@@ -41,7 +41,7 @@ class UserInfoViewSet(viewsets.ModelViewSet):
 	serializer_class = UserInfoSerializer
 
 	def list(self, request, *args, **kwargs):
-		msg = "의미없는 창 입니다"
+		msg = "검색창입니다."
 		return Response({"msg" : msg}, status=status.HTTP_400_BAD_REQUEST)
 
 	def create(self, request):

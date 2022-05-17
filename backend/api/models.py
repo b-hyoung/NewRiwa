@@ -64,8 +64,9 @@ class ER_Stats_Model(models.Model):
 	rank = models.CharField(max_length=30, null=True)
 
 	#맞는 데이터 찾기용
-	matchingTeamMode = models.IntegerField(max_length=10, null=True)
-	season = models.CharField(max_length=10,default=0)
+	matchingTeamMode = models.IntegerField(null=True)
+	seasonId = models.IntegerField(default=0, null=True)
+	season = models.CharField(max_length=10,default=0, null=True)
 	
 	#캐릭터 정보를 위해서
 	character = models.CharField(max_length=50)
@@ -89,8 +90,8 @@ class ER_User_Info_Model(models.Model):
 	# 식별용 데이터
 	nickname = models.CharField(max_length=30)
 	userNum = models.CharField(max_length=20, null=False)
-	matchingTeamMode = models.IntegerField(max_length=10, null=True)
-	seasonId = models.IntegerField(max_length=10,default=0)
+	matchingTeamMode = models.IntegerField(null=True)
+	seasonId = models.IntegerField(default=0)
 	mmr = models.IntegerField(null=True, default=0)
 
 	#티어
@@ -106,7 +107,6 @@ class ER_User_Info_Model(models.Model):
 	averageProficiency = models.FloatField(null=True,)
 	mastery = models.ForeignKey(MasteryModel, on_delete=models.CASCADE, related_name="mastery", null=True)
 
-	#듀오일때만 추가
 	averageAssistants = models.FloatField(null=True, default=0)
 	
 	#유저 프로필 데이터
