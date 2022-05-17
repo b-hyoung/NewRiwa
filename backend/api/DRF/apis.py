@@ -105,7 +105,10 @@ class UserGameViewSet(viewsets.ModelViewSet):
 		if queryset:
 			temp = {}
 			for i, data in enumerate(queryset):
-				temp[i] = UserGameRecordSerializer(data).data 
+				temp[i] = UserGameRecordSerializer(data).data
+				temp[i]["itemImage"] = get_ER_ItemsImg(data.items)
+				temp[i]["charname"] = get_ER_char_name(data.charnum)
+				temp[i]["charImg"] = get_ER_charicon_image(data.charnum)
 			return Response(temp, status=status.HTTP_201_CREATED)
 		else :
 			return Response(error_msg(5), status=status.HTTP_404_NOT_FOUND)
