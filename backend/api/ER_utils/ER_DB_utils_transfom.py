@@ -25,6 +25,8 @@ def get_season(seasonId):
 	return("{}시즌 {}".format(seasonName, seasonNum))
 
 def get_ER_char_name(charcode:int):
+	if charcode==None:
+		return None
 	return (ER_char_name[charcode])
 
 def get_ER_Tier(mmr:int):

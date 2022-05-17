@@ -59,7 +59,7 @@ class UserInfoSerializer(serializers.ModelSerializer):
 	nickname = serializers.CharField()
 	mmr = serializers.IntegerField(read_only=True)
 	matchingTeamMode = serializers.IntegerField(read_only=True)
-	season = serializers.IntegerField(default=0, read_only=True)
+	season = serializers.IntegerField(	default=0, read_only=True)
 	seasonId = serializers.CharField(max_length=10,default=0, read_only=True)
 
 	averageRanking = serializers.FloatField(read_only=True)

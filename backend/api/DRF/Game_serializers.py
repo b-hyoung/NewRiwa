@@ -32,8 +32,7 @@ class UserGameRecordSerializer(serializers.ModelSerializer):
 
 	class Meta:
 		model = ER_Game_Record_Model
-		# exclude = ("id", )
-		fields = '__all__'
+		exclude = ("id", )
 		
 
 class UserGameRecordCreateSerializer(serializers.Serializer):
@@ -48,7 +47,6 @@ class UserGameRecordCreateSerializer(serializers.Serializer):
 			instance = ER_Game_Record_Model()
 			instance.nickname = nickname
 			set_ER_game_record_data(instance, userNum, content)
-
 			instance_save(instance, commit)
 		return ER_Game_Record_Model.objects.filter(nickname=nickname).order_by("-id")[:20]
 	
@@ -56,7 +54,6 @@ class UserGameRecordCreateSerializer(serializers.Serializer):
 		instance = ER_Game_Record_Model.objects.filter(id=id).first()
 
 		set_ER_info_data(instance)
-
 		instance_save(instance, commit)
 		return instance
 
