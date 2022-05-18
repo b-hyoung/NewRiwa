@@ -38,9 +38,9 @@ def get_ER_ItemsImg(items:ItemModel):
 	return ItemsImage
 
 def get_ER_TierImg(api_data):
-	if api_data["matchingTeamMode"] == 1:
+	if int(api_data["matchingTeamMode"]) == 1:
 		temp = api_data["soloTier"].split()[0]
-	elif api_data["matchingTeamMode"] == 2:
+	elif int(api_data["matchingTeamMode"]) == 2:
 		temp = api_data["duoTier"].split()[0]
 	else :
 		temp = api_data["squadTier"].split()[0]
