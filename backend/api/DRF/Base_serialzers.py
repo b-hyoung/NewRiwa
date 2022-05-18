@@ -22,8 +22,6 @@ class ItemSerializer(serializers.ModelSerializer):
 		model = ItemModel
 		exclude = ("id","charName")
 
-class TraitSerializer(serializers.ModelSerializer):
-	#image 추가하기
-	class Meta:
-		model = TraitModel
-		exclude = ("id",)
+class TraitSerializer(serializers.Serializer):
+	FirstCoreImg = serializers.ImageField(read_only=True)
+	SecondImg = serializers.ImageField(read_only=True)

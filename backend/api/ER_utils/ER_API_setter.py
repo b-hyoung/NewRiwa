@@ -6,7 +6,7 @@ from api.error_utils import error_msg
 from api.ER_utils.ER_base_setter import set_ER_graph_data
 
 from .ER_DB_utils_transfom import get_ER_Tier, get_ER_char_name, get_season
-from ..models import ER_Stats_Model, ER_User_Info_Model, ER_Game_Record_Model, ItemModel, MasteryModel, MostPickModel
+from ..models import ER_Stats_Model, ER_User_Info_Model, ER_Game_Record_Model, ItemModel, MasteryModel, MostPickModel, TraitModel
 
 from rest_framework import exceptions
 
@@ -47,6 +47,7 @@ def set_ER_mostpick(instance:ER_User_Info_Model, userstats, matchingTeamMode):
 	temp_mostpick.save()
 
 	instance.mostpick_id = temp_mostpick.id
+
 
 def set_ER_info_data(instance:ER_User_Info_Model, matchingTeamMode=1):
 	ER_userStats_Solo = 0
@@ -99,7 +100,6 @@ def set_ER_game_record_data(instance:ER_Game_Record_Model, userNum, content):
       #   7010401
       # ],
 		instance.items = set_ER_items(content["equipment"], instance.charnum)
-		# instance.Trait = content[""]
 		instance.Route = content["routeIdOfStart"]
 		try :
 			instance.mmr = content["mmrAfter"]
@@ -149,13 +149,3 @@ def set_ER_items(data, charnum):
 	instance.save()
 	return instance
 # def set_ER_Trait():
-
-
-# def set_ER_items_image(data):
-# 	print(data)
-# 	(data["Weapon"])
-# 	(data["Haed"])
-# 	(data["Clothes"])
-# 	(data["Arm"])
-# 	(data["Leg"])
-# 	(data["Accessories"])

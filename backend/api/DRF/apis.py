@@ -58,7 +58,9 @@ class UserInfoViewSet(viewsets.ModelViewSet):
 			if serializer.is_valid():
 				rtn = serializer.create(request, serializer.data)
 				if rtn:
+					matchingTeamMode = request.GET.get("matchingTeamMode", 1)
 					api = UserInfoSerializer(rtn).data
+					api["matchingTeamMode"] = matchingTeamMode
 					set_userinfo_serializers_data(api, rtn)
 					return Response(api, status=status.HTTP_201_CREATED)
 				else :
@@ -69,7 +71,9 @@ class UserInfoViewSet(viewsets.ModelViewSet):
 	def retrieve(self, request, pk=None):
 		user = get_object_or_404(ER_User_Info_Model, nickname=pk)
 		if user:
+			matchingTeamMode = request.GET.get("matchingTeamMode", 1)
 			api = UserInfoSerializer(user).data
+			api["matchingTeamMode"] = matchingTeamMode
 			set_userinfo_serializers_data(api, user)
 			return Response(api, status=status.HTTP_200_OK)
 		else:

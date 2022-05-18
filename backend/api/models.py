@@ -73,6 +73,7 @@ class ER_Stats_Model(models.Model):
 	lavel = models.IntegerField(default=1)
 	bestWeapon = models.CharField(max_length=30)
 	
+	# 나중에 따로 뺴자 너무 겹쳐있음 그래프와 기타등등이
 	# 평균 특성, 평균 아이템 이건 나중에 그캐릭터의 특성이나 아이템을 보여주기 위한 창에서 쓰일것 다른곳으로 안빼고 하나로 합쳐놓음
 	averageTrait = models.ForeignKey(TraitModel, on_delete=models.CASCADE, null=True)
 	averageItem = models.ForeignKey(ItemModel, on_delete=models.CASCADE, null=True)
@@ -87,7 +88,6 @@ class ER_Stats_Model(models.Model):
 	averageAssistants = models.FloatField(null=True,)
 
 class ER_User_Info_Model(models.Model):
-	# 식별용 데이터
 	nickname = models.CharField(max_length=30)
 	userNum = models.CharField(max_length=20, null=False)
 	matchingTeamMode = models.IntegerField(null=True)
@@ -109,14 +109,12 @@ class ER_User_Info_Model(models.Model):
 
 	averageAssistants = models.FloatField(null=True, default=0)
 	
-	#유저 프로필 데이터
 	mostpick = models.ForeignKey(MostPickModel, on_delete=models.CASCADE, related_name="mostpick", null=True)
 
 	updated_at = models.DateTimeField(auto_now=True)
 	created_at = models.DateTimeField(auto_now_add=True)
 
 class ER_Game_Record_Model(models.Model):
-	#데이터를 찾기위한 nickname
 	nickname = models.CharField(max_length=30)
 
 	season = models.CharField(max_length=10,default=0)

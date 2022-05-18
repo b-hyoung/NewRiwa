@@ -15,3 +15,4 @@ def set_usergame_serializers_data(api, data, i):
 	api[i]["itemImage"] = get_ER_ItemsImg(data.items)
 	api[i]["charImg"] = get_ER_charicon_image(data.charnum)
 	api[i]["bestWeaponImg"] = get_ER_WeaponIconImg(data.bestWeapon)
+	# api[i]["TraitImg"] = get_ER_TraitImg(data)
