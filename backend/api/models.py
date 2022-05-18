@@ -127,7 +127,7 @@ class ER_Game_Record_Model(models.Model):
 	gameId = models.IntegerField(null=True)
 	charnum = models.IntegerField(null=True)
 	characterlevel = models.IntegerField(default=1)
-	bestWeapon = models.CharField(max_length=30)
+	bestWeapon = models.IntegerField(null=True)
 	bestWeaponLevel = models.IntegerField(default=1)
 
 	Kills = models.FloatField(null=True,)

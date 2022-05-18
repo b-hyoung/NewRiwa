@@ -4,9 +4,9 @@ from rest_framework import viewsets, status
 
 from api.error_utils import error_msg
 from api.DRF.User_serializers import UserStatsSerializer, UserStatsSerializerCreateSerializer, UserInfoSerializer, UserInfoCreateSerializer
-from api.ER_utils.ER_Serializer_setter import set_mostpick_Serializer
-from api.ER_utils.ER_DB_utils_image import get_ER_TierImg, get_ER_charhalf_image, get_ER_ItemsImg, get_ER_charicon_image
-from api.ER_utils.ER_DB_utils_transfom import get_season, get_ER_char_name
+from api.ER_utils.ER_DB_utils_image import get_ER_ItemsImg, get_ER_charicon_image
+from api.ER_utils.ER_DB_utils_transfom import get_ER_char_name
+from api.DRF.apis_utils import set_userinfo_serializers_data, set_usergame_serializers_data
 
 from .Game_serializers import  UserGameRecordCreateSerializer, UserGameRecordSerializer
 from ..models import ER_Stats_Model, ER_User_Info_Model, ER_Game_Record_Model
@@ -32,7 +32,7 @@ class UserStatsViewSet(viewsets.ModelViewSet):
 		user = get_object_or_404(ER_User_Info_Model, inckname=pk)
 		if user:
 			serializer = UserInfoSerializer(user)
-			return Response(serializer.data, status=status.HTTP_201_CREATED)
+			return Response(serializer.data, status=status.HTTP_200_OK)
 		else:
 			self.create(request)
 		queryset = ER_User_Info_Model.objects.filter(nickname=pk).last()
@@ -48,34 +48,31 @@ class UserInfoViewSet(viewsets.ModelViewSet):
 
 	def list(self, request, *args, **kwargs):
 		msg = "검색창입니다."
-		return Response({"msg" : msg}, status=status.HTTP_400_BAD_REQUEST)
+		return Response({"msg" : msg}, status=status.HTTP_200_OK)
 
 	def create(self, request):
-		serializer = UserInfoCreateSerializer(data=request.data)
-		if serializer.is_valid():
-			#리디렉트
-			# nickname = serializer.data.get("nickname")
-			# if ER_User_Info_Model.objects.filter(nickname=nickname):
-			# 	return(self.retrieve(request, nickname))
-			rtn = serializer.create(request, serializer.data)
-			if rtn:
-				temp = UserInfoSerializer(rtn).data
-				temp["mostpick"] = set_mostpick_Serializer(rtn.mostpick)
-				temp["mainCharImg"] = get_ER_charhalf_image(rtn.mostpick.most_one_charcode)
-				temp["season"] = get_season(int(temp["seasonId"]))
-				temp["mainTireImg"] = get_ER_TierImg(temp)
-				return Response(temp, status=status.HTTP_201_CREATED)
-		else :
-			return Response(error_msg(1), status=status.HTTP_400_BAD_REQUEST)
+		try:
+			ER_User_Info_Model.objects.get(nickname=request.data["nickname"])
+		except:
+			serializer = UserInfoCreateSerializer(data=request.data)
+			if serializer.is_valid():
+				rtn = serializer.create(request, serializer.data)
+				if rtn:
+					api = UserInfoSerializer(rtn).data
+					set_userinfo_serializers_data(api, rtn)
+					return Response(api, status=status.HTTP_201_CREATED)
+				else :
+					return Response(error_msg(1), status=status.HTTP_400_BAD_REQUEST)
+		else:
+			return Response(error_msg(6), status=status.HTTP_400_BAD_REQUEST)
 
 	def retrieve(self, request, pk=None):
-		queryset = ER_User_Info_Model.objects.filter(nickname=pk).last()
-		if queryset:
-			temp = UserInfoSerializer(queryset).data
-			temp["mostpick"] = set_mostpick_Serializer(queryset.mostpick)
-			temp["mainCharImg"] = get_ER_charhalf_image(queryset.mostpick.most_one_charcode)
-			return Response(temp, status=status.HTTP_201_CREATED)
-		else :
+		user = get_object_or_404(ER_User_Info_Model, nickname=pk)
+		if user:
+			api = UserInfoSerializer(user).data
+			set_userinfo_serializers_data(api, user)
+			return Response(api, status=status.HTTP_200_OK)
+		else:
 			return Response(error_msg(5), status=status.HTTP_404_NOT_FOUND)
 
 class UserGameViewSet(viewsets.ModelViewSet):
@@ -83,40 +80,31 @@ class UserGameViewSet(viewsets.ModelViewSet):
 	serializer_class = UserGameRecordSerializer
 
 	def list(self, request, *args, **kwargs):
-		msg = "의미없는 창 입니다"
-		return Response({"msg" : msg}, status=status.HTTP_400_BAD_REQUEST)
+		msg = "검색창입니다."
+		return Response({"msg" : msg}, status=status.HTTP_200_OK)
 	
 	#POST
 	def create(self, request):
 		serializer = UserGameRecordCreateSerializer(data=request.data)
 		if serializer.is_valid():
-
-			nickname = serializer.data.get("nickname")
-			# if ER_Game_Record_Model.objects.filter(nickname=nickname):
-			# 	return(self.retrieve(request, nickname))
-
 			rtn = serializer.create(request, serializer.data)
 			if rtn:
-				temp = {}
+				api = {}
 				for i, data in enumerate(rtn):
-					temp[i] = UserGameRecordSerializer(data).data
-					temp[i]["itemImage"] = get_ER_ItemsImg(data.items)
-					temp[i]["charname"] = get_ER_char_name(data.charnum)
-					temp[i]["charImg"] = get_ER_charicon_image(data.charnum)
-				return Response(temp, status=status.HTTP_201_CREATED)
+					api[i] = UserGameRecordSerializer(data).data
+					set_usergame_serializers_data(api, data, i)
+				return Response(api, status=status.HTTP_201_CREATED)
 		else :
 			return Response(error_msg(1), status=status.HTTP_400_BAD_REQUEST)
 
 	def retrieve(self,request, pk=None):
 		queryset = ER_Game_Record_Model.objects.filter(nickname=pk).order_by("-id")[:20]
 		if queryset:
-			temp = {}
+			api = {}
 			for i, data in enumerate(queryset):
-				temp[i] = UserGameRecordSerializer(data).data
-				temp[i]["itemImage"] = get_ER_ItemsImg(data.items)
-				temp[i]["charname"] = get_ER_char_name(data.charnum)
-				temp[i]["charImg"] = get_ER_charicon_image(data.charnum)
-			return Response(temp, status=status.HTTP_201_CREATED)
+				api[i] = UserGameRecordSerializer(data).data
+				set_usergame_serializers_data(api, data, i)
+			return Response(api, status=status.HTTP_201_CREATED)
 		else :
 			return Response(error_msg(5), status=status.HTTP_404_NOT_FOUND)
 

@@ -1,5 +1,5 @@
 from api.models import ItemModel
-from .ER_DB import ER_Items, ER_char_img, ER_charhalf_img
+from .ER_DB import ER_Items, ER_Weapon_group, ER_char_img, ER_charhalf_img
 from Eriwa.settings import STATIC_URL
 
 def get_ER_charicon_image(charcode:int):
@@ -16,6 +16,11 @@ def get_ER_WeaponImg(itemcode:int):
 	if itemcode == None:
 		return None
 	return ("/image/Item/Weapon/" + ER_Items[itemcode])
+
+def get_ER_WeaponIconImg(Weaponcode:int):
+	if Weaponcode == None:
+		return None
+	return ("/image/Item/WeaponGroup/" + ER_Weapon_group[Weaponcode])
 
 def get_ER_AmorImg(itemcode:int):
 	if itemcode == None:

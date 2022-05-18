@@ -80,7 +80,7 @@ def set_ER_game_record_data(instance:ER_Game_Record_Model, userNum, content):
 		instance.matchingMode = "일반" if content["matchingMode"] == 2 else "랭크"
 		instance.matchingTeamMode = "솔로" if content["matchingTeamMode"] == 1 else "듀오" if content["matchingTeamMode"] == 2 else "스쿼드"
 		
-		instance.charcode = content["characterNum"]
+		instance.charnum = content["characterNum"]
 		instance.characterlevel = content["characterLevel"]
 		instance.bestWeapon = content["bestWeapon"]
 		instance.bestWeaponLevel = content["bestWeaponLevel"]

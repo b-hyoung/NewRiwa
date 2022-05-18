@@ -17,9 +17,8 @@ class UserGameRecordSerializer(serializers.ModelSerializer):
 
 	gameId = serializers.IntegerField(read_only = True)
 	charImg = serializers.ImageField(read_only=True)
-	charname = serializers.CharField(max_length=50, read_only=True)
 	characterlevel = serializers.IntegerField(default=1, read_only=True)
-	bestWeapon = serializers.CharField(max_length=30, read_only=True)
+	bestWeaponImg = serializers.ImageField(read_only=True)
 	bestWeaponLevel = serializers.CharField(max_length=30, read_only=True)
 
 	Kills = serializers.FloatField(read_only=True)
@@ -33,7 +32,7 @@ class UserGameRecordSerializer(serializers.ModelSerializer):
 
 	class Meta:
 		model = ER_Game_Record_Model
-		exclude = ("id", "updated_at", "created_at", "items","charnum")
+		exclude = ("id", "updated_at", "created_at", "items","charnum","bestWeapon")
 		
 
 class UserGameRecordCreateSerializer(serializers.Serializer):

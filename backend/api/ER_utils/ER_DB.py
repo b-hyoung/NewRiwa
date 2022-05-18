@@ -179,7 +179,36 @@ ER_Tier = {
 	7 : "Eternity",
 }
 
-# 쉬프트 알트 
+
+ER_Weapon_group = {
+	0 : "",
+  1 : "Glove.png",
+  2 : "Tonfa.png",
+  3 : "Bat.png",
+  4 : "Whip.png",
+  5 : "Throw.png",
+  6 : "Shuriken.png",
+  7 : "Bow.png",
+  8 : "Crossbow.png",
+  9 : "Pistol.png",
+  10 : "Assault Rifle.png",
+  11 : "Sniper Rifle.png",
+  12 : "Hammer.png",
+  13 : "Axe.png",
+  14 : "Dagger.png",
+  15 : "Two-handed Sword.png",
+  16 : "Polearm.png",
+  17 : "Dual Swords.png",
+  18 : "Spear.png",
+  19 : "Nunchaku.png",
+  20 : "Rapier.png",
+  21 : "Guitar.png",
+  22 : "Camera.png",
+  23 : "Arcana.png",
+  24 : "VF Prosthetic_VF.png",
+}
+
+# 쉬프트 알트 i
 ER_Items = {
 	101101 : "ItemIcon_101101_Scissors.png",
 	101102 : "ItemIcon_101102_FountainPen.png",
