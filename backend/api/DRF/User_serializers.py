@@ -76,6 +76,7 @@ class UserInfoSerializer(serializers.ModelSerializer):
 	mostpick = MostpickSerializer(read_only=True)
 
 	#티어
+	mainTireImg = serializers.ImageField(read_only=True)
 	soloTier = serializers.CharField(max_length=10, read_only=True)
 	duoTier = serializers.CharField(max_length=10, read_only=True)
 	squadTier = serializers.CharField(max_length=10, read_only=True)
