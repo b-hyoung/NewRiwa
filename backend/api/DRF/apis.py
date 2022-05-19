@@ -1,6 +1,9 @@
 from django.shortcuts import get_object_or_404
+from django.db.models import Q
+
 from rest_framework.response import Response
 from rest_framework import viewsets, status
+
 
 from api.error_utils import error_msg
 from api.DRF.User_serializers import UserStatsSerializer, UserStatsSerializerCreateSerializer, UserInfoSerializer, UserInfoCreateSerializer
@@ -29,7 +32,7 @@ class UserStatsViewSet(viewsets.ModelViewSet):
 			return Response(error_msg(1), status=status.HTTP_400_BAD_REQUEST)
 
 	def retrieve(self, request, pk=None):
-		user = get_object_or_404(ER_User_Info_Model, inckname=pk)
+		user = get_object_or_404(ER_User_Info_Model, nickname=pk)
 		if user:
 			serializer = UserInfoSerializer(user)
 			return Response(serializer.data, status=status.HTTP_200_OK)
@@ -51,14 +54,14 @@ class UserInfoViewSet(viewsets.ModelViewSet):
 		return Response({"msg" : msg}, status=status.HTTP_200_OK)
 
 	def create(self, request):
+		matchingTeamMode = int(request.GET.get("matchingTeamMode", 1))
 		try:
-			ER_User_Info_Model.objects.get(nickname=request.data["nickname"])
-		except:
+			t = ER_User_Info_Model.objects.get(Q(nickname=request.data["nickname"]) & Q(matchingTeamMode=matchingTeamMode))
+		except Exception:
 			serializer = UserInfoCreateSerializer(data=request.data)
 			if serializer.is_valid():
-				rtn = serializer.create(request, serializer.data)
+				rtn = serializer.create(request, serializer.data, matchingTeamMode)
 				if rtn:
-					matchingTeamMode = request.GET.get("matchingTeamMode", 1)
 					api = UserInfoSerializer(rtn).data
 					api["matchingTeamMode"] = matchingTeamMode
 					set_userinfo_serializers_data(api, rtn)
@@ -69,9 +72,10 @@ class UserInfoViewSet(viewsets.ModelViewSet):
 			return Response(error_msg(6), status=status.HTTP_400_BAD_REQUEST)
 
 	def retrieve(self, request, pk=None):
-		user = get_object_or_404(ER_User_Info_Model, nickname=pk)
+		matchingTeamMode = request.GET.get("matchingTeamMode", 1)
+		user = get_object_or_404(ER_User_Info_Model, nickname=pk, matchingTeamMode=matchingTeamMode)
+		print(user)
 		if user:
-			matchingTeamMode = request.GET.get("matchingTeamMode", 1)
 			api = UserInfoSerializer(user).data
 			api["matchingTeamMode"] = matchingTeamMode
 			set_userinfo_serializers_data(api, user)

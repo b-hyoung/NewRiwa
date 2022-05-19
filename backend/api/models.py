@@ -89,8 +89,8 @@ class ER_Stats_Model(models.Model):
 
 class ER_User_Info_Model(models.Model):
 	nickname = models.CharField(max_length=30)
+	matchingTeamMode = models.IntegerField(null=False, default=1)
 	userNum = models.CharField(max_length=20, null=False)
-	matchingTeamMode = models.IntegerField(null=True)
 	seasonId = models.IntegerField(default=0)
 	mmr = models.IntegerField(null=True, default=0)
 

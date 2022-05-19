@@ -49,7 +49,7 @@ def set_ER_mostpick(instance:ER_User_Info_Model, userstats, matchingTeamMode):
 	instance.mostpick_id = temp_mostpick.id
 
 
-def set_ER_info_data(instance:ER_User_Info_Model, matchingTeamMode=1):
+def set_ER_info_data(instance:ER_User_Info_Model, matchingTeamMode:int):
 	ER_userStats_Solo = 0
 	ER_userStats_Duo = 1
 	ER_userStats_Squad = 2

@@ -1,8 +1,8 @@
+from django.db.models import Q
 
-from email.policy import default
 from rest_framework import serializers
-from api.ER_utils.ER_API_setter import set_ER_info_data, set_ER_stats_data
 
+from api.ER_utils.ER_API_setter import set_ER_info_data, set_ER_stats_data
 from api.models import ER_User_Info_Model, ER_Stats_Model
 from api.models_utils import instance_save
 from api.DRF.Base_serialzers import (
@@ -88,12 +88,12 @@ class UserInfoSerializer(serializers.ModelSerializer):
 class UserInfoCreateSerializer(serializers.Serializer):
 	nickname = serializers.CharField()
 
-	def create(self, request, data, commit=True):
+	def create(self, request, data, matchingTeamMode, commit=True):
 		nickname = data.get("nickname", None)
-		instance = ER_User_Info_Model.objects.filter(nickname=nickname).first()
-		if not instance:
-			instance = ER_User_Info_Model.objects.create(nickname=nickname)
-		matchingTeamMode = int(request.GET.get("matchingTeamMode", 1))
+		try:
+			instance = ER_User_Info_Model.objects.get(Q(nickname=request.data["nickname"]) & Q(matchingTeamMode=matchingTeamMode))
+		except :
+			instance = ER_User_Info_Model.objects.create(nickname=nickname, matchingTeamMode=matchingTeamMode)
 		instance.matchingTeamMode = matchingTeamMode
 		set_ER_info_data(instance, matchingTeamMode)
 		# ER_status_update(instance)
