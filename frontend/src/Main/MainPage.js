@@ -13,7 +13,14 @@ function MainPage() {
         setNickName(e.target.value)
     }
 
-    const handleUserInfoClick = () => {
+    const handleEnterInput = (e) => {
+        if (e.key === 'Enter') {
+            handleUserInfoClick();
+        }
+    }
+
+    const handleUserInfoClick = (e) => {
+        e.preventDefault();
         if (nickName.length > 0) {
             try {
                 axios.post(
@@ -21,28 +28,30 @@ function MainPage() {
                     {
                         nickname: nickName
                     },
-                    )
+                )
                     .then(function (response) {
                         navigate(`/userInfo/${nickName}`)
-                     })
-                    .catch(function (error) { 
+                    })
+                    .catch(function (error) {
                         navigate(`/userInfo/${nickName}`)
                         console.log(error)
-                     });
+                    });
             } catch (error) {
-                console.error("에러가 이건가?"+error);
+                console.error("에러가 이건가?" + error);
             }
         }
     }
     return (
         <div className='page_wrapper'>
-            <div className='event_Logo'>
-                <img src={event_logo} />
-            </div>
-            <div className='header'>
-                <input placeholder='실험체 검색' onChange={handleInputChange} value={nickName} />
-                <button onClick={handleUserInfoClick}>검색</button>
-            </div>
+                <div className='event_Logo'>
+                    <img src={event_logo} />
+                </div>
+                <form onKeyPress={handleEnterInput}>
+                    <div className='header'>
+                        <input placeholder='실험체 검색' onChange={handleInputChange} value={nickName} />
+                        <button onClick={(e) => handleUserInfoClick(e)}>검색</button>
+                    </div>
+                </form>
         </div>
     )
 }

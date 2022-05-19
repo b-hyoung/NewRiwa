@@ -4,6 +4,31 @@
     background-color: rgb(31, 31, 31);
 }
 
+.page_wrap .searchForm{
+    position: relative;
+    width: 300px;
+    top: -50px;    
+    left: 717px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+}
+
+.page_wrap .searchForm input {
+    width: 70%;
+    height: 35px;
+    
+}
+.page_wrap .searchForm img {
+    width: 30%;
+    height: 60px;
+    object-fit: cover;
+    transform: scale(0.5);
+    position: absolute;
+    background-color: rgb(189, 189, 189);
+    border-radius: 12px;
+}
+
 /* .page_wrap .headers{
     width: 100%;
     height: 250px;
@@ -35,7 +60,7 @@
     border: 1px solid rgb(146, 146, 146);
     color: white;
     text-align: left;
-    margin-top: 30px;
+    margin-top: 60px;
     margin-bottom: 50px;
     padding-left: 100px;
 }
@@ -60,8 +85,8 @@
     object-fit: cover;
     opacity: 0.7 !important;
     position: absolute;
-    top: 50px;
-    left: 730px;
+    top: 60px;
+    left: 325px;
     overflow: hidden;
     background-color: none;
 }
@@ -85,14 +110,14 @@
     width: 800px;
     display: flex;
     flex-direction: row;
-    border:1px solid white;
+    border:1px solid rgb(141, 141, 141);
     margin : 0px auto;
     color: white;
     padding-left: 0.5rem;
     padding-top: 0.1rem;
-    background-color: #474747;
-    border-left: 5px solid greenyellow;
-    border-right: 5px solid skyblue;
+    background-color: #2a2a2a;
+    border-left: 5px solid #8CE33d;
+    border-right: 5px solid #46A3D2;
     margin-bottom: 10px;
 }
 
@@ -110,7 +135,10 @@
     height: 70px;
     border-radius: 5rem;
     margin-top: -27px !important;
-    background-color: black
+    background-color: #191919;
+    position: relative;
+    top: 30px;
+    left: 2px;
 
     
 }
@@ -120,12 +148,15 @@
     width: 25px;
     height: 25px;
     border-radius: 50%;
-    border: solid rgb(255, 255, 255) 1px;
     text-align: center;
-    background-color: #474747;
-    color: white;
-    top: 50px;
-    font-size: 15px;
+    background-color: #2b2b2b;
+    color: #FCF6F5;
+    border: 1px solid rgb(134, 130, 130);
+    top: -15px;
+    padding-top: 2px;
+    font-size: 14.5px;
+    z-index: 1;
+    left: -5px;
 }
 
 
@@ -135,8 +166,12 @@
     border-radius: 50%;
     object-fit: cover;
     position: relative;
-    top: -20px;
-    left: 43px;
+    top: 10px;
+    left: 45px;
+    z-index: 1;
+    background-color: #323232;
+    border: 1px solid rgb(134, 130, 130);
+    padding: 0.15rem 0.15rem;
 }
 
 .ability , .sub_ability{
@@ -173,22 +208,52 @@
 
 .user .sixth{
     margin-top: 20px;
-    width:180px;
+    width:200px;
 }
 
 .user .sixth div{
     display: inline-block;
-    width: 38px;
-    height: 25px;
-    background-color: aqua;
-    margin-right: 4px;
-    border: 1px solid white;
+    margin-bottom: 6px;
+    width: 48px;
+    height: 31px;
+    margin-right: 6px;
+    background-color: #5A467E;
+    border :solid 1px #7f63b3;
 }
-.user .sixth div img{
-    object-fit: cover;
-    width: 38px;
-    height: 25px;
 
+
+.user .sixth div.Legend{
+    background-color:#a37833;
+    border :solid 1px #b69f7a;
+    
+}
+
+.user .sixth div.Unike{
+    background-color: #5A467E;
+    border :solid 1px #7f63b3;
+}
+
+.user .sixth div.blue{
+    background-color: #425C7F;
+    border :solid 1px #77A7D7;
+}
+
+.user .sixth div.green{
+    background-color: #466A49 ;
+    border :solid 1px #647F4B;
+}
+
+.user .sixth div.gray{
+    background-color: #585A5C ;
+    border :solid 1px #878787;
+}
+
+
+.user .sixth div img{
+    height: auto;
+    max-width: 100%;
+    margin-top: 0px;
+    margin-left: 1;
 }
 
 
@@ -214,26 +279,65 @@
     position: relative;
     display: flex;
     flex-direction: row;
-    width: 100%;
+    width: 600px;
     color: white;
-    left: 760px;
-    font-size: 20px;
+    left: 730px;
+    
 }
 
 .select_modeAll span{
-    margin-right: 15px;
+    width: 60px;
+    border : 1px solid rgb(135, 135, 135);
+    border-radius: 13px ;
+    margin-right: 7px;
     margin-bottom: 15px;
     margin-top: -10px;
+    padding: .7rem .7rem;
+    
 }
+
 
 .select_modeAll span a{
     outline: none;
-    color: white;
+    color: #DCE2F0;
     text-decoration: none;
+    font-size: 15px;
+    position: relative;
 }
 
 .active_toggle{
-    border-bottom: 2px solid white;
+    background-color: #77A7D7;
+}
+.active_toggle a{
+    font-weight: bolder;
+}
+
+/* .select_modeAll .B a::before , .select_modeAll .C a::before{
+    content: "";
+    height: 2px;
+    width: 0;
+    background-color: #fff;
+    border-radius: 10px;
+    transition: .3s;
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+}
+.select_modeAll .B a:hover::before{
+    width: 35px;
+    background-color: rgb(158, 159, 159);
+}
+.select_modeAll .C a:hover::before{
+    width: 55px;
+    background-color: rgb(158, 159, 159);
+} */
+
+@keyframes inAnimation{
+    from{
+        left:0
+    }to{
+        left:785
+    }
 }
 
 .add_gameLog{

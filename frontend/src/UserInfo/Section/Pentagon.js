@@ -269,7 +269,7 @@ function Pentagon({ name, infoTier, dataUser , usertier }) {
                 <>
                     <div className='rank_survive'>
                         <span className='rank'>{firRank}</span>
-                        <span className='text_survive'>평균 생존 시간</span>
+                        <span className='text_survive'>순위</span>
                     </div>
                     <div className='rank_kill'>
                         <span className='rank'>{senRank}</span>
@@ -285,20 +285,20 @@ function Pentagon({ name, infoTier, dataUser , usertier }) {
                     </div>
                     <div className='rank_test'>
                         <span className='rank'>{fifRank}</span>
-                        <span className='text_test'>테스트</span>
+                        <span className='text_test'>평균 헌트</span>
                     </div>
                 </>
             )}
 
             <div className='avg_tier'>
                 <div className='colume'>
-                    <div className='test_' style={{ backgroundColor: "gray" }}></div>
+                    <div className='test_' style={{ backgroundColor: "orange" }}></div>
                     <div>
                     <span >{usertier}</span>
                     </div>
                 </div>
                 <div className='colume'>
-                    <div className='test_' style={{ backgroundColor: "orange" }}></div>
+                    <div className='test_' style={{ backgroundColor: "gray" }}></div>
                     <span style={{ width: "130px" }}>{name}</span>
                 </div>
             </div>
@@ -351,7 +351,7 @@ function Pentagon({ name, infoTier, dataUser , usertier }) {
                     <line transform="translate(115,115)" x2="-53" y2="73" x="0" y="0" stroke='white' ></line>
                     <line transform="translate(115,115)" x2="-85.5" y2="-27.5" x="0" y="0" stroke='white' ></line>
 
-                    <path d="M 2,-45 L42,-13 L26,36 L-26,36 L-42,-13.5 Z" stroke='orange' fill='none' transform="translate(115,115)"></path>
+                    <path d="M 0,-45 L42,-13 L26,36 L-26,36 L-42,-13.5 Z" stroke='orange' fill='none' transform="translate(115,115)"></path>
                     <path d={"M " + survTemp + " L" + killTemp + " " + demageTemp + "   " + masteryTemp + "   " + testTemp + " Z"} stroke='aqua' fill='yellow' opacity="0.4" transform="translate(115,115)"></path>
                 </g>
             </svg>

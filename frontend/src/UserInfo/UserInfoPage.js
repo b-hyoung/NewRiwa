@@ -17,37 +17,31 @@ function UserinfoPage() {
   const { nickname } = useParams();
   const [userData, setUserData] = useState([])
   const [userRecode, setUserRecode] = useState("")
-  const [userRecodeImage, setUserRecodeImage] = useState("")
+  const [searchInputForm, setSearchInputForm] = useState("")
   const [useError, setUserError] = useState(false)
   const [clickButton, setClickButton] = useState(false)
   const [clickIndex, setClickIndex] = useState("")
-  const [toggleState,setToggleState] = useState(1)
-  const [arr , setArr] = useState([])
-  const [tierInfo,setTierInfo] = useState([]);
+  const [toggleState, setToggleState] = useState(1)
+  const [arr, setArr] = useState([])
+  const [tierInfo, setTierInfo] = useState([]);
 
   const publicUrl = process.env.PUBLIC_URL;
 
-  useEffect(() => { 
+  useEffect(() => {
     getUserGame()
     getUserInfo()
-  }, []) 
+  }, [])
 
-  useEffect(() => { 
-    getTierInfo() 
-  }, [userData,arr[0]]) 
+  useEffect(() => {
+    getTierInfo()
+  }, [userData, arr[0]])
 
-  useEffect(() => { 
-    if(userRecode !== null){
-      setUserRecodeImage(userRecode.itemImage) 
-      console.log("얘 실행됐냐?")
-    }
-  }, [userRecode]) 
 
 
   const getUserGame = () => {
     try {
       axios.get(
-        'http://127.0.0.1:8000/api/UserGameRecord/'+nickname+'/')
+        'http://127.0.0.1:8000/api/UserGameRecord/' + nickname + '/')
         .then(response => {
           console.log(response)
           setUserRecode(response.data);
@@ -62,11 +56,9 @@ function UserinfoPage() {
 
   const getUserInfo = () => {
     try {
-      axios.post(
-        'http://127.0.0.1:8000/api/UserInfo/'
-        , {
-          nickname: nickname
-        },
+      axios.get(
+        'http://127.0.0.1:8000/api/UserInfo/' + nickname + '/'
+
       )
         .then(response => {
           console.log(response)
@@ -81,36 +73,41 @@ function UserinfoPage() {
   }
 
   const getTierInfo = () => {
-    if(userData.soloTier !== undefined){
+    if (userData.soloTier !== undefined) {
       setArr(userData.soloTier.split(" "))
     }
-    if(arr[0] !== undefined){
-      try { 
+    if (arr[0] !== undefined) {
+      try {
         axios.post(
           'http://127.0.0.1:8000/api/UserStats/'
           , {
             rank: arr[0]
           },
-          )
+        )
           .then(response => {
             console.log(response.data)
             setTierInfo(response.data)
-      })
-        } catch (error) {
-          console.log(error)
-        }
+          })
+      } catch (error) {
+        console.log(error)
+      }
     }
-    }
-    
-    const handleClickOpen = (e, index) => {
-      e.preventDefault(); 
-      if (clickButton === true) {
+  }
+
+  const handleClickOpen = (e, index) => {
+    e.preventDefault();
+    if (clickButton === true) {
       setClickButton(false);
       setClickIndex(index)
     } else if (clickButton === false) {
       setClickButton(true);
       setClickIndex(index)
     }
+  }
+
+  const handleChangeInput = (event) => {
+    event.preventDefault()
+    setSearchInputForm(event.target.value)
   }
 
   const toggleTabs = (index) => {
@@ -128,33 +125,29 @@ function UserinfoPage() {
     // }
   }
 
-  
+
 
   return (
     <div className='page_wrap'>
-      {console.log(userRecodeImage)}
       {useError === false ? (
         <>
-          <div className='user_name'>
-            {nickname}
-          </div>
           <div className='pentagon_content'>
-            <div className='user_Stat'>
-              <Pentagon name={nickname} infoTier={tierInfo}  dataUser={userData} usertier={arr[0]} />
-              <img className='char' src={`${process.env.PUBLIC_URL}${userData.mainCharImg}`} />
+             <div className='user_Stat'>
+              <Pentagon name={nickname} infoTier={tierInfo} dataUser={userData} usertier={arr[0]} />
               {/* <img className='char' src={require('../image/Char/Full/Full.png')} style={{transform:"rotate(90deg)" , transform:"scaleX(-1)"}} /> */}
-              <User_Stats />
+              <User_Stats name={nickname} useData={userData} infoTier={tierInfo} />
             </div>
-          </div>
+          </div> 
+          
 
           <div className='user_Content'>
-          <div>
+            <div>
               <div className='select_modeAll'>
-                <span className={toggleState === 1 ? "active_toggle" : ""}><a href='#' onClick={() => toggleTabs(1)}>전체</a></span>
-                <span className={toggleState === 2 ? "active_toggle" : ""}><a href='#' onClick={() => toggleTabs(2)}>일반</a></span>
-                <span className={toggleState === 3 ? "active_toggle" : ""}><a href='#' onClick={() => toggleTabs(3)}>솔로</a></span>
-                <span className={toggleState === 4 ? "active_toggle" : ""}><a href='#' onClick={() => toggleTabs(4)}>듀오</a></span>
-                <span className={toggleState === 5 ? "active_toggle" : ""}><a href='#' onClick={() => toggleTabs(5)}>스쿼드</a></span>
+                <span className={toggleState === 1 ? "active_toggle" : "B"} style={{width:"55px"}} ><a href='#' onClick={() => toggleTabs(1)}>전체</a></span>
+                <span className={toggleState === 2 ? "active_toggle" : "B"} style={{width:"55px"}} ><a href='#' onClick={() => toggleTabs(2)}>일반</a></span>
+                <span className={toggleState === 3 ? "active_toggle" : "B"} style={{width:"55px"}} ><a href='#' onClick={() => toggleTabs(3)}>솔로</a></span>
+                <span className={toggleState === 4 ? "active_toggle" : "B"} style={{width:"55px"}} ><a href='#' onClick={() => toggleTabs(4)}>듀오</a></span>
+                <span className={toggleState === 5 ? "active_toggle" : "C"} style={{width:"70px"}}><a href='#' onClick={() => toggleTabs(5)}>스쿼드</a></span>
               </div>
             </div>
 
@@ -192,9 +185,9 @@ function UserinfoPage() {
                       <div>6시간 전</div>
                     </div>
                     <div className='second'>
+                      <img className='char_img' src={`${process.env.PUBLIC_URL}${userRecode[item].charImg}`} />
+                      <img className='char_wephon' src={`${process.env.PUBLIC_URL}${userRecode[item].bestWeaponImg}`} />
                       <div className='charLevel'>{userRecode[item].bestWeaponLevel}</div>
-                      {/* <img className='char_img' src={require("../image/Char/icon/Yuki.png")} /> */}
-                      <img className='char_wephon' src={require("../image/WeaponMastery/07. Sniper Rifle.png")} />
                     </div>
                     <div style={{ display: "block", width: "70px" }}>
                       <img className='ability' src={require("../image/Ability/Havoc/Frailty Infliction.png")} />

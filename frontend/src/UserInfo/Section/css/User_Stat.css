@@ -6,37 +6,63 @@
 }
 
 .userTier .selected_tier{
-    width: 105px;
+    width: 120px;
     height: 30px;
     position: absolute;
     top: -60px;
-    left: 440px;
+    left: 422px;
     font-size: 13px;
     background-color: #505050;
+    padding-left: 10px;
+    padding-bottom: -5px;
     color: white;
-    border: skyblue 1px solid;
+    border: rgb(130, 212, 227) 1px solid;
+}
+.selected_tier option{
+    background-color: none;
 }
 
+
+
 .userTier .img_Box{
-    width: 200px;
-    height: 245px;
+    position: absolute;
+    width: 75px;
+    height: 75px;
     border-radius: 50%;
     padding: 1rem 1rem;
     margin-right: 20px;
     background-color: rgba(53, 53, 53, 0.597);
     margin-top: 15px;
-}
-
-.userTier img {
-    object-fit: cover;
-    width: 140px;
-    height: 220px;
+    overflow: hidden;
+    top: -40px;
+    left: 100px;
+    transform: scale(0.7);
+    }
+    
+    .userTier .img_Box img {
+    width: 100px;
+    height: 100px;
+    position: relative;
     margin: 0 auto;
     padding: 0.3rem 0.3rem;
+    top: -16px;
+    left: -29px;
+    transform: scale(1.4);
+    
+    }
+    
+.avg_Info{
+    position: relative;
+    top: -10px;
+    left: 180px;
 }
 
-.userTier .avg_info div{
-    width: 300px;
+
+
+.userTier .info_bar{
+    position: relative;
+    left: -60px;
+    top: 5px;
 }
 
 span.info_log{
@@ -48,9 +74,9 @@ span.info_log{
 
 .userTier .avg_Info .gameBar{
     width: 100%;
-    height: 7px;
+    height: 8px;
     background-color: gray;
-    border-radius: 3px;
+    border-radius: 12px;
     margin-top: 7px;
     margin-bottom: 5px;
 }

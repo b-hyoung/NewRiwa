@@ -5,6 +5,7 @@
     margin: 0 auto;
     position: relative;
     margin-top: 75px;
+    top: 20px;
 }
 
 .pentagon svg{
@@ -22,20 +23,28 @@
 .text_kill , .text_test{
     width: 130px;
     position: absolute;
-    left: 20px !important;
-    top: 25px
+    left: 0px ;
+    top: 25px;
+    color: #F4EFEA;
+}
+
+.text_kill{
+    left: 15px;
 }
 .text_demage, .text_mastery{
     width: 130px;
     position: absolute;
     left: 5px !important;
-    top: 25px
+    top: 25px;
+    color: #F4EFEA;
+    
 }
 .text_survive{
     width: 130px;
     position:absolute;
-    top: 25px;
-    left:-5px;
+    top: 20px;
+    left:25px;
+    color: #F4EFEA;
 }
 
 
@@ -71,7 +80,7 @@
 }
 .rank_mastery {
     position: absolute;
-    top: 230px;
+    top: 220px;
     left: -20px;
     display: flex;
     flex-direction: column;
@@ -92,8 +101,8 @@
 
 .avg_tier{
     position: absolute;
-    top: -60px;
-    left: 320px;
+    top: -75px;
+    left: 280px;
     width: 130px;
 }
 
