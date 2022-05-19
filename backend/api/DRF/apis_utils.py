@@ -6,9 +6,9 @@ from api.ER_utils.ER_Serializer_setter import set_mostpick_Serializer
 
 
 def set_userinfo_serializers_data(api, data):
-	api["mostpick"] = set_mostpick_Serializer(data.mostpick)
+	api["mostpick"] = set_mostpick_Serializer(data.mostpick, data.userNum)
 	api["mainCharImg"] = get_ER_charhalf_image(data.mostpick.most_one_charcode)
-	api["season"] = get_season(int(api["seasonId"]))
+	api["season"] = get_season(int(data.seasonId))
 	api["mainTireImg"] = get_ER_TierImg(api)
 
 def set_usergame_serializers_data(api, data, i):

@@ -56,7 +56,7 @@ class UserInfoViewSet(viewsets.ModelViewSet):
 	def create(self, request):
 		matchingTeamMode = int(request.GET.get("matchingTeamMode", 1))
 		try:
-			t = ER_User_Info_Model.objects.get(Q(nickname=request.data["nickname"]) & Q(matchingTeamMode=matchingTeamMode))
+			ER_User_Info_Model.objects.get(Q(nickname=request.data["nickname"]) & Q(matchingTeamMode=matchingTeamMode))
 		except Exception:
 			serializer = UserInfoCreateSerializer(data=request.data)
 			if serializer.is_valid():

@@ -19,6 +19,7 @@ def set_mostpick_data(mostpick_model, matchingTeamMode, userstats):
 			mostpick_model.most_one_charcode = userstats["userStats"]["characterStats"][0]["characterCode"]
 		except TypeError:
 			pass
+
 	try :
 		mostpick_model.most_two_charcode = userstats["userStats"][matchingTeamMode]["characterStats"][1]["characterCode"]
 	except IndexError:
