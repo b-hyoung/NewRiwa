@@ -1,6 +1,8 @@
 
+from asyncio import exceptions
 from api.ER_utils.ER_API_utils import ER_user_averageDeal
 from api.models import ER_Stats_Model, MasteryModel
+from api.error_utils import error_msg
 
 
 def set_ER_averageMastery(instance:ER_Stats_Model, user_games):
@@ -42,10 +44,13 @@ def set_ER_averageMastery(instance:ER_Stats_Model, user_games):
 	return mastery.get_averageProficiency()
 
 def set_ER_graph_data(instance, user_stats, user_games, matchingTeamMode:int):
-	matchingTeamMode = matchingTeamMode - 1
-	instance.averageRanking = user_stats["userStats"][matchingTeamMode]["averageRank"]
-	instance.averageKills = user_stats["userStats"][matchingTeamMode]["averageKills"]
-	instance.averageHunts = user_stats["userStats"][matchingTeamMode]["averageHunts"]
-	instance.averageAssistants = user_stats["userStats"][matchingTeamMode]["averageAssistants"]
-	instance.averageDeal = ER_user_averageDeal(user_games)
-	instance.averageProficiency = set_ER_averageMastery(instance, user_games)
+	TeamMode = matchingTeamMode - 1
+	try:
+		instance.averageRanking = user_stats["userStats"][TeamMode]["averageRank"]
+		instance.averageKills = user_stats["userStats"][TeamMode]["averageKills"]
+		instance.averageHunts = user_stats["userStats"][TeamMode]["averageHunts"]
+		instance.averageAssistants = user_stats["userStats"][TeamMode]["averageAssistants"]
+		instance.averageDeal = ER_user_averageDeal(instance.userNum,instance.nickname, user_games, matchingTeamMode)
+		instance.averageProficiency = set_ER_averageMastery(instance, user_games)
+	except IndexError:
+		raise exceptions.ValidationError(error_msg(301), code=404)
