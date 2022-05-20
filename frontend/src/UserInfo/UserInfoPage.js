@@ -24,13 +24,16 @@ function UserinfoPage() {
   const [toggleState, setToggleState] = useState(1)
   const [arr, setArr] = useState([])
   const [tierInfo, setTierInfo] = useState([]);
+  const [bool , setBool] = useState(true)
+  const [bool2 , setBool2] = useState(true)
 
   const publicUrl = process.env.PUBLIC_URL;
 
   useEffect(() => {
     getUserGame()
     getUserInfo()
-  }, [])
+  }, [bool,bool2])
+
 
   useEffect(() => {
     getTierInfo()
@@ -38,19 +41,53 @@ function UserinfoPage() {
 
 
 
+  const userNotFount = () => {
+    try {
+      axios.post(
+        'http://127.0.0.1:8000/api/UserInfo/',
+        {
+          nickname: nickname
+        },
+      ).then(
+        setBool2(false)
+      )
+    } catch (error) {
+      console.error("에러가 이건가?" + error);
+    }
+  }
+
+  const gameNotFount = () => {
+    try {
+      axios.post(
+        'http://127.0.0.1:8000/api/UserGameRecord/',
+        {
+          nickname: nickname
+        },
+      ).then(
+        setBool2(false),
+        console.log("게임로그 보내기 성공")
+      )
+    } catch (error) {
+      console.error("에러가 이건가?" + error);
+    }
+  }
+
   const getUserGame = () => {
     try {
       axios.get(
         'http://127.0.0.1:8000/api/UserGameRecord/' + nickname + '/')
         .then(response => {
           console.log(response)
-          setUserRecode(response.data);
+          setUserRecode(response.data); 
+          setBool(true)
         })
         .catch(error => {
-          setUserError(true)
+          console.error(error);
+          gameNotFount()
         })
-    } catch (error) {
-      console.error(error);
+      } catch (error) {
+        console.error(error);
+        gameNotFount()
     }
   }
 
@@ -63,9 +100,10 @@ function UserinfoPage() {
         .then(response => {
           console.log(response)
           setUserData(response.data)
+          setBool2(true)
         })
         .catch(error => {
-          setUserError(true)
+          userNotFount();
         })
     } catch (error) {
       console.error(error);
@@ -132,22 +170,22 @@ function UserinfoPage() {
       {useError === false ? (
         <>
           <div className='pentagon_content'>
-             <div className='user_Stat'>
+            <div className='user_Stat'>
               <Pentagon name={nickname} infoTier={tierInfo} dataUser={userData} usertier={arr[0]} />
               {/* <img className='char' src={require('../image/Char/Full/Full.png')} style={{transform:"rotate(90deg)" , transform:"scaleX(-1)"}} /> */}
               <User_Stats name={nickname} useData={userData} infoTier={tierInfo} />
             </div>
-          </div> 
-          
+          </div>
+
 
           <div className='user_Content'>
             <div>
               <div className='select_modeAll'>
-                <span className={toggleState === 1 ? "active_toggle" : "B"} style={{width:"55px"}} ><a href='#' onClick={() => toggleTabs(1)}>전체</a></span>
-                <span className={toggleState === 2 ? "active_toggle" : "B"} style={{width:"55px"}} ><a href='#' onClick={() => toggleTabs(2)}>일반</a></span>
-                <span className={toggleState === 3 ? "active_toggle" : "B"} style={{width:"55px"}} ><a href='#' onClick={() => toggleTabs(3)}>솔로</a></span>
-                <span className={toggleState === 4 ? "active_toggle" : "B"} style={{width:"55px"}} ><a href='#' onClick={() => toggleTabs(4)}>듀오</a></span>
-                <span className={toggleState === 5 ? "active_toggle" : "C"} style={{width:"70px"}}><a href='#' onClick={() => toggleTabs(5)}>스쿼드</a></span>
+                <span className={toggleState === 1 ? "active_toggle" : "B"} style={{ width: "55px" }} ><a href='#' onClick={() => toggleTabs(1)}>전체</a></span>
+                <span className={toggleState === 2 ? "active_toggle" : "B"} style={{ width: "55px" }} ><a href='#' onClick={() => toggleTabs(2)}>일반</a></span>
+                <span className={toggleState === 3 ? "active_toggle" : "B"} style={{ width: "55px" }} ><a href='#' onClick={() => toggleTabs(3)}>솔로</a></span>
+                <span className={toggleState === 4 ? "active_toggle" : "B"} style={{ width: "55px" }} ><a href='#' onClick={() => toggleTabs(4)}>듀오</a></span>
+                <span className={toggleState === 5 ? "active_toggle" : "C"} style={{ width: "70px" }}><a href='#' onClick={() => toggleTabs(5)}>스쿼드</a></span>
               </div>
             </div>
 

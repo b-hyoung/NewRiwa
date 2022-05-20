@@ -15,11 +15,19 @@ function User_Stat({useData,name , infoTier}) {
   const [selectTier, setSelectTier] = useState("1");
   const [tierData, setTierData] = useState("");
   const [testData, setTestData] = useState("");
+  const [boole , setBoole] = useState(true)
 
   const handleSelectClick = (e) => {
     console.log(e.target.value)
     setSelectTier(e.target.value)
   }
+
+  useEffect(() => {
+    postTeamMode1()
+    postTeamMode2()
+    postTeamMode3()
+  }, [boole])
+  
 
   useEffect(() => {
     setTestData(useData);
@@ -40,8 +48,56 @@ function User_Stat({useData,name , infoTier}) {
           console.log(response.data)
           setTestData(response.data)
         })
+        .catch(response => {
+          
+          console.log("이거에러임? 222")
+        })
     } catch (error) {
       console.log(error)
+      console.log("이거에러임?")
+    }
+  }
+
+  const postTeamMode1 = () => {
+    try{
+      axios.post(
+        'http://127.0.0.1:8000/api/UserInfo/?matchingTeamMode=1',
+        {
+          nickname:name
+        },
+      ).then(
+        setBoole(false)
+      )
+    }catch(error){
+
+    }
+  }
+  const postTeamMode2 = () => {
+    try{
+      axios.post(
+        'http://127.0.0.1:8000/api/UserInfo/?matchingTeamMode=2',
+        {
+          nickname:name
+        },
+      ).then(
+        setBoole(false)
+      )
+    }catch(error){
+
+    }
+  }
+  const postTeamMode3 = () => {
+    try{
+      axios.post(
+        'http://127.0.0.1:8000/api/UserInfo/?matchingTeamMode=3',
+        {
+          nickname:name
+        },
+      ).then(
+        setBoole(false)
+      )
+    }catch(error){
+
     }
   }
 

@@ -20,21 +20,21 @@ function MainPage() {
     }
 
     const handleUserInfoClick = (e) => {
-        e.preventDefault();
         if (nickName.length > 0) {
+            e.preventDefault();
             try {
                 axios.post(
-                    'http://127.0.0.1:8000/api/UserGameRecord/',
+                    'http://127.0.0.1:8000/api/UserInfo/',
                     {
                         nickname: nickName
                     },
                 )
                     .then(function (response) {
                         navigate(`/userInfo/${nickName}`)
+                        console.log("보내기 성공")
                     })
                     .catch(function (error) {
                         navigate(`/userInfo/${nickName}`)
-                        console.log(error)
                     });
             } catch (error) {
                 console.error("에러가 이건가?" + error);
