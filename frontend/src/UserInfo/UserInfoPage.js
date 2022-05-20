@@ -252,7 +252,7 @@ function UserinfoPage() {
                       <div><img src={`${process.env.PUBLIC_URL}${userRecode[item].itemImage.Accessories}`} /></div>
                     </div>
                     <div className='seventh'>
-                      <button onClick={(e) => handleClickOpen(e, index)}>/''/</button>
+                      {/* <button onClick={(e) => handleClickOpen(e, index)}></button> */}
                     </div>
                   </div>
                   {clickButton === true && index === clickIndex && (

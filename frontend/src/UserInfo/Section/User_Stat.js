@@ -161,7 +161,7 @@ function User_Stat({useData,name , infoTier}) {
               25 Games
             </span>
             <div className='gameBar'>
-              <div style={{ width: "40%", height: "8px", backgroundColor: "rgb(140,227,061)", borderRadius: "50px" }}>
+              <div style={{ width: "30%", height: "8px", backgroundColor: "#9FC131", borderRadius: "50px" }}>
 
               </div>
             </div>
@@ -172,7 +172,7 @@ function User_Stat({useData,name , infoTier}) {
               4.86%
             </span>
             <div className='gameBar'>
-              <div style={{ width: "60%", height: "8px", backgroundColor: "rgb(070,163,210)", borderRadius: "50px" }}>
+              <div style={{ width: "70%", height: "8px", backgroundColor: "rgb(070,163,210)", borderRadius: "50px" }}>
               </div>
             </div>
           </div>
@@ -183,7 +183,7 @@ function User_Stat({useData,name , infoTier}) {
               #{testData.averageRanking}
             </span>
             <div className='gameBar'>
-              <div style={{ width: "60%", height: "8px", backgroundColor: "rgb(251,194,044)" ,borderRadius: "50px" }}>
+              <div style={{ width: "50%", height: "8px", backgroundColor: "rgb(070,163,210)" ,borderRadius: "50px" }}>
 
               </div>
             </div>
@@ -206,7 +206,7 @@ function User_Stat({useData,name , infoTier}) {
               {testData.averageDeal}
             </span>
             <div className='gameBar'>
-              <div style={{ width: "60%", height: "8px", backgroundColor: "rgb(251,194,044)" ,borderRadius: "50px" }}>
+              <div style={{ width: "60%", height: "8px", backgroundColor: "rgb(070,163,210)" ,borderRadius: "50px" }}>
 
               </div>
             </div>

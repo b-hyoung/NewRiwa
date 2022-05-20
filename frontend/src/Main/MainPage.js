@@ -41,6 +41,7 @@ function MainPage() {
             }
         }
     }
+    
     return (
         <div className='page_wrapper'>
                 <div className='event_Logo'>

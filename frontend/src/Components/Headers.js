@@ -5,10 +5,11 @@ import Container from 'react-bootstrap/Container'
 import { useNavigate } from 'react-router-dom'
 import Eriwa_Logo from '../image/Logo/MainLogo.png'
 import './Headers.css'
+import axios from 'axios'
 
 function Headers() {
 
-  const [userInpuf , setUserInput] = useState("");
+  const [nickName , setUserInput] = useState("");
 
   const navigate = useNavigate("");
 
@@ -35,6 +36,18 @@ function Headers() {
   const handleMainClick = () =>{
     navigate("/")
   }
+
+  const handleEnterInput = (e) => {
+    if (e.key === 'Enter') {
+        handleUserInfoClick();
+    }
+}
+
+  const handleUserInfoClick = (e) => {
+    navigate(`/userInfo/${nickName}`)
+                
+}
+
   return (
     <Navbar className="top_logo" collapseOnSelect expand="lg" variant="dark">
       <Container style={{height : 60 , fontSize : 18}}>
@@ -53,8 +66,10 @@ function Headers() {
           </Nav>
           <Nav >
             <Nav.Link href="#" className='searchForm'>
-                <input />
-                <img src={require("../image/Logo/EriwaLogo.png")} />
+              <form onKeyPress={handleEnterInput}>
+                <input onChange={(e) => handleChangeInput(e)} value={nickName}  />
+                <img src={require("../image/Logo/EriwaLogo.png")} onClick={(e) => handleUserInfoClick(e)} />
+              </form>
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>

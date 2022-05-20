@@ -6,9 +6,9 @@ function User_GameLog({ useData, mostData }) {
     return (
         <>
             <div>
-                <div className='log_header' style={{backgroundColor:"gray" , width:"100%"}}>
+                <div className='log_header' style={{backgroundColor:"#50586C" , width:"100%",height:"30px",padding:"0.15rem 0.15rem" ,color:"#DCE2F0"}}>
                     <span style={{width:"70%" , marginLeft:"5px",marginTop:"5px",marginBottom:"5px"}}>캐릭터</span>
-                    <span style={{marginLeft:"145px"}}>승 률</span>
+                    <span style={{marginLeft:"130px"}}>승 률</span>
                 </div>
                 <div className='most_op'>
                     <div>

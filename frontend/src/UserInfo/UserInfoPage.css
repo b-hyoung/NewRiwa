@@ -96,8 +96,8 @@
 .user_Content .user_Infos{
     display: inline-block;
     width: 240px;
-    height: 250px;
-    border: solid white 1px;
+    height: 200px;
+    border: solid #6E6E6D 2px;
 }
 
 .user_GameLog{
