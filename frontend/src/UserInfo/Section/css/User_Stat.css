@@ -9,8 +9,8 @@
     width: 120px;
     height: 30px;
     position: absolute;
-    top: -60px;
-    left: 422px;
+    top: -55px;
+    left: 370px;
     font-size: 13px;
     background-color: #505050;
     padding-left: 10px;
@@ -40,14 +40,14 @@
     }
     
     .userTier .img_Box img {
-    width: 100px;
+    width: 130px;
     height: 100px;
     position: relative;
     margin: 0 auto;
     padding: 0.3rem 0.3rem;
-    top: -16px;
-    left: -29px;
-    transform: scale(1.4);
+    top: -12px;
+    left: -42px;
+    transform: scale(1.3);
     
     }
     

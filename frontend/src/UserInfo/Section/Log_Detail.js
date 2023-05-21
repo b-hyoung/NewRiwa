@@ -16,7 +16,7 @@ function Log_Detail({ show }) {
                     <span>#1</span>
                 </div>
                 <div className='detail_char_image'>
-                    <img className='char_img' src={require("../../image/Char/icon/Yuki.png")} />
+                    <img className='char_img' /* src={require("../../image/Char/icon/Yuki.png")} */ />
                     {/* <img className='char_wephon' src={require("../../image/WeaponMastery/07. Sniper Rifle.png")} /> */}
                 </div>
                 <div className='detail_ability'>

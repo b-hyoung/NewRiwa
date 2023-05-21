@@ -12,40 +12,40 @@ function User_GameLog({ useData, mostData }) {
                 </div>
                 <div className='most_op'>
                     <div>
-                        {mostData && <img className='most_img' src={`${process.env.PUBLIC_URL}${mostData.most_one_charimg}`} />}
+                        { <img className='most_img' src={`${process.env.PUBLIC_URL}/image/Char/icon/Alex.png`} />}
                     </div>
                     <div className='left_op'>
-                        <div style={{ color: "white" }}>{mostData && mostData.most_one_charName}</div>
-                        <div style={{ color: "white", fontSize: "11.5px" }}>25 Games</div>
+                        <div style={{ color: "white" }}>Alex</div>
+                        <div style={{ color: "white", fontSize: "11.5px" }}>133 Games</div>
                     </div>
                     <div className='right_op'>
-                        <div>5.24 %</div>
+                        <div>27.3 %</div>
                     </div>
                 </div>
 
                 <div className='most_op'>
                     <div>
-                        {mostData && <img className='most_img' src={`${process.env.PUBLIC_URL}${mostData.most_two_charimg}`} />}
+                        { <img className='most_img' src={`${process.env.PUBLIC_URL}/image/Char/icon/Shoichi.png`} />}
                     </div>
                     <div className='left_op'>
-                        <div style={{ color: "white" }}>{mostData && mostData.most_two_charName}</div>
-                        <div style={{ color: "white", fontSize: "11.5px" }}>25 Games</div>
+                        <div style={{ color: "white" }}>Shoichi</div>
+                        <div style={{ color: "white", fontSize: "11.5px" }}>78 Games</div>
                     </div>
                     <div className='right_op'>
-                        <div>5.24 %</div>
+                        <div>17.3 %</div>
                     </div>
                 </div>
 
                 <div className='most_op'>
                     <div>
-                        {mostData && <img className='most_img' src={`${process.env.PUBLIC_URL}${mostData.most_three_charimg}`} />}
+                        {<img className='most_img' src={`${process.env.PUBLIC_URL}/image/Char/icon/Chloe.png`} />}
                     </div>
                     <div className='left_op'>
-                        <div style={{ color: "white" }}>{mostData && mostData.most_three_charName}</div>
-                        <div style={{ color: "white", fontSize: "11.5px" }}>25 Games</div>
+                        <div style={{ color: "white" }}>Chloe</div>
+                        <div style={{ color: "white", fontSize: "11.5px" }}>54 Games</div>
                     </div>
                     <div className='right_op'>
-                        <div>5.24 %</div>
+                        <div>33.7 %</div>
                     </div>
                 </div>
             </div>

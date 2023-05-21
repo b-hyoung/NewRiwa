@@ -55,9 +55,9 @@ function Headers() {
         <Navbar.Toggle   aria-controls="responsive-navbar-nav" style={{width:"50px",height:"40px",marginTop:"-20px"}} />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto" >
-            <Nav.Link  href="#features" style={{color:"#D5D7D8" ,marginRight:"5px"}} >실험체 정보</Nav.Link>
-            <Nav.Link  href="#features" style={{color:"#D5D7D8" , marginRight:"5px"}} >루트</Nav.Link>
-            <Nav.Link  href="#features" style={{color:"#D5D7D8"}} >
+            <Nav.Link  href="#features" style={{color:"#DCE2F0" ,marginRight:"5px"}} >실험체 정보</Nav.Link>
+            <Nav.Link  href="#features" style={{color:"#DCE2F0" , marginRight:"5px"}} >루트</Nav.Link>
+            <Nav.Link  href="#features" style={{color:"#DCE2F0"}} >
               우린 왜 2등을 했을까?
               <span style={{fontSize:"14px",marginLeft:"5px",color:"skyblue"}}>
                 

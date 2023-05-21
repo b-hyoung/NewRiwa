@@ -14,6 +14,7 @@ import Log_Detail from './Section/Log_Detail'
 
 function UserinfoPage() {
 
+  let ar = "aa"
   const { nickname } = useParams();
   const [userData, setUserData] = useState([])
   const [userRecode, setUserRecode] = useState("")
@@ -177,7 +178,6 @@ function UserinfoPage() {
             </div>
           </div>
 
-
           <div className='user_Content'>
             <div>
               <div className='select_modeAll'>
@@ -194,11 +194,11 @@ function UserinfoPage() {
             </div>
 
             <div className='user_GameLog'>
-              {userRecode && Object.keys(userRecode).map((item, index) => (
+              {/* { ar = "aa" && Object.keys(userRecode).map((item, index) => ( */}
                 <div>
                   <div className='user'>
                     <div className='first'>
-                      {userRecode[item].ranking === 1 &&
+                      {/* {userRecode[item].ranking === 1 &&
                         <>
                           <div style={{ fontWeight: "bold", fontSize: "20px", color: "yellow" }}>#{userRecode[item].ranking}</div>
                         </>
@@ -212,20 +212,19 @@ function UserinfoPage() {
                         <>
                           <div style={{ fontWeight: "bold", fontSize: "20px", color: "skyblue" }}>#{userRecode[item].ranking}</div>
                         </>
-                      }
-                      {userRecode[item].ranking > 3 &&
+                      } */}
+                 
                         <>
-                          <div style={{ fontWeight: "bold", fontSize: "20px", color: "silver" }}>#{userRecode[item].ranking}</div>
+                          <div style={{ fontWeight: "bold", fontSize: "20px", color: "silver" }}>#4</div>
                         </>
-                      }
 
-                      <div>{userRecode[item].matchingMode}</div>
+                      <div>Solo</div>
                       <div>6시간 전</div>
                     </div>
                     <div className='second'>
-                      <img className='char_img' src={`${process.env.PUBLIC_URL}${userRecode[item].charImg}`} />
-                      <img className='char_wephon' src={`${process.env.PUBLIC_URL}${userRecode[item].bestWeaponImg}`} />
-                      <div className='charLevel'>{userRecode[item].bestWeaponLevel}</div>
+                      <img className='char_img' src={`${process.env.PUBLIC_URL}/image/Char/icon/Yuki.png`} />
+                      <img className='char_wephon' src={`${process.env.PUBLIC_URL}/image/item/Weapon/ItemIcon_118403_Tac-50.png`} />
+                      <div className='charLevel'>17</div>
                     </div>
                     <div style={{ display: "block", width: "70px" }}>
                       <img className='ability' src={require("../image/Ability/Havoc/Frailty Infliction.png")} />
@@ -233,46 +232,118 @@ function UserinfoPage() {
                     </div>
                     <div className='third'>
                       <div style={{ fontSize: "15px", textAlign: "left !important", marginBottom: "-4px" }}>K/A/H</div>
-                      <div className='user_kah'>{userRecode[item].Kills}/{userRecode[item].Assistants}/{userRecode[item].Hunts}</div>
+                      <div className='user_kah'>3 /6 / 23</div>
                     </div>
                     <div className='forth'>
                       <div style={{ marginBottom: "-4px" }}>MMR</div>
-                      <div style={{ fontWeight: "bold", fontSize: "20px" }}>{userRecode[item].mmr}</div>
+                      <div style={{ fontWeight: "bold", fontSize: "20px" }}>2200</div>
                     </div>
                     <div className='fifth'>
                       <div>Route</div>
                       <div style={{ fontSize: "13px" }}><a href='#' style={{ textDecoration: "none", backgroundColor: "none", color: "white" }}>567655</a></div>
                     </div>
                     <div className='sixth'>
-                      <div><img src={`${process.env.PUBLIC_URL}${userRecode[item].itemImage.WeaponImg}`} /></div>
-                      <div><img src={`${process.env.PUBLIC_URL}${userRecode[item].itemImage.Clothes}`} /></div>
-                      <div><img src={`${process.env.PUBLIC_URL}${userRecode[item].itemImage.Head}`} /></div>
-                      <div><img src={`${process.env.PUBLIC_URL}${userRecode[item].itemImage.Arm}`} /></div>
-                      <div><img src={`${process.env.PUBLIC_URL}${userRecode[item].itemImage.Leg}`} /></div>
-                      <div><img src={`${process.env.PUBLIC_URL}${userRecode[item].itemImage.Accessories}`} /></div>
+                      <div><img src={`${process.env.PUBLIC_URL}/image/Item/Weapon/ItemIcon_117501_Agni.png`} /></div>
+                      <div><img src={`${process.env.PUBLIC_URL}/image/Item/Amor/ItemIcon_202406_Rocker'sJacket.png`} /></div>
+                      <div><img src={`${process.env.PUBLIC_URL}/image/Item/Amor/ItemIcon_205503_Kundala.png`} /></div>
+                      <div><img src={`${process.env.PUBLIC_URL}/image/Item/Amor/ItemIcon_205213_MarksmanHandbook.png`} /></div>
+                      <div><img src={`${process.env.PUBLIC_URL}/image/Item/Amor/ItemIcon_204410_GlacialShoes.png`} /></div>
+                      <div><img src={`${process.env.PUBLIC_URL}/image/Item/Amor/ItemIcon_202501_Kabana.png`} /></div>
                     </div>
                     <div className='seventh'>
                       {/* <button onClick={(e) => handleClickOpen(e, index)}></button> */}
                     </div>
                   </div>
-                  {clickButton === true && index === clickIndex && (
+                  {/* {clickButton === true (
                     <div style={{ position: "relative", display: "block" }}>
                       <div className={clickButton ? 'add_gameLog' : 'addgameLog'} style={{ width: "800px", height: "110px", backgroundColor: "#474747" }}>
                         <Log_Detail show={nickname} />
                       </div>
                     </div>
-                  )}
+                  )} */}
                 </div>
-              ))}
+                <>
+                <div className='user'>
+                    <div className='first'>
+                      {/* {userRecode[item].ranking === 1 &&
+                        <>
+                          <div style={{ fontWeight: "bold", fontSize: "20px", color: "yellow" }}>#{userRecode[item].ranking}</div>
+                        </>
+                      }
+                      {userRecode[item].ranking === 2 &&
+                        <>
+                          <div style={{ fontWeight: "bold", fontSize: "20px", color: "orange" }}>#{userRecode[item].ranking}</div>
+                        </>
+                      }
+                      {userRecode[item].ranking === 3 &&
+                        <>
+                          <div style={{ fontWeight: "bold", fontSize: "20px", color: "skyblue" }}>#{userRecode[item].ranking}</div>
+                        </>
+                      } */}
+                 
+                        <>
+                          <div style={{ fontWeight: "bold", fontSize: "20px", color: "silver" }}>#4</div>
+                        </>
+
+                      <div>Solo</div>
+                      <div>6시간 전</div>
+                    </div>
+                    <div className='second'>
+                      <img className='char_img' src={`${process.env.PUBLIC_URL}/image/Char/icon/Yuki.png`} />
+                      <img className='char_wephon' src={`${process.env.PUBLIC_URL}/image/item/Weapon/ItemIcon_118403_Tac-50.png`} />
+                      <div className='charLevel'>17</div>
+                    </div>
+                    <div style={{ display: "block", width: "70px" }}>
+                      <img className='ability' src={require("../image/Ability/Havoc/Frailty Infliction.png")} />
+                      <img className='sub_ability' src={require("../image/Ability/Fortification/Diamond Shard.png")} />
+                    </div>
+                    <div className='third'>
+                      <div style={{ fontSize: "15px", textAlign: "left !important", marginBottom: "-4px" }}>K/A/H</div>
+                      <div className='user_kah'>3 /6 / 23</div>
+                    </div>
+                    <div className='forth'>
+                      <div style={{ marginBottom: "-4px" }}>MMR</div>
+                      <div style={{ fontWeight: "bold", fontSize: "20px" }}>2200</div>
+                    </div>
+                    <div className='fifth'>
+                      <div>Route</div>
+                      <div style={{ fontSize: "13px" }}><a href='#' style={{ textDecoration: "none", backgroundColor: "none", color: "white" }}>567655</a></div>
+                    </div>
+                    <div className='sixth'>
+                      <div><img src={`${process.env.PUBLIC_URL}/image/Item/Weapon/ItemIcon_117501_Agni.png`} /></div>
+                      <div><img src={`${process.env.PUBLIC_URL}/image/Item/Amor/ItemIcon_202406_Rocker'sJacket.png`} /></div>
+                      <div><img src={`${process.env.PUBLIC_URL}/image/Item/Amor/ItemIcon_205503_Kundala.png`} /></div>
+                      <div><img src={`${process.env.PUBLIC_URL}/image/Item/Amor/ItemIcon_205213_MarksmanHandbook.png`} /></div>
+                      <div><img src={`${process.env.PUBLIC_URL}/image/Item/Amor/ItemIcon_204410_GlacialShoes.png`} /></div>
+                      <div><img src={`${process.env.PUBLIC_URL}/image/Item/Amor/ItemIcon_202501_Kabana.png`} /></div>
+                    </div>
+                    <div className='seventh'>
+                      {/* <button onClick={(e) => handleClickOpen(e, index)}></button> */}
+                    </div>
+                  </div>
+                  {/* {clickButton === true (
+                    <div style={{ position: "relative", display: "block" }}>
+                      <div className={clickButton ? 'add_gameLog' : 'addgameLog'} style={{ width: "800px", height: "110px", backgroundColor: "#474747" }}>
+                        <Log_Detail show={nickname} />
+                      </div>
+                    </div>
+                  )} */}
+                
+                </>
             </div>
           </div>
+       
         </>
+       
       ) : (
         <div>
           <ErrorPage />
         </div>
       )
       }
+      <>
+      
+      </>
     </div>
   )
 }

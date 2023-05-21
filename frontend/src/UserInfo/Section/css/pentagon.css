@@ -21,15 +21,16 @@
     font-weight: bold;
 }
 .text_kill , .text_test{
-    width: 130px;
+    width: 80px;
     position: absolute;
     left: 0px ;
     top: 25px;
     color: #F4EFEA;
+    text-align: center;
 }
 
 .text_kill{
-    left: 15px;
+    left: 5px;
 }
 .text_demage, .text_mastery{
     width: 130px;

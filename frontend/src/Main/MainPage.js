@@ -44,15 +44,7 @@ function MainPage() {
     
     return (
         <div className='page_wrapper'>
-                <div className='event_Logo'>
-                    <img src={event_logo} />
-                </div>
-                <form onKeyPress={handleEnterInput}>
-                    <div className='header'>
-                        <input placeholder='실험체 검색' onChange={handleInputChange} value={nickName} />
-                        <button onClick={(e) => handleUserInfoClick(e)}>검색</button>
-                    </div>
-                </form>
+               
         </div>
     )
 }

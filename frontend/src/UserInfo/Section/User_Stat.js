@@ -127,18 +127,18 @@ function User_Stat({useData,name , infoTier}) {
                 </Form.Select>
         </div>
         <div className='img_Box'>
-          <img src={testData.mainTireImg} />
+          <img src={process.env.PUBLIC_URL + '/image/Tier/Platinum.png'} />
         </div>
-        <img className='char' src={`${process.env.PUBLIC_URL}${testData.mainCharImg}`} />
+        <img className='char' src={`${process.env.PUBLIC_URL}/image/Char/Full/charhalf_028_Sua.png`} />
         <div className='avg_Info' style={{position:"relative",top:""}}>
           <div style={{marginBottom:"15px" ,width:"100%"}}>
             <div>
-              {name}
+              김밥님
             </div>
             <div>
             { selectTier === "1" && (
               <>
-                <div>{testData.soloTier}LP</div>
+                <div>32 LP</div>
               </>
             )}
             {testData && selectTier === "2" && (
@@ -180,7 +180,7 @@ function User_Stat({useData,name , infoTier}) {
           <div>
             평균 순위
             <span className='info_log'>
-              #{testData.averageRanking}
+              # 3.6
             </span>
             <div className='gameBar'>
               <div style={{ width: "50%", height: "8px", backgroundColor: "rgb(070,163,210)" ,borderRadius: "50px" }}>
@@ -192,10 +192,10 @@ function User_Stat({useData,name , infoTier}) {
           <div>
             평균 킬
             <span className='info_log'>
-              {testData.averageKills} Kills
+             4.2 Kills
             </span>
             <div className='gameBar'>
-              <div style={{ width: "100%", height: "8px", backgroundColor: "rgb(251,194,044)", borderRadius: "50px" }}>
+              <div style={{ width: "60%", height: "8px", backgroundColor: "rgb(251,194,044)", borderRadius: "50px" }}>
 
               </div>
             </div>
@@ -203,7 +203,7 @@ function User_Stat({useData,name , infoTier}) {
           <div>
             평균 데미지
             <span className='info_log'>
-              {testData.averageDeal}
+              14,867
             </span>
             <div className='gameBar'>
               <div style={{ width: "60%", height: "8px", backgroundColor: "rgb(070,163,210)" ,borderRadius: "50px" }}>

@@ -8,11 +8,11 @@ function Pentagon({ name, infoTier, dataUser , usertier }) {
     const [masteryTemp, setMasteryTemp] = useState("")
     const [testTemp, setTestTemp] = useState("")
 
-    const [firRank, setFirRank] = useState("")
-    const [senRank, setSenRank] = useState("")
-    const [thiRank, setThiRank] = useState("")
-    const [forRank, setForRank] = useState("")
-    const [fifRank, setFifRank] = useState("")
+    const [firRank, setFirRank] = useState("B")
+    const [senRank, setSenRank] = useState("C")
+    const [thiRank, setThiRank] = useState("A")
+    const [forRank, setForRank] = useState("A")
+    const [fifRank, setFifRank] = useState("A")
 
     //생존시간 , 판수 , 딜량 , 랭크
     // 등수 
@@ -273,7 +273,7 @@ function Pentagon({ name, infoTier, dataUser , usertier }) {
                     </div>
                     <div className='rank_kill'>
                         <span className='rank'>{senRank}</span>
-                        <span className='text_kill'>평균 킬</span>
+                        <span className='text_kill'>킬</span>
                     </div>
                     <div className='rank_demage'>
                         <span className='rank'>{thiRank}</span>
@@ -285,7 +285,7 @@ function Pentagon({ name, infoTier, dataUser , usertier }) {
                     </div>
                     <div className='rank_test'>
                         <span className='rank'>{fifRank}</span>
-                        <span className='text_test'>평균 헌트</span>
+                        <span className='text_test'>헌트</span>
                     </div>
                 </>
             )}
@@ -294,12 +294,12 @@ function Pentagon({ name, infoTier, dataUser , usertier }) {
                 <div className='colume'>
                     <div className='test_' style={{ backgroundColor: "orange" }}></div>
                     <div>
-                    <span >{usertier}</span>
+                    <span >Platinum</span>
                     </div>
                 </div>
                 <div className='colume'>
                     <div className='test_' style={{ backgroundColor: "gray" }}></div>
-                    <span style={{ width: "130px" }}>{name}</span>
+                    <span style={{ width: "130px" }}>김밥님</span>
                 </div>
             </div>
 
@@ -345,11 +345,11 @@ function Pentagon({ name, infoTier, dataUser , usertier }) {
                     <circle r="67.5px" opacity="0.2" transform="translate(115,115)" ></circle>
                     <circle r="90px" opacity="0.4" transform="translate(115,115)" ></circle>
 
-                    <line transform="translate(115,115)" x="0" y="0" x2="0" y2="-90" stroke='white' />
-                    <line transform="translate(115,115)" x2="85.5" y2="-28" x="0" y="0" stroke='white' ></line>
-                    <line transform="translate(115,115)" x2="53" y2="73" x="0" y="0" stroke='white'></line>
-                    <line transform="translate(115,115)" x2="-53" y2="73" x="0" y="0" stroke='white' ></line>
-                    <line transform="translate(115,115)" x2="-85.5" y2="-27.5" x="0" y="0" stroke='white' ></line>
+                    <line transform="translate(115,115)" x="0" y="0" x2="0" y2="-90" stroke='#bebebe' />
+                    <line transform="translate(115,115)" x2="85.5" y2="-28" x="0" y="0" stroke='#bebebe' ></line>
+                    <line transform="translate(115,115)" x2="53" y2="73" x="0" y="0" stroke='#bebebe'></line>
+                    <line transform="translate(115,115)" x2="-53" y2="73" x="0" y="0" stroke='#bebebe' ></line>
+                    <line transform="translate(115,115)" x2="-85.5" y2="-27.5" x="0" y="0" stroke='#bebebe' ></line>
 
                     <path d="M 0,-45 L42,-13 L26,36 L-26,36 L-42,-13.5 Z" stroke='orange' fill='none' transform="translate(115,115)"></path>
                     <path d={"M " + survTemp + " L" + killTemp + " " + demageTemp + "   " + masteryTemp + "   " + testTemp + " Z"} stroke='aqua' fill='yellow' opacity="0.4" transform="translate(115,115)"></path>

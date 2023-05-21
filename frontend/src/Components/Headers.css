@@ -1,5 +1,5 @@
 .top_logo{
-    background-color: #2d2d2f;
+    background-color: #50586C;
 }
 
 .img_logo img{
@@ -43,11 +43,11 @@
     object-fit: contain;
     transform: scale(0.5);
     position: absolute;
-    background-color: #c2cacd;
+    background-color: #DCE2F0;
     border-radius: 12px;
     top: -3px;
     left: 167px;
     margin-left: 110px;
-
 }
+
 
