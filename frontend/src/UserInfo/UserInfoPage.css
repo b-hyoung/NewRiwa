@@ -55,15 +55,29 @@
 
 .pentagon_content{
     margin: 0 auto;
-    width: 1000px;
+    width: 1050px;
     height: 400px;
-    border: 1px solid rgb(146, 146, 146);
+    border: 1px solid rgb(78, 78, 78);
+    border-radius: 0.7;
     color: white;
     text-align: left;
-    margin-top: 60px;
-    margin-bottom: 50px;
+    margin-top: 30px;
+    margin-bottom: 30px;
     padding-left: 100px;
+    position: relative;
+    
 }
+.pentagon_content::before {
+    width: 100%;
+    height: 100%;
+    content: "";
+    background-image: url("../image/Background/Docks.jpg");
+    background-size: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0.3;
+  }
 
 .pentagon_content .user_Stat{
     width: 250px;
@@ -217,7 +231,7 @@
     width: 48px;
     height: 31px;
     margin-right: 6px;
-    background-color: #5A467E;
+    background-color: #a66c10;
     border :solid 1px #7f63b3;
 }
 

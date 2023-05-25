@@ -223,7 +223,7 @@ function UserinfoPage() {
                     </div>
                     <div className='second'>
                       <img className='char_img' src={`${process.env.PUBLIC_URL}/image/Char/icon/Yuki.png`} />
-                      <img className='char_wephon' src={`${process.env.PUBLIC_URL}/image/item/Weapon/ItemIcon_118403_Tac-50.png`} />
+                      <img className='char_wephon' src={`${process.env.PUBLIC_URL}/image/WeaponMastery/02. Two-Handed Sword.png`} />
                       <div className='charLevel'>17</div>
                     </div>
                     <div style={{ display: "block", width: "70px" }}>
@@ -232,7 +232,7 @@ function UserinfoPage() {
                     </div>
                     <div className='third'>
                       <div style={{ fontSize: "15px", textAlign: "left !important", marginBottom: "-4px" }}>K/A/H</div>
-                      <div className='user_kah'>3 /6 / 23</div>
+                      <div className='user_kah'>3 / 6 / 23</div>
                     </div>
                     <div className='forth'>
                       <div style={{ marginBottom: "-4px" }}>MMR</div>
@@ -263,6 +263,10 @@ function UserinfoPage() {
                   )} */}
                 </div>
                 <>
+
+
+
+
                 <div className='user'>
                     <div className='first'>
                       {/* {userRecode[item].ranking === 1 &&
@@ -282,40 +286,40 @@ function UserinfoPage() {
                       } */}
                  
                         <>
-                          <div style={{ fontWeight: "bold", fontSize: "20px", color: "silver" }}>#4</div>
+                          <div style={{ fontWeight: "bold", fontSize: "20px", color: "silver" }}>#7</div>
                         </>
 
-                      <div>Solo</div>
-                      <div>6시간 전</div>
+                      <div>Duo</div>
+                      <div>8시간 전</div>
                     </div>
                     <div className='second'>
-                      <img className='char_img' src={`${process.env.PUBLIC_URL}/image/Char/icon/Yuki.png`} />
-                      <img className='char_wephon' src={`${process.env.PUBLIC_URL}/image/item/Weapon/ItemIcon_118403_Tac-50.png`} />
-                      <div className='charLevel'>17</div>
+                      <img className='char_img' src={`${process.env.PUBLIC_URL}/image/Char/icon/Shoichi.png`} />
+                      <img className='char_wephon' src={`${process.env.PUBLIC_URL}/image/WeaponMastery/Nunchaku.png`} />
+                      <div className='charLevel'>13</div>
                     </div>
                     <div style={{ display: "block", width: "70px" }}>
-                      <img className='ability' src={require("../image/Ability/Havoc/Frailty Infliction.png")} />
-                      <img className='sub_ability' src={require("../image/Ability/Fortification/Diamond Shard.png")} />
+                      <img className='ability' src={require("../image/Ability/Havoc/Spirit Culling.png")} />
+                      <img className='sub_ability' src={require("../image/Ability/Fortification/Cavalcade.png")} />
                     </div>
                     <div className='third'>
                       <div style={{ fontSize: "15px", textAlign: "left !important", marginBottom: "-4px" }}>K/A/H</div>
-                      <div className='user_kah'>3 /6 / 23</div>
+                      <div className='user_kah'>6 / 0 / 30</div>
                     </div>
                     <div className='forth'>
                       <div style={{ marginBottom: "-4px" }}>MMR</div>
-                      <div style={{ fontWeight: "bold", fontSize: "20px" }}>2200</div>
+                      <div style={{ fontWeight: "bold", fontSize: "20px" }}>2173</div>
                     </div>
                     <div className='fifth'>
                       <div>Route</div>
-                      <div style={{ fontSize: "13px" }}><a href='#' style={{ textDecoration: "none", backgroundColor: "none", color: "white" }}>567655</a></div>
+                      <div style={{ fontSize: "13px" }}><a href='#' style={{ textDecoration: "none", backgroundColor: "none", color: "white" }}>137579</a></div>
                     </div>
                     <div className='sixth'>
-                      <div><img src={`${process.env.PUBLIC_URL}/image/Item/Weapon/ItemIcon_117501_Agni.png`} /></div>
-                      <div><img src={`${process.env.PUBLIC_URL}/image/Item/Amor/ItemIcon_202406_Rocker'sJacket.png`} /></div>
+                      <div><img src={`${process.env.PUBLIC_URL}/image/Item/Weapon/ItemIcon_121402_StairwaytoHeaven.png`} /></div>
+                      <div><img src={`${process.env.PUBLIC_URL}/image/Item/Amor/ItemIcon_201414_Diadem.png`} /></div>
                       <div><img src={`${process.env.PUBLIC_URL}/image/Item/Amor/ItemIcon_205503_Kundala.png`} /></div>
-                      <div><img src={`${process.env.PUBLIC_URL}/image/Item/Amor/ItemIcon_205213_MarksmanHandbook.png`} /></div>
+                      <div><img src={`${process.env.PUBLIC_URL}/image/Item/Amor/ItemIcon_203501_BraceletofSkadi.png`} /></div>
                       <div><img src={`${process.env.PUBLIC_URL}/image/Item/Amor/ItemIcon_204410_GlacialShoes.png`} /></div>
-                      <div><img src={`${process.env.PUBLIC_URL}/image/Item/Amor/ItemIcon_202501_Kabana.png`} /></div>
+                      <div><img src={`${process.env.PUBLIC_URL}/image/Item/Amor/ItemIcon_205501_EmeraldTablet.png`} /></div>
                     </div>
                     <div className='seventh'>
                       {/* <button onClick={(e) => handleClickOpen(e, index)}></button> */}
@@ -328,12 +332,17 @@ function UserinfoPage() {
                       </div>
                     </div>
                   )} */}
+                <>
                 
+                </>
                 </>
             </div>
           </div>
-       
+        <>
+        
+        </> 
         </>
+        
        
       ) : (
         <div>
