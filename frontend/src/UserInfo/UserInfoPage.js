@@ -14,7 +14,6 @@ import Log_Detail from './Section/Log_Detail'
 
 function UserinfoPage() {
 
-  let ar = "aa"
   const { nickname } = useParams();
   const [userData, setUserData] = useState([])
   const [userRecode, setUserRecode] = useState("")
@@ -28,7 +27,6 @@ function UserinfoPage() {
   const [bool , setBool] = useState(true)
   const [bool2 , setBool2] = useState(true)
 
-  const publicUrl = process.env.PUBLIC_URL;
 
   useEffect(() => {
     getUserGame()
