@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react'
 import './css/pentagon.css'
 
 function Pentagon({ name, infoTier, dataUser , usertier }) {
-    const [survTemp, setServTemp] = useState("")
-    const [killTemp, setKillTemp] = useState("")
-    const [demageTemp, setDemageTemp] = useState("")
-    const [masteryTemp, setMasteryTemp] = useState("")
-    const [testTemp, setTestTemp] = useState("")
+    const [survTemp, setServTemp] = useState("B")
+    const [killTemp, setKillTemp] = useState("C")
+    const [demageTemp, setDemageTemp] = useState("A")
+    const [masteryTemp, setMasteryTemp] = useState("A")
+    const [testTemp, setTestTemp] = useState("A")
 
     const [firRank, setFirRank] = useState("B")
     const [senRank, setSenRank] = useState("C")
@@ -337,7 +337,6 @@ function Pentagon({ name, infoTier, dataUser , usertier }) {
                     </div>
                 </div>
                 */}
-
             <svg>
                 <g>
                     <circle r="22.5px" opacity="0.2" transform="translate(115,115)" ></circle>

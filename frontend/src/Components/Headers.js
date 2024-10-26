@@ -50,7 +50,7 @@ function Headers() {
 
   return (
     <Navbar className="top_logo" collapseOnSelect expand="lg" variant="dark">
-      <Container style={{height : 60 , fontSize : 18}}>
+      <Container style={{height : '6vh' , fontSize : 18}}>
         <Navbar.Brand className="img_logo" onClick={handleMainClick}><img src={Eriwa_Logo} /></Navbar.Brand>
         <Navbar.Toggle   aria-controls="responsive-navbar-nav" style={{width:"50px",height:"40px",marginTop:"-20px"}} />
         <Navbar.Collapse id="responsive-navbar-nav">

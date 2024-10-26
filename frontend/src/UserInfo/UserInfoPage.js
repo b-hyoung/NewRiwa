@@ -229,16 +229,16 @@ function UserinfoPage() {
                       <img className='sub_ability' src={require("../image/Ability/Fortification/Diamond Shard.png")} />
                     </div>
                     <div className='third'>
-                      <div style={{ fontSize: "15px", textAlign: "left !important", marginBottom: "-4px" }}>K/A/H</div>
+                      <div style={{ fontWeight:"300", fontSize: "15px", textAlign: "left !important", marginBottom: "-4px" }}>K/A/H</div>
                       <div className='user_kah'>3 / 6 / 23</div>
                     </div>
                     <div className='forth'>
-                      <div style={{ marginBottom: "-4px" }}>MMR</div>
+                      <div style={{ fontWeight:"300" ,  marginBottom: "-4px" }}>MMR</div>
                       <div style={{ fontWeight: "bold", fontSize: "20px" }}>2200</div>
                     </div>
                     <div className='fifth'>
-                      <div>Route</div>
-                      <div style={{ fontSize: "13px" }}><a href='#' style={{ textDecoration: "none", backgroundColor: "none", color: "white" }}>567655</a></div>
+                      <div style={{fontWeight:"300"}}>Route</div>
+                      <div style={{ fontSize: "18px", fontWeight:"400" }}><a href='#' style={{ textDecoration: "none", backgroundColor: "none", color: "white" }}>567655</a></div>
                     </div>
                     <div className='sixth'>
                       <div><img src={`${process.env.PUBLIC_URL}/image/Item/Weapon/ItemIcon_117501_Agni.png`} /></div>
@@ -300,16 +300,16 @@ function UserinfoPage() {
                       <img className='sub_ability' src={require("../image/Ability/Fortification/Cavalcade.png")} />
                     </div>
                     <div className='third'>
-                      <div style={{ fontSize: "15px", textAlign: "left !important", marginBottom: "-4px" }}>K/A/H</div>
+                      <div style={{fontWeight:"300" , fontSize: "15px", textAlign: "left !important", marginBottom: "-4px" }}>K/A/H</div>
                       <div className='user_kah'>6 / 0 / 30</div>
                     </div>
                     <div className='forth'>
-                      <div style={{ marginBottom: "-4px" }}>MMR</div>
+                      <div style={{ marginBottom: "-4px" , fontWeight:"300" }}>MMR</div>
                       <div style={{ fontWeight: "bold", fontSize: "20px" }}>2173</div>
                     </div>
                     <div className='fifth'>
-                      <div>Route</div>
-                      <div style={{ fontSize: "13px" }}><a href='#' style={{ textDecoration: "none", backgroundColor: "none", color: "white" }}>137579</a></div>
+                      <div style={{fontWeight:"300"}}>Route</div>
+                      <div style={{ fontSize: "18px", fontWeight:"400" }}><a href='#' style={{ textDecoration: "none", backgroundColor: "none", color: "white" }}>137579</a></div>
                     </div>
                     <div className='sixth'>
                       <div><img src={`${process.env.PUBLIC_URL}/image/Item/Weapon/ItemIcon_121402_StairwaytoHeaven.png`} /></div>

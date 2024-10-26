@@ -138,7 +138,7 @@ function User_Stat({useData,name , infoTier}) {
             <div>
             { selectTier === "1" && (
               <>
-                <div>32 LP</div>
+                <div>Platinum ll - 32 LP</div>
               </>
             )}
             {testData && selectTier === "2" && (

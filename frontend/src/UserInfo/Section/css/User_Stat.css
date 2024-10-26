@@ -10,7 +10,7 @@
     height: 30px;
     position: absolute;
     top: -55px;
-    left: 370px;
+    left: 415px;
     font-size: 13px;
     background-color: #505050;
     padding-left: 10px;
@@ -73,7 +73,7 @@ span.info_log{
 
 
 .userTier .avg_Info .gameBar{
-    width: 100%;
+    width: 180px;
     height: 8px;
     background-color: gray;
     border-radius: 12px;

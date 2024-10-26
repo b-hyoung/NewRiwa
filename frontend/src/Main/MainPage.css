@@ -1,12 +1,28 @@
 .page_wrapper{
-    position: absolute;
-    width: 100%;
-    height: 1077px;
-    background: url(../image/Background/ER_Main.png)  center center / cover no-repeat;
-    display: inline-block;
+    height: 94vh;
+    
 
 }
-
+.MP_Box{
+    height: 94vh;
+    display: flex;
+    align-items: center;
+}
+.MP_NameBox {
+    margin: 0 auto;
+    width: 670px;
+    height: 7vh;
+    border: 3px solid black;
+    border-radius: 15px;
+    color: black;
+    display: grid;
+    align-items: center;
+}
+.MP_Name{
+    font-size: 22px;
+    margin-left: 2vw;
+    
+}
 .event_Logo{
     width: 500px;
     height:250px;
