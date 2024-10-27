@@ -71,42 +71,44 @@ function UserinfoPage() {
     }
   }
 
+  //유저 게임 로그 받아오기
   const getUserGame = () => {
-    try {
-      axios.get(
-        'http://127.0.0.1:8000/api/UserGameRecord/' + nickname + '/')
-        .then(response => {
-          console.log(response)
-          setUserRecode(response.data); 
-          setBool(true)
-        })
-        .catch(error => {
-          console.error(error);
-          gameNotFount()
-        })
-      } catch (error) {
-        console.error(error);
-        gameNotFount()
-    }
+    // try {
+    //   axios.get(
+    //     'http://127.0.0.1:8000/api/UserGameRecord/' + nickname + '/')
+    //     .then(response => {
+    //       console.log(response)
+    //       setUserRecode(response.data); 
+    //       setBool(true)
+    //     })
+    //     .catch(error => {
+    //       console.error(error);
+    //       gameNotFount()
+    //     })
+    //   } catch (error) {
+    //     console.error(error);
+    //     gameNotFount()
+    // }
   }
 
+  //유저 이름 받아오기
   const getUserInfo = () => {
-    try {
-      axios.get(
-        'http://127.0.0.1:8000/api/UserInfo/' + nickname + '/'
+    // try {
+    //   axios.get(
+    //     'http://127.0.0.1:8000/api/UserInfo/' + nickname + '/'
 
-      )
-        .then(response => {
-          console.log(response)
-          setUserData(response.data)
-          setBool2(true)
-        })
-        .catch(error => {
-          userNotFount();
-        })
-    } catch (error) {
-      console.error(error);
-    }
+    //   )
+    //     .then(response => {
+    //       console.log(response)
+    //       setUserData(response.data)
+    //       setBool2(true)
+    //     })
+    //     .catch(error => {
+    //       userNotFount();
+    //     })
+    // } catch (error) {
+    //   console.error(error);
+    // }
   }
 
   const getTierInfo = () => {

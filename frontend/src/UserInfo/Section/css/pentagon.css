@@ -9,10 +9,12 @@
 }
 
 .pentagon svg{
-    transform: scale(1.5);
+    transform: scale(1.5m);
+    width: 100%;
+    height : 100%;
 }
 .pentagon svg g circle{
-    size: 180;
+    size: 300;
     stroke: white;
     fill: none;
 

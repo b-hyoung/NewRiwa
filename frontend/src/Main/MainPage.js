@@ -46,6 +46,7 @@ function MainPage() {
         <div className='page_wrapper'>
             <div className='MP_Box'>
                 <div className='MP_NameBox'>
+                    
                     <div className='MP_Name'>김밥이 너무 맛있어요</div>
                 </div>
             </div>

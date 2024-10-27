@@ -38,67 +38,71 @@ function User_Stat({useData,name , infoTier}) {
   },[selectTier])
 
   const getSelTier = () =>{
-    try {
-      axios.get(
-        'http://127.0.0.1:8000/api/UserInfo/'+name+'/?matchingTeamMode='+selectTier
-        , {
-        },
-      )
-        .then(response => {
-          console.log(response.data)
-          setTestData(response.data)
-        })
-        .catch(response => {
+    // try {
+    //   axios.get(
+    //     'http://127.0.0.1:8000/api/UserInfo/'+name+'/?matchingTeamMode='+selectTier
+    //     , {
+    //     },
+    //   )
+    //     .then(response => {
+    //       console.log(response.data)
+    //       setTestData(response.data)
+    //     })
+    //     .catch(response => {
           
-          console.log("이거에러임? 222")
-        })
-    } catch (error) {
-      console.log(error)
-      console.log("이거에러임?")
-    }
+    //       console.log("이거에러임? 222")
+    //     })
+    // } catch (error) {
+    //   console.log(error)
+    //   console.log("이거에러임?")
+    // }
   }
-
+//솔로 정보불러오기
   const postTeamMode1 = () => {
-    try{
-      axios.post(
-        'http://127.0.0.1:8000/api/UserInfo/?matchingTeamMode=1',
-        {
-          nickname:name
-        },
-      ).then(
-        setBoole(false)
-      )
-    }catch(error){
+    // try{
+    //   axios.post(
+    //     'http://127.0.0.1:8000/api/UserInfo/?matchingTeamMode=1',
+    //     {
+    //       nickname:name
+    //     },
+    //   ).then(
+    //     setBoole(false)
+    //   )
+    // }catch(error){
 
-    }
+    // }
   }
+
+  //듀오 정보 불러오기
   const postTeamMode2 = () => {
-    try{
-      axios.post(
-        'http://127.0.0.1:8000/api/UserInfo/?matchingTeamMode=2',
-        {
-          nickname:name
-        },
-      ).then(
-        setBoole(false)
-      )
-    }catch(error){
+    // try{
+    //   axios.post(
+    //     'http://127.0.0.1:8000/api/UserInfo/?matchingTeamMode=2',
+    //     {
+    //       nickname:name
+    //     },
+    //   ).then(
+    //     setBoole(false)
+    //   )
+    // }catch(error){
 
-    }
+    // }
   }
-  const postTeamMode3 = () => {
-    try{
-      axios.post(
-        'http://127.0.0.1:8000/api/UserInfo/?matchingTeamMode=3',
-        {
-          nickname:name
-        },
-      ).then(
-        setBoole(false)
-      )
-    }catch(error){
 
-    }
+  //스쿼드 정보 불러오기
+  const postTeamMode3 = () => {
+    // try{
+    //   axios.post(
+    //     'http://127.0.0.1:8000/api/UserInfo/?matchingTeamMode=3',
+    //     {
+    //       nickname:name
+    //     },
+    //   ).then(
+    //     setBoole(false)
+    //   )
+    // }catch(error){
+
+    // }
   }
 
   // const getSelTier = () =>{
