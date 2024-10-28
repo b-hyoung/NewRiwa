@@ -351,8 +351,8 @@ function Pentagon({ name, infoTier, dataUser , usertier }) {
                     <line transform="translate(115,115)" x2="-53" y2="73" x="0" y="0" stroke='#bebebe' ></line>
                     <line transform="translate(115,115)" x2="-85.5" y2="-27.5" x="0" y="0" stroke='#bebebe' ></line>
 
-                    <path d="M 0,-45 L42,-13 L26,36 L-26,36 L-42,-13.5 Z"  stroke='orange' fill='none' transform="translate(115,115)"></path>
-                    <path d={"M " + survTemp + " L" + killTemp + " L" + demageTemp + " L" + masteryTemp + " L" + testTemp + " Z"} stroke='aqua' fill='yellow' opacity="0.4" transform="translate(115,115)"></path>
+                    <path d="M 0,-45 L42,-13 L26,36 L-26,36 L-42,-13.5 Z"  stroke='rgb(92,166,196)' fill='none' transform="translate(115,115)"></path>
+                    <path d={"M " + survTemp + " L" + killTemp + " L" + demageTemp + " L" + masteryTemp + " L" + testTemp + " Z"} stroke='rgb(119, 126, 88)' fill='rgb(161, 239, 255)' opacity="0.4" transform="translate(115,115)"></path>
                 </g>
             </svg>
             {console.log(survTemp)}

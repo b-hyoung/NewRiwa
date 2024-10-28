@@ -14,7 +14,7 @@ function Headers() {
   const navigate = useNavigate("");
 
   const handleChangeInput = (e) => {
-    setUserInput(e.target.value)
+      setUserInput(e.target.value)
   }
 
   // const getUserGame = () => {
@@ -38,15 +38,19 @@ function Headers() {
   }
 
   const handleEnterInput = (e) => {
-    if (e.key === 'Enter') {
+    if(e.value===undefined){
+      alert("플레이어 이름을 적어주세요")
+    }else{
+     if (e.key === 'Enter') {
         handleUserInfoClick();
     }
+  }
 }
 
   const handleUserInfoClick = (e) => {
-    navigate(`/userInfo/${nickName}`)
+      navigate(`/userInfo/${nickName}`)
+    }
                 
-}
 
   return (
     <Navbar className="top_logo" collapseOnSelect expand="lg" variant="dark">
