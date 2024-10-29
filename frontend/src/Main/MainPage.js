@@ -39,8 +39,7 @@ function MainPage() {
             } catch (error) {
                 console.error("에러가 이건가?" + error);
             }
-        }
-    }
+            }    }
     
     return (
         <div className='page_wrapper'>
