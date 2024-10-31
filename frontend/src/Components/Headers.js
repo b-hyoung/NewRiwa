@@ -44,9 +44,11 @@ function Headers() {
 
   const handleUserInfoClick = (e) => {
       if(nickName.length > 0){
+        sessionStorage.setItem("NameHistory",nickName)
         navigate(`/userInfo/${nickName}`)
       }else{
         alert("플레이어 이름을 입력해주세요c")
+        sessionStorage.removeItem("NameHistory")
       }
     }
                 
@@ -71,6 +73,7 @@ function Headers() {
             <Nav.Link href="#" className='searchForm'>
               <form onKeyPress={handleEnterInput}>
                 <input onChange={(e) => handleChangeInput(e)} value={nickName}  />
+                <h1>{sessionStorage.getItem("NameHistory",1)}</h1>
                 <img src={require("../image/Logo/EriwaLogo.png")} onClick={(e) => handleUserInfoClick(e)} />
               </form>
             </Nav.Link>
