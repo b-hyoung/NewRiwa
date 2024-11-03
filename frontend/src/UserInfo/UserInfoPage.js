@@ -263,10 +263,6 @@ function UserinfoPage() {
                   )} */}
                 </div>
                 <>
-
-
-
-
                 <div className='user'>
                     <div className='first'>
                       {/* {userRecode[item].ranking === 1 &&

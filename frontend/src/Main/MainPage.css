@@ -1,12 +1,13 @@
 .page_wrapper{
     height: 94vh;
-    
-
 }
 .MP_Box{
-    height: 94vh;
+    position: absolute;
     display: flex;
     align-items: center;
+    flex-direction: column;
+    top: 40%;
+    left: 30%;
 }
 .MP_NameBox {
     margin: 0 auto;
@@ -21,7 +22,10 @@
 .MP_Name{
     font-size: 22px;
     margin-left: 2vw;
-    
+}
+.MP_NameHistory{
+    width: 670px;
+    height: 300px;
 }
 .event_Logo{
     width: 500px;
