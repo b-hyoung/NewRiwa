@@ -10,7 +10,7 @@ function MainPage() {
     const [nickName, setNickName] = useState("")
     const [userData, setUserData] = useState([])
     const [history , setHistory] = useState(0)
-    const [historyArray , setHistoryArray] = useState([""])
+    const [historyArray , setHistoryArray] = useState([])
 
     const handleInputChange = (e) => {
         setNickName(e.target.value)
@@ -47,7 +47,12 @@ function MainPage() {
             }else{
             }
         }
-    
+
+    const handleClickDelete = (e) => {
+        alert(historyArray.slice(e))
+        historyArray.slice(e)
+        const newData = historyArray.filter(user => e !== e)
+    }    
     return (
         <div className='page_wrapper'>
             <div className='MP_Box'>
@@ -60,6 +65,7 @@ function MainPage() {
                         return(
                             <div>
                                 {item}
+                                <button onClick={(e) => handleClickDelete(index)}>X</button>
                             </div>
                         )
                     })}
