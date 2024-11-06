@@ -50,10 +50,16 @@ function MainPage() {
 
     const handleClickDelete = (e) => {
         let ary = [...historyArray]
-        ary[e] = historyArray.filter(user => e !== e)
-        console.log(historyArray)
-        console.log(e)
-        setHistoryArray(ary)
+        let ard = []
+        console.log(historyArray.lengthç)
+        for(let i = 0 ; i < historyArray.length; i++){
+            if(ary[i] === e){
+                ard[i] = ary.splice(i,1);
+                console.log(ard[i],"aa")
+            }
+        }
+        setHistoryArray(ard)
+        console.log(e,ary,ary.length)
     }    
     return (
         <div className='page_wrapper'>
@@ -66,10 +72,11 @@ function MainPage() {
                     {historyArray.map((item , index) => {
                         return(
                             <div>
-                                {item}
                                 {item !== "" &&  (
                                     <>
-                                    <button onClick={(e) => handleClickDelete(index)}>X</button>
+                                        {item}
+                                        <button onClick={(e) => handleClickDelete(index)}>X</button>
+                                    {console.log(item , "glloew")}
                                     </>
                                 )
                                 }
