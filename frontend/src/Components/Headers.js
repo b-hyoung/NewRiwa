@@ -73,7 +73,7 @@ function Headers() {
             <Nav.Link href="#" className='searchForm'>
               <form onKeyPress={handleEnterInput}>
                 <input onChange={(e) => handleChangeInput(e)} value={nickName}  />
-                <h1>{sessionStorage.getItem("NameHistory",1)}</h1>
+                {/* <h1>{sessionStorage.getItem("NameHistory",1)}</h1> */}
                 <img src={require("../image/Logo/EriwaLogo.png")} onClick={(e) => handleUserInfoClick(e)} />
               </form>
             </Nav.Link>
