@@ -22,7 +22,10 @@
 .MP_Name{
     font-size: 22px;
     margin-left: 2vw;
+    border: none;
+    outline: none;
 }
+
 .MP_NameHistory{
     width: 670px;
     height: 300px;

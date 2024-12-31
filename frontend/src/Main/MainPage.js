@@ -10,7 +10,7 @@ function MainPage() {
     const [nickName, setNickName] = useState("")
     const [reciveData, setReciveData] = useState(0)
     const [history , setHistory] = useState(0)
-    const [historyArray , setHistoryArray] = useState(["a","b","c","d"])
+    const [historyArray , setHistoryArray] = useState([])
 
     
     useEffect(() => {
@@ -34,8 +34,8 @@ function MainPage() {
 
     // 현재 서버가없어서 에러가 뜨는 상태 
     const handleUserInfoClick = (e) => {
+        console.log("입력 받았습니다")
         if (nickName.length > 0) {
-            e.preventDefault();
             // try {
             //     axios.post(
             //         'http://127.0.0.1:8000/api/UserInfo/',
@@ -53,16 +53,16 @@ function MainPage() {
             //     } catch (error) {
                 //         console.error("에러가 이건가?" + error);
                 //     }
-                if(historyArray.length === 0){
+                if(historyArray.length === 0 || historyArray.filter((user) => user === nickName).length === 0){
                     addUser()
-                }
-                else{
+                    console.log("gksrmfslr")
+                }else{
                     const newArray = [
                         ...historyArray.filter((user) => user === nickName),
                         ...historyArray.filter((user) => user !== nickName)
                     ]
                     setHistoryArray(newArray)
-                    setNickName("")
+                    console.log("a")
                 }
             }else{
                 alert("유저 이름을 입력해주세요")
@@ -79,9 +79,9 @@ function MainPage() {
         <div className='page_wrapper'>
             <div className='MP_Box'>
                 <div className='MP_NameBox'>
-                    <input className='MP_Name' onChange={(e)=> handleInputChange(e)} />
+                    <input className='MP_Name' onChange={(e)=> handleInputChange(e)} onKeyDown={handleEnterInput}/>
                 </div>
-                <button onClick={(e) => handleUserInfoClick(e)}>검색</button>
+                <button onClick={handleUserInfoClick}>검색</button>
                 <div className='MP_NameHistory'>
                     {historyArray.map((item , index) => {
                         return(
