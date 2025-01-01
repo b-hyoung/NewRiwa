@@ -8,14 +8,21 @@ import User_Stat from '../UserInfo/Section/User_Stat'
 function MainPage() {
     const navigate = useNavigate("");
     const [nickName, setNickName] = useState("")
-    const [reciveData, setReciveData] = useState(0)
-    const [history , setHistory] = useState(0)
-    const [historyArray , setHistoryArray] = useState([])
+    const [historyArray , setHistoryArray] = useState(["a"])
+    const [ax,setAX] = useState([])
 
     
     useEffect(() => {
+        if(JSON.parse(localStorage.getItem("historyName")) !== null){
+            getHistoryList()
+        }
+        //로컬 스토리지 네임 히스토리 지워버려
+        // localStorage.removeItem("historyName")
+    },[])
 
-    },[historyArray])
+    const getHistoryList = () => {
+        setHistoryArray(JSON.parse(localStorage.getItem("historyName")))
+    }
 
     const handleInputChange = (e) => {
         setNickName(e.target.value)
@@ -28,13 +35,11 @@ function MainPage() {
     }
 
     const addUser = (e) => {
-        setHistoryArray([...historyArray,nickName])
-        setHistory(history+1)
+        localStorage.setItem("historyName",JSON.stringify([...historyArray,nickName]))
     }
 
     // 현재 서버가없어서 에러가 뜨는 상태 
     const handleUserInfoClick = (e) => {
-        console.log("입력 받았습니다")
         if (nickName.length > 0) {
             // try {
             //     axios.post(
@@ -55,14 +60,15 @@ function MainPage() {
                 //     }
                 if(historyArray.length === 0 || historyArray.filter((user) => user === nickName).length === 0){
                     addUser()
-                    console.log("gksrmfslr")
+                    navigate(`/userInfo/${nickName}`)
                 }else{
                     const newArray = [
                         ...historyArray.filter((user) => user === nickName),
                         ...historyArray.filter((user) => user !== nickName)
                     ]
-                    setHistoryArray(newArray)
-                    console.log("a")
+                    localStorage.setItem("historyName",JSON.stringify(newArray))
+                    navigate(`/userInfo/${nickName}`)
+
                 }
             }else{
                 alert("유저 이름을 입력해주세요")
@@ -73,6 +79,7 @@ function MainPage() {
         let ary = [...historyArray]
         const result = ary.filter((user) => user !== DeleteUser);
         setHistoryArray(result)
+        localStorage.setItem("historyName",JSON.stringify(result))
         
     }    
     return (
