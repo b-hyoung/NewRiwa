@@ -38,7 +38,8 @@ function MainPage() {
         localStorage.setItem("historyName",JSON.stringify([...historyArray,nickName]))
     }
 
-    // 현재 서버가없어서 에러가 뜨는 상태 
+    // 현재 서버가없어서 에러가 뜨는 상태
+    //유저 닉네임 확인후 이동
     const handleUserInfoClick = (e) => {
         if (nickName.length > 0 && nickName.includes(" ") ===false) {
             // try {
@@ -78,6 +79,7 @@ function MainPage() {
             }
         }
 
+    //유저 히스토리 삭제
     const handleClickDelete = (DeleteUser) => {
         let ary = [...historyArray]
         const result = ary.filter((user) => user !== DeleteUser);
@@ -85,6 +87,7 @@ function MainPage() {
         localStorage.setItem("historyName",JSON.stringify(result))
         
     }    
+
     return (
         <div className='page_wrapper'>
             <div className='MP_Box'>
@@ -98,7 +101,7 @@ function MainPage() {
                             <div className='History_NameList'>
                                 {item !== "" &&  (
                                     <>
-                                    <span className='History_Name'>
+                                    <span className='History_Name' onClick={(e) => navigate(`/userInfo/${item}`)}>
                                         {item}
                                     </span>
                                         <button onClick={(e) => handleClickDelete(item)}>X</button>

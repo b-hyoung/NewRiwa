@@ -38,6 +38,7 @@
 }
 .History_NameList  .History_Name{
     font-size: 24px;
+    cursor: pointer;
 }
 .History_NameList button{
     border: none;
@@ -45,6 +46,7 @@
     background-color: white;
     font-size: 20px;
     margin-left: 50px;
+    opacity: 0.5;
 }
 /* 이름 박스*/
 
