@@ -40,7 +40,7 @@ function MainPage() {
 
     // 현재 서버가없어서 에러가 뜨는 상태 
     const handleUserInfoClick = (e) => {
-        if (nickName.length > 0) {
+        if (nickName.length > 0 && nickName.includes(" ") ===false) {
             // try {
             //     axios.post(
             //         'http://127.0.0.1:8000/api/UserInfo/',
@@ -70,8 +70,11 @@ function MainPage() {
                     navigate(`/userInfo/${nickName}`)
 
                 }
-            }else{
-                alert("유저 이름을 입력해주세요")
+        }else if(nickName.includes(" ") === true){
+            alert("유저이름에 공백을 제거해주세요")
+        }
+        else{
+            alert("유저 이름을 입력해주세요")
             }
         }
 
@@ -92,10 +95,12 @@ function MainPage() {
                 <div className='MP_NameHistory'>
                     {historyArray.map((item , index) => {
                         return(
-                            <div>
+                            <div className='History_NameList'>
                                 {item !== "" &&  (
                                     <>
+                                    <span className='History_Name'>
                                         {item}
+                                    </span>
                                         <button onClick={(e) => handleClickDelete(item)}>X</button>
                                     </>
                                 )

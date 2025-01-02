@@ -9,11 +9,13 @@
     top: 40%;
     left: 30%;
 }
+
+/* 이름 박스 */
 .MP_NameBox {
     margin: 0 auto;
     width: 670px;
     height: 7vh;
-    border: 3px solid black;
+    border: 1.5px solid black;
     border-radius: 15px;
     color: black;
     display: grid;
@@ -21,16 +23,33 @@
 }
 .MP_Name{
     font-size: 22px;
-    margin-left: 2vw;
+    margin-left: 1.5vw;
     border: none;
     outline: none;
 }
-
 .MP_NameHistory{
     width: 670px;
     height: 300px;
     border: 1px solid rgb(166, 166, 166)
 }
+.History_NameList{
+    text-align: center;
+    margin-top: 10px;
+}
+.History_NameList  .History_Name{
+    font-size: 24px;
+}
+.History_NameList button{
+    border: none;
+    color: none;
+    background-color: white;
+    font-size: 20px;
+    margin-left: 50px;
+}
+/* 이름 박스*/
+
+
+
 .event_Logo{
     width: 500px;
     height:250px;
