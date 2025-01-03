@@ -3,6 +3,12 @@ import './css/User_GameLog.css'
 
 function User_GameLog({ useData, mostData }) {
 
+    const [userInfo , setUserInfo] = useState({
+        most : "",
+        games  : "",
+        win : "",
+    })
+
     return (
         <>
             <div>

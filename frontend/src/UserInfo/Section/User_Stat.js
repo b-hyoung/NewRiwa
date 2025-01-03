@@ -16,6 +16,14 @@ function User_Stat({useData,name , infoTier}) {
   const [tierData, setTierData] = useState("");
   const [testData, setTestData] = useState("");
   const [boole , setBoole] = useState(true)
+  const [userInfo , setUserInfo] = useState({
+    game : "25 Games",
+    rank : "# 2.4",
+    damage : "14,245",
+    kill : "3",
+    win : "4.86%"
+
+  })
 
   const handleSelectClick = (e) => {
     console.log(e.target.value)
@@ -125,9 +133,9 @@ function User_Stat({useData,name , infoTier}) {
       <div className='userTier'>
         <div className='select_mode'>
                 <Form.Select className='selected_tier' onChange={(e) => handleSelectClick(e)}>
-                  <option value="1" className= {selectTier === "1" ? "selectTier" : "un_selected" } >솔로 랭크</option>
-                  <option value="2" className= {selectTier === "2" ? "selectTier" : "un_selected" } >듀오 랭크</option>
-                  <option value="3" className= {selectTier === "3" ? "selectTier" : "un_selected" } >스쿼드 랭크</option>
+                  <option value="1" className= {selectTier === "1" ? "selectTier" : "un_selected" } >일반 게임</option>
+                  {/* <option value="2" className= {selectTier === "2" ? "selectTier" : "un_selected" } >듀오 랭크</option> */}
+                  <option value="3" className= {selectTier === "3" ? "selectTier" : "un_selected" } >랭크 게임</option>
                 </Form.Select>
         </div>
         <div className='img_Box'>
@@ -162,7 +170,7 @@ function User_Stat({useData,name , infoTier}) {
           <div style={{ width: "180px" }}>
             게임 수
             <span className='info_log'>
-              25 Games
+              {userInfo.game}
             </span>
             <div className='gameBar'>
               <div style={{ width: "30%", height: "8px", backgroundColor: "#9FC131", borderRadius: "50px" }}>
@@ -173,7 +181,7 @@ function User_Stat({useData,name , infoTier}) {
           <div>
             승률
             <span className='info_log'>
-              4.86%
+              {userInfo.win}
             </span>
             <div className='gameBar'>
               <div style={{ width: "70%", height: "8px", backgroundColor: "rgb(070,163,210)", borderRadius: "50px" }}>
@@ -184,7 +192,7 @@ function User_Stat({useData,name , infoTier}) {
           <div>
             평균 순위
             <span className='info_log'>
-              # 3.6
+              {userInfo.rank}
             </span>
             <div className='gameBar'>
               <div style={{ width: "50%", height: "8px", backgroundColor: "rgb(070,163,210)" ,borderRadius: "50px" }}>
@@ -196,7 +204,7 @@ function User_Stat({useData,name , infoTier}) {
           <div>
             평균 킬
             <span className='info_log'>
-             4.2 Kills
+             {userInfo.kill}
             </span>
             <div className='gameBar'>
               <div style={{ width: "60%", height: "8px", backgroundColor: "rgb(251,194,044)", borderRadius: "50px" }}>
@@ -207,7 +215,7 @@ function User_Stat({useData,name , infoTier}) {
           <div>
             평균 데미지
             <span className='info_log'>
-              14,867
+              {userInfo.damage}
             </span>
             <div className='gameBar'>
               <div style={{ width: "60%", height: "8px", backgroundColor: "rgb(070,163,210)" ,borderRadius: "50px" }}>
