@@ -27,6 +27,20 @@ function UserinfoPage() {
   const [bool , setBool] = useState(true)
   const [bool2 , setBool2] = useState(true)
 
+  const [userLog , setUserLog ] = useState([
+    {
+    rank : "#2",
+    people : "Duo",
+    timeAgo : "3시간 전",
+    weaponLevel : "14",
+    kah : "3 / 0 / 21",
+    mmr : "2231",
+    rootId : "57831"
+    }
+  ])
+
+    // rank , people , timeago , weaponLevel , kah , mmr , rootId
+
 
   useEffect(() => {
     getUserGame()
@@ -196,6 +210,75 @@ function UserinfoPage() {
             <div className='user_GameLog'>
               {/* { ar = "aa" && Object.keys(userRecode).map((item, index) => ( */}
                 <div>
+                       {userLog.map((item , index) => {
+                        return(
+                          <>
+                            <div className='user'>
+                    <div className='first'>
+                      {/* {userRecode[item].ranking === 1 &&
+                        <>
+                          <div style={{ fontWeight: "bold", fontSize: "20px", color: "yellow" }}>#{userRecode[item].ranking}</div>
+                        </>
+                      }
+                      {userRecode[item].ranking === 2 &&
+                        <>
+                          <div style={{ fontWeight: "bold", fontSize: "20px", color: "orange" }}>#{userRecode[item].ranking}</div>
+                        </>
+                      }
+                      {userRecode[item].ranking === 3 &&
+                        <>
+                          <div style={{ fontWeight: "bold", fontSize: "20px", color: "skyblue" }}>#{userRecode[item].ranking}</div>
+                        </>
+                      } */}
+                        <>
+                          <div style={{ fontWeight: "bold", fontSize: "20px", color: "silver" }}>{item.rank}</div>
+                        </>
+                      <div>{item.people}</div>
+                      <div>{item.timeAgo}</div>
+                    </div>
+                    <div className='second'>
+                      <img className='char_img' src={`${process.env.PUBLIC_URL}/image/Char/icon/Yuki.png`} />
+                      <img className='char_wephon' src={`${process.env.PUBLIC_URL}/image/WeaponMastery/02. Two-Handed Sword.png`} />
+                      <div className='charLevel'>{item.weaponLevel}</div>
+                    </div>
+                    <div style={{ display: "block", width: "70px" }}>
+                      <img className='ability' src={require("../image/Ability/Havoc/Frailty Infliction.png")} />
+                      <img className='sub_ability' src={require("../image/Ability/Fortification/Diamond Shard.png")} />
+                    </div>
+                    <div className='third'>
+                      <div style={{ fontWeight:"300", fontSize: "15px", textAlign: "left !important", marginBottom: "-4px" }}>K/A/H</div>
+                      <div className='user_kah'>{item.kah}</div>
+                    </div>
+                    <div className='forth'>
+                      <div style={{ fontWeight:"300" ,  marginBottom: "-4px" }}>MMR</div>
+                      <div style={{ fontWeight: "bold", fontSize: "20px" }}>{item.mmr}</div>
+                    </div>
+                    <div className='fifth'>
+                      <div style={{fontWeight:"300"}}>Route</div>
+                      <div style={{ fontSize: "18px", fontWeight:"400" }}><a href='#' style={{ textDecoration: "none", backgroundColor: "none", color: "white" }}>{item.rootId}</a></div>
+                    </div>
+                    <div className='sixth'>
+                      <div><img src={`${process.env.PUBLIC_URL}/image/Item/Weapon/ItemIcon_117501_Agni.png`} /></div>
+                      <div><img src={`${process.env.PUBLIC_URL}/image/Item/Amor/ItemIcon_202406_Rocker'sJacket.png`} /></div>
+                      <div><img src={`${process.env.PUBLIC_URL}/image/Item/Amor/ItemIcon_205503_Kundala.png`} /></div>
+                      <div><img src={`${process.env.PUBLIC_URL}/image/Item/Amor/ItemIcon_205213_MarksmanHandbook.png`} /></div>
+                      <div><img src={`${process.env.PUBLIC_URL}/image/Item/Amor/ItemIcon_204410_GlacialShoes.png`} /></div>
+                      <div><img src={`${process.env.PUBLIC_URL}/image/Item/Amor/ItemIcon_202501_Kabana.png`} /></div>
+                    </div>
+                    <div className='seventh'>
+                      {/* <button onClick={(e) => handleClickOpen(e, index)}></button> */}
+                    </div>
+                  </div>
+                  {/* {clickButton === true (
+                    <div style={{ position: "relative", display: "block" }}>
+                      <div className={clickButton ? 'add_gameLog' : 'addgameLog'} style={{ width: "800px", height: "110px", backgroundColor: "#474747" }}>
+                        <Log_Detail show={nickname} />
+                      </div>
+                    </div>
+                    )} */}
+                          </>
+                        )
+                      })} 
                   <div className='user'>
                     <div className='first'>
                       {/* {userRecode[item].ranking === 1 &&
@@ -213,11 +296,9 @@ function UserinfoPage() {
                           <div style={{ fontWeight: "bold", fontSize: "20px", color: "skyblue" }}>#{userRecode[item].ranking}</div>
                         </>
                       } */}
-                 
                         <>
                           <div style={{ fontWeight: "bold", fontSize: "20px", color: "silver" }}>#4</div>
                         </>
-
                       <div>Solo</div>
                       <div>6시간 전</div>
                     </div>
@@ -260,8 +341,8 @@ function UserinfoPage() {
                         <Log_Detail show={nickname} />
                       </div>
                     </div>
-                  )} */}
-                </div>
+                    )} */}
+                    </div>
                 <>
                 <div className='user'>
                     <div className='first'>
