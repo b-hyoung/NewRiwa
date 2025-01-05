@@ -26,51 +26,51 @@ function UserinfoPage() {
   const [toggleState, setToggleState] = useState(1)
   const [arr, setArr] = useState([])
   const [tierInfo, setTierInfo] = useState([]);
-  const [bool , setBool] = useState(true)
-  const [bool2 , setBool2] = useState(true)
+  const [bool, setBool] = useState(true)
+  const [bool2, setBool2] = useState(true)
 
-  const [userLogNomal , setUserLogNomal ] = useState([
+  const [userLogNomal, setUserLogNomal] = useState([
     {
-    rank : "#2",
-    people : "일반 게임",
-    timeAgo : "3시간 전",
-    weaponLevel : "14",
-    TKA : "16 / 8 / 3",
-    mmr : "4032",
-    routeId : "57831"
+      rank: "#2",
+      type: "일반 게임",
+      timeAgo: "3시간 전",
+      weaponLevel: "14",
+      TKA: "16 / 8 / 3",
+      mmr: "4032",
+      routeId: "57831"
     }
   ])
-  const [userLogRank , setUserLogRank ] = useState([
+  const [userLogRank, setUserLogRank] = useState([
     {
-    rank : "#4",
-    people : "랭크 게임",
-    timeAgo : "4시간 전",
-    weaponLevel : "12",
-    TKA : "20 / 10 / 7",
-    mmr : "2251",
-    routeId : "27894"
-    }
-  ])
-
-  const [userLogCobart , setUserLogCobart ] = useState([
-    {
-    rank : "패배",
-    people : "코발트",
-    timeAgo : "4시간 전",
-    weaponLevel : "14",
-    TKA : "30 / 16 / 4",
-    mmr : "2783",
-    routeId : "비공개"
+      rank: "#4",
+      type: "랭크 게임",
+      timeAgo: "4시간 전",
+      weaponLevel: "12",
+      TKA: "20 / 10 / 7",
+      mmr: "2251",
+      routeId: "27894"
     }
   ])
 
-    // rank , people , timeago , weaponLevel , kah , mmr , rootId
+  const [userLogCobart, setUserLogCobart] = useState([
+    {
+      rank: "패배",
+      type: "코발트",
+      timeAgo: "4시간 전",
+      weaponLevel: "14",
+      TKA: "30 / 16 / 4",
+      mmr: "2783",
+      routeId: "비공개"
+    }
+  ])
+
+  // rank , people , timeago , weaponLevel , kah , mmr , rootId
 
 
   useEffect(() => {
     getUserGame()
     getUserInfo()
-  }, [bool,bool2])
+  }, [bool, bool2])
 
 
   useEffect(() => {
@@ -232,19 +232,35 @@ function UserinfoPage() {
             </div>
 
             <div className='user_GameLog'>
-                <div>
-                    <Game_Nomal userLog = {userLogNomal}/>
-                    <Game_Rank userLog = {userLogRank} />
-                    <Game_Cobart userLog = {userLogCobart} />
-                </div>
+              <div>
+                {toggleState === 1 &&
+                  <>
+                    <Game_Nomal userLog={userLogNomal} />
+                    <Game_Rank userLog={userLogRank} />
+                    <Game_Cobart userLog={userLogCobart} />
+                  </>}
+                {toggleState === 2 &&
+                  <>
+                    <Game_Nomal userLog={userLogNomal} />
+                  </>
+                }
+                {toggleState === 3 &&
+                  <>
+                    <Game_Rank userLog={userLogRank} />
+                  </>}
+                {toggleState === 4 &&
+                  <>
+                    <Game_Cobart userLog={userLogCobart} />
+                  </>}
+              </div>
             </div>
           </div>
-        <>
-        
-        </> 
+          <>
+
+          </>
         </>
-        
-       
+
+
       ) : (
         <div>
           <ErrorPage />
@@ -252,7 +268,7 @@ function UserinfoPage() {
       )
       }
       <>
-      
+
       </>
     </div>
   )

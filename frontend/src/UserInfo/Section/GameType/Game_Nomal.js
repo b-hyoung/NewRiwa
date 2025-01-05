@@ -12,7 +12,7 @@ function Game_Nomal({ userLog }) {
                         <div className='user'>
                             <div className='first'>
                                 <div style={{ fontWeight: "bold", fontSize: "20px", color: "silver" }}>{item.rank}</div>
-                                <div>{item.people}</div>
+                                <div>{item.type}</div>
                                 <div>{item.timeAgo}</div>
                             </div>
                             <div className='second'>

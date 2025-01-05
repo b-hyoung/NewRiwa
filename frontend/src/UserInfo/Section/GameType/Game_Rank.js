@@ -9,7 +9,7 @@ function Game_Rank({ userLog }) {
             <div className='user'>
               <div className='first'>
                 <div style={{ fontWeight: "bold", fontSize: "20px", color: "silver" }}>{item.rank}</div>
-                <div>랭크 게임</div>
+                <div>{item.type}</div>
                 <div>{item.timeAgo}</div>
               </div>
               <div className='second'>

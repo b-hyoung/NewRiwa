@@ -8,9 +8,7 @@ import User_Stat from '../UserInfo/Section/User_Stat'
 function MainPage() {
     const navigate = useNavigate("");
     const [nickName, setNickName] = useState("")
-    const [historyArray , setHistoryArray] = useState(["a"])
-    const [ax,setAX] = useState([])
-
+    const [historyArray , setHistoryArray] = useState([])
     
     useEffect(() => {
         if(JSON.parse(localStorage.getItem("historyName")) !== null){
@@ -18,10 +16,16 @@ function MainPage() {
         }
         //로컬 스토리지 네임 히스토리 지워버려
         // localStorage.removeItem("historyName")
-    },[])
+        DeleteOldHistory()
+    })
 
     const getHistoryList = () => {
-        setHistoryArray(JSON.parse(localStorage.getItem("historyName")))
+        const arr = JSON.parse(localStorage.getItem("historyName"))
+        if(arr.length > 1){
+            setHistoryArray(arr.reverse())
+        }else{
+            setHistoryArray(arr)
+        }
     }
 
     const handleInputChange = (e) => {
@@ -36,6 +40,13 @@ function MainPage() {
 
     const addUser = (e) => {
         localStorage.setItem("historyName",JSON.stringify([...historyArray,nickName]))
+    }
+
+    const DeleteOldHistory = (e) => {
+        if(historyArray.length >= 6){
+            historyArray.shift()
+            localStorage.setItem("historyName",JSON.stringify(historyArray))
+        }
     }
 
     // 현재 서버가없어서 에러가 뜨는 상태
@@ -69,7 +80,6 @@ function MainPage() {
                     ]
                     localStorage.setItem("historyName",JSON.stringify(newArray))
                     navigate(`/userInfo/${nickName}`)
-
                 }
         }else if(nickName.includes(" ") === true){
             alert("유저이름에 공백을 제거해주세요")
@@ -96,7 +106,7 @@ function MainPage() {
                 </div>
                 <button onClick={handleUserInfoClick}>검색</button>
                 <div className='MP_NameHistory'>
-                    {historyArray.map((item , index) => {
+                    {(historyArray).map((item , index) => {
                         return(
                             <div className='History_NameList'>
                                 {item !== "" &&  (
