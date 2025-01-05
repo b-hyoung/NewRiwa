@@ -209,6 +209,14 @@
     width: 150px !important;
 }
 
+.user .third .tka{
+    font-weight: "500";
+    font-size: "100px";
+    text-align: "left !important";
+    margin-bottom: "0px";
+    word-spacing:"-2px";
+}
+
 .user .third , .user .forth{
     margin-top: 20px;
 }

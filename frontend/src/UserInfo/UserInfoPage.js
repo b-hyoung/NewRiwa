@@ -8,8 +8,10 @@ import { useParams } from 'react-router-dom';
 import ErrorPage from './Section/ErrorPage'
 import User_GameLog from './Section/User_GameLog'
 import User_Stats from './Section/User_Stat'
-import Form from 'react-bootstrap/Form'
 import Log_Detail from './Section/Log_Detail'
+import Game_Nomal from './Section/GameType/Game_Nomal';
+import Game_Rank from './Section/GameType/Game_Rank';
+import Game_Cobart from './Section/GameType/Game_Cobart';
 
 
 function UserinfoPage() {
@@ -27,15 +29,38 @@ function UserinfoPage() {
   const [bool , setBool] = useState(true)
   const [bool2 , setBool2] = useState(true)
 
-  const [userLog , setUserLog ] = useState([
+  const [userLogNomal , setUserLogNomal ] = useState([
     {
     rank : "#2",
     people : "일반 게임",
     timeAgo : "3시간 전",
     weaponLevel : "14",
-    kah : "3 / 0 / 21",
-    mmr : "2231",
-    rootId : "57831"
+    TKA : "16 / 8 / 3",
+    mmr : "4032",
+    routeId : "57831"
+    }
+  ])
+  const [userLogRank , setUserLogRank ] = useState([
+    {
+    rank : "#4",
+    people : "랭크 게임",
+    timeAgo : "4시간 전",
+    weaponLevel : "12",
+    TKA : "20 / 10 / 7",
+    mmr : "2251",
+    routeId : "27894"
+    }
+  ])
+
+  const [userLogCobart , setUserLogCobart ] = useState([
+    {
+    rank : "패배",
+    people : "코발트",
+    timeAgo : "4시간 전",
+    weaponLevel : "14",
+    TKA : "30 / 16 / 4",
+    mmr : "2783",
+    routeId : "비공개"
     }
   ])
 
@@ -207,211 +232,11 @@ function UserinfoPage() {
             </div>
 
             <div className='user_GameLog'>
-              {/* { ar = "aa" && Object.keys(userRecode).map((item, index) => ( */}
                 <div>
-                       {userLog.map((item , index) => {
-                        return(
-                          <>
-                            <div className='user'>
-                    <div className='first'>
-                      {/* {userRecode[item].ranking === 1 &&
-                        <>
-                          <div style={{ fontWeight: "bold", fontSize: "20px", color: "yellow" }}>#{userRecode[item].ranking}</div>
-                        </>
-                      }
-                      {userRecode[item].ranking === 2 &&
-                        <>
-                          <div style={{ fontWeight: "bold", fontSize: "20px", color: "orange" }}>#{userRecode[item].ranking}</div>
-                        </>
-                      }
-                      {userRecode[item].ranking === 3 &&
-                        <>
-                          <div style={{ fontWeight: "bold", fontSize: "20px", color: "skyblue" }}>#{userRecode[item].ranking}</div>
-                        </>
-                      } */}
-                        <>
-                          <div style={{ fontWeight: "bold", fontSize: "20px", color: "silver" }}>{item.rank}</div>
-                        </>
-                      <div>{item.people}</div>
-                      <div>{item.timeAgo}</div>
-                    </div>
-                    <div className='second'>
-                      <img className='char_img' src={`${process.env.PUBLIC_URL}/image/Char/icon/Yuki.png`} />
-                      <img className='char_wephon' src={`${process.env.PUBLIC_URL}/image/WeaponMastery/02. Two-Handed Sword.png`} />
-                      <div className='charLevel'>{item.weaponLevel}</div>
-                    </div>
-                    <div style={{ display: "block", width: "70px" }}>
-                      <img className='ability' src={require("../image/Ability/Havoc/Frailty Infliction.png")} />
-                      <img className='sub_ability' src={require("../image/Ability/Fortification/Diamond Shard.png")} />
-                    </div>
-                    <div className='third'>
-                      <div style={{ fontWeight:"300", fontSize: "15px", textAlign: "left !important", marginBottom: "-4px" }}>K/A/H</div>
-                      <div className='user_kah'>{item.kah}</div>
-                    </div>
-                    <div className='forth'>
-                      <div style={{ fontWeight:"300" ,  marginBottom: "-4px" }}>MMR</div>
-                      <div style={{ fontWeight: "bold", fontSize: "20px" }}>{item.mmr}</div>
-                    </div>
-                    <div className='fifth'>
-                      <div style={{fontWeight:"300"}}>Route</div>
-                      <div style={{ fontSize: "18px", fontWeight:"400" }}><a href='#' style={{ textDecoration: "none", backgroundColor: "none", color: "white" }}>{item.rootId}</a></div>
-                    </div>
-                    <div className='sixth'>
-                      <div><img src={`${process.env.PUBLIC_URL}/image/Item/Weapon/ItemIcon_117501_Agni.png`} /></div>
-                      <div><img src={`${process.env.PUBLIC_URL}/image/Item/Amor/ItemIcon_202406_Rocker'sJacket.png`} /></div>
-                      <div><img src={`${process.env.PUBLIC_URL}/image/Item/Amor/ItemIcon_205503_Kundala.png`} /></div>
-                      <div><img src={`${process.env.PUBLIC_URL}/image/Item/Amor/ItemIcon_205213_MarksmanHandbook.png`} /></div>
-                      <div><img src={`${process.env.PUBLIC_URL}/image/Item/Amor/ItemIcon_204410_GlacialShoes.png`} /></div>
-                      <div><img src={`${process.env.PUBLIC_URL}/image/Item/Amor/ItemIcon_202501_Kabana.png`} /></div>
-                    </div>
-                    <div className='seventh'>
-                      {/* <button onClick={(e) => handleClickOpen(e, index)}></button> */}
-                    </div>
-                  </div>
-                  {/* {clickButton === true (
-                    <div style={{ position: "relative", display: "block" }}>
-                      <div className={clickButton ? 'add_gameLog' : 'addgameLog'} style={{ width: "800px", height: "110px", backgroundColor: "#474747" }}>
-                        <Log_Detail show={nickname} />
-                      </div>
-                    </div>
-                    )} */}
-                          </>
-                        )
-                      })} 
-                  <div className='user'>
-                    <div className='first'>
-                      {/* {userRecode[item].ranking === 1 &&
-                        <>
-                          <div style={{ fontWeight: "bold", fontSize: "20px", color: "yellow" }}>#{userRecode[item].ranking}</div>
-                        </>
-                      }
-                      {userRecode[item].ranking === 2 &&
-                        <>
-                          <div style={{ fontWeight: "bold", fontSize: "20px", color: "orange" }}>#{userRecode[item].ranking}</div>
-                        </>
-                      }
-                      {userRecode[item].ranking === 3 &&
-                        <>
-                          <div style={{ fontWeight: "bold", fontSize: "20px", color: "skyblue" }}>#{userRecode[item].ranking}</div>
-                        </>
-                      } */}
-                        <>
-                          <div style={{ fontWeight: "bold", fontSize: "20px", color: "silver" }}>#4</div>
-                        </>
-                      <div>랭크 게임</div>
-                      <div>6시간 전</div>
-                    </div>
-                    <div className='second'>
-                      <img className='char_img' src={`${process.env.PUBLIC_URL}/image/Char/icon/Sua.png`} />
-                      <img className='char_wephon' src={`${process.env.PUBLIC_URL}/image/WeaponMastery/02. Two-Handed Sword.png`} />
-                      <div className='charLevel'>17</div>
-                    </div>
-                    <div style={{ display: "block", width: "70px" }}>
-                      <img className='ability' src={require("../image/Ability/Havoc/Frailty Infliction.png")} />
-                      <img className='sub_ability' src={require("../image/Ability/Fortification/Diamond Shard.png")} />
-                    </div>
-                    <div className='third'>
-                      <div style={{ fontWeight:"300", fontSize: "15px", textAlign: "left !important", marginBottom: "-4px" }}>K/A/H</div>
-                      <div className='user_kah'>3 / 6 / 23</div>
-                    </div>
-                    <div className='forth'>
-                      <div style={{ fontWeight:"300" ,  marginBottom: "-4px" }}>MMR</div>
-                      <div style={{ fontWeight: "bold", fontSize: "20px" }}>2200</div>
-                    </div>
-                    <div className='fifth'>
-                      <div style={{fontWeight:"300"}}>Route</div>
-                      <div style={{ fontSize: "18px", fontWeight:"400" }}><a href='#' style={{ textDecoration: "none", backgroundColor: "none", color: "white" }}>567655</a></div>
-                    </div>
-                    <div className='sixth'>
-                      <div><img src={`${process.env.PUBLIC_URL}/image/Item/Weapon/ItemIcon_117501_Agni.png`} /></div>
-                      <div><img src={`${process.env.PUBLIC_URL}/image/Item/Amor/ItemIcon_202406_Rocker'sJacket.png`} /></div>
-                      <div><img src={`${process.env.PUBLIC_URL}/image/Item/Amor/ItemIcon_205503_Kundala.png`} /></div>
-                      <div><img src={`${process.env.PUBLIC_URL}/image/Item/Amor/ItemIcon_205213_MarksmanHandbook.png`} /></div>
-                      <div><img src={`${process.env.PUBLIC_URL}/image/Item/Amor/ItemIcon_204410_GlacialShoes.png`} /></div>
-                      <div><img src={`${process.env.PUBLIC_URL}/image/Item/Amor/ItemIcon_202501_Kabana.png`} /></div>
-                    </div>
-                    <div className='seventh'>
-                      {/* <button onClick={(e) => handleClickOpen(e, index)}></button> */}
-                    </div>
-                  </div>
-                  {/* {clickButton === true (
-                    <div style={{ position: "relative", display: "block" }}>
-                      <div className={clickButton ? 'add_gameLog' : 'addgameLog'} style={{ width: "800px", height: "110px", backgroundColor: "#474747" }}>
-                        <Log_Detail show={nickname} />
-                      </div>
-                    </div>
-                    )} */}
-                    </div>
-                <>
-                <div className='user'>
-                    <div className='first'>
-                      {/* {userRecode[item].ranking === 1 &&
-                        <>
-                          <div style={{ fontWeight: "bold", fontSize: "20px", color: "yellow" }}>#{userRecode[item].ranking}</div>
-                        </>
-                      }
-                      {userRecode[item].ranking === 2 &&
-                        <>
-                          <div style={{ fontWeight: "bold", fontSize: "20px", color: "orange" }}>#{userRecode[item].ranking}</div>
-                        </>
-                      }
-                      {userRecode[item].ranking === 3 &&
-                        <>
-                          <div style={{ fontWeight: "bold", fontSize: "20px", color: "skyblue" }}>#{userRecode[item].ranking}</div>
-                        </>
-                      } */}
-                 
-                        <>
-                          <div style={{ fontWeight: "bold", fontSize: "20px", color: "silver" }}>패배</div>
-                        </>
-
-                      <div>코발트</div>
-                      <div>8시간 전</div>
-                    </div>
-                    <div className='second'>
-                      <img className='char_img' src={`${process.env.PUBLIC_URL}/image/Char/icon/Shoichi.png`} />
-                      <img className='char_wephon' src={`${process.env.PUBLIC_URL}/image/WeaponMastery/Nunchaku.png`} />
-                      <div className='charLevel'>13</div>
-                    </div>
-                    <div style={{ display: "block", width: "70px" }}>
-                      <img className='ability' src={require("../image/Ability/Havoc/Spirit Culling.png")} />
-                      <img className='sub_ability' src={require("../image/Ability/Fortification/Cavalcade.png")} />
-                    </div>
-                    <div className='third'>
-                      <div style={{fontWeight:"300" , fontSize: "15px", textAlign: "left !important", marginBottom: "-4px" }}>K/A/H</div>
-                      <div className='user_kah'>6 / 0 / 30</div>
-                    </div>
-                    <div className='forth'>
-                      <div style={{ marginBottom: "-4px" , fontWeight:"300" }}>MMR</div>
-                      <div style={{ fontWeight: "bold", fontSize: "20px" }}>2173</div>
-                    </div>
-                    <div className='fifth'>
-                      <div style={{fontWeight:"300"}}>Route</div>
-                      <div style={{ fontSize: "18px", fontWeight:"400" }}><a href='#' style={{ textDecoration: "none", backgroundColor: "none", color: "white" }}>137579</a></div>
-                    </div>
-                    <div className='sixth'>
-                      <div><img src={`${process.env.PUBLIC_URL}/image/Item/Weapon/ItemIcon_121402_StairwaytoHeaven.png`} /></div>
-                      <div><img src={`${process.env.PUBLIC_URL}/image/Item/Amor/ItemIcon_201414_Diadem.png`} /></div>
-                      <div><img src={`${process.env.PUBLIC_URL}/image/Item/Amor/ItemIcon_205503_Kundala.png`} /></div>
-                      <div><img src={`${process.env.PUBLIC_URL}/image/Item/Amor/ItemIcon_203501_BraceletofSkadi.png`} /></div>
-                      <div><img src={`${process.env.PUBLIC_URL}/image/Item/Amor/ItemIcon_204410_GlacialShoes.png`} /></div>
-                      <div><img src={`${process.env.PUBLIC_URL}/image/Item/Amor/ItemIcon_205501_EmeraldTablet.png`} /></div>
-                    </div>
-                    <div className='seventh'>
-                      {/* <button onClick={(e) => handleClickOpen(e, index)}></button> */}
-                    </div>
-                  </div>
-                  {/* {clickButton === true (
-                    <div style={{ position: "relative", display: "block" }}>
-                      <div className={clickButton ? 'add_gameLog' : 'addgameLog'} style={{ width: "800px", height: "110px", backgroundColor: "#474747" }}>
-                        <Log_Detail show={nickname} />
-                      </div>
-                    </div>
-                  )} */}
-                <>
-                
-                </>
-                </>
+                    <Game_Nomal userLog = {userLogNomal}/>
+                    <Game_Rank userLog = {userLogRank} />
+                    <Game_Cobart userLog = {userLogCobart} />
+                </div>
             </div>
           </div>
         <>
