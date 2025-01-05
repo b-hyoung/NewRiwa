@@ -1,87 +1,130 @@
 import React, { useState, useEffect } from 'react'
 import './css/pentagon.css'
 
+//랭크의 기준은 무엇인가 ? 
+{/*
+                    solo , duo , squad 3개 squad만 존재하는 유형 솔로에만 존재하는 유형
+                    킬 생존 헌트 무숙 딜량
+
+                    solo : 
+                        솔로형
+                        1. 킬에 비례해서 딜량이 높거나 낮다
+                        2. 킬에 비례하여 헌트가 높거나 낮다.
+                             킬↑ 헌트↓ => 싸움을 좋아하는 유형 
+                             킬↓ 헌트↑ => 싸움보다는 벽보고 성장하며 후반싸움을 좋아하는 유형 
+                             킬↑ 헌트= => 킬이 높고 헌트가 평균면 뭐라쓸꺼임 평균치없애 ㅅㅂ?
+                             킬↑ 헌트↑ => 개고수
+                             킬↓ 헌트↓ => 개줫밥
+                                킬이 높고 낮다는 어떤것에 평균점을 둘것인가
+                                오브젝트를 챙기는 사람은 싸움을 좋아한다? //이클 , 오메가 
+                                해당하는 칭호가 있엇으면 좋겟음 ex) 미친놈 : 킬은 개높은데 헌트가 낮음
+                        3. 생존시간 비례해서 킬이 높거나 낮다.
+                        4. 생존시간에 비하여 헌트가 높거나 낮다.
+                        5. 
+                    duo :
+                        듀오형 
+
+                    squad : 
+                        스퀏형
+                         
+                <div className='avg_result'>
+                    <div>
+                        업둥이 형
+                    </div>
+                    <div>
+                        
+                    </div>
+                </div>
+                */}
+
 function Pentagon({ name, infoTier, dataUser , usertier }) {
+    // 닉네임 , 티어 , 순위 , 킬 , 가한피해량 , 무기숙련도 , 야생동물
+    const [userInfo , setUserInfo ] = useState({
+        nickName : "김밥님",
+        tier : "Platinum",
+        avgRank : "S",
+        avgKill : "C",
+        avgDamage : "A",
+        avgWeapon : "B",
+        avgHunt : "D"
+    })
+
+    //오각형 그래프 위치
     const [survTemp, setServTemp] = useState("2 , -78.75")
     const [killTemp, setKillTemp] = useState("78 , -27.5")
     const [demageTemp, setDemageTemp] = useState("35 ,  48.5")
     const [masteryTemp, setMasteryTemp] = useState("-19 ,  25")
-    const [testTemp, setTestTemp] = useState(" -64.7 -21.0")
+    const [huntTemp, setHuntTemp] = useState(" -64.7 -21.0")
 
-    const [firRank, setFirRank] = useState("S")
-    const [senRank, setSenRank] = useState("C")
-    const [thiRank, setThiRank] = useState("A")
-    const [forRank, setForRank] = useState("A")
-    const [fifRank, setFifRank] = useState("A")
 
     //생존시간 , 판수 , 딜량 , 랭크
     // 등수 
     // const getSurviveRank = () => {
     //     if (infoTier.averageRanking / dataUser.averageRanking * 100 >= 150) {
-    //         setFirRank("S")
+    //         setuserInfo.avgRank("S")
     //     } else if (infoTier.averageRanking / dataUser.averageRanking * 100 >= 140) {
-    //         setFirRank("A+");
+    //         setuserInfo.avgRank("A+");
     //     } else if (infoTier.averageRanking / dataUser.averageRanking * 100 >= 130) {
-    //         setFirRank("A");
+    //         setuserInfo.avgRank("A");
     //     } else if (infoTier.averageRanking / dataUser.averageRanking * 100 >= 115) {
-    //         setFirRank("B+");
+    //         setuserInfo.avgRank("B+");
     //     } else if (infoTier.averageRanking / dataUser.averageRanking * 100 >= 100) {
-    //         setFirRank("B");
+    //         setuserInfo.avgRank("B");
     //     } else if (infoTier.averageRanking / dataUser.averageRanking * 100 >= 75) {
-    //         setFirRank("C+");
+    //         setuserInfo.avgRank("C+");
     //     } else if (infoTier.averageRanking / dataUser.averageRanking * 100 >= 50) {
-    //         setFirRank("C");
+    //         setuserInfo.avgRank("C");
     //     } else if (infoTier.averageRanking / dataUser.averageRanking * 100 >= 25) {
-    //         setFirRank("D");
+    //         setuserInfo.avgRank("D");
     //     } else if (infoTier.averageRanking / dataUser.averageRanking * 100 <= 12.5) {
-    //         setFirRank("F");
+    //         setuserInfo.avgRank("F");
     //     }
     // }
 
     // //킬
     // const getKillRank = () => {
     //     if (dataUser.averageKills / infoTier.averageKills * 100 >= 150) {
-    //         setSenRank("S")
+    //         setuserInfo.avgDamage("S")
     //     } else if (dataUser.averageKills / infoTier.averageKills * 100 >= 140) {
-    //         setSenRank("A+");
+    //         setuserInfo.avgDamage("A+");
     //     } else if (dataUser.averageKills / infoTier.averageKills * 100 >= 150) {
-    //         setSenRank("A");
+    //         setuserInfo.avgDamage("A");
     //     } else if (dataUser.averageKills / infoTier.averageKills * 100 >= 115) {
-    //         setSenRank("B+");
+    //         setuserInfo.avgDamage("B+");
     //     } else if (dataUser.averageKills / infoTier.averageKills * 100 >= 100) {
-    //         setSenRank("B");
+    //         setuserInfo.avgDamage("B");
     //     } else if (dataUser.averageKills / infoTier.averageKills * 100 >= 75) {
-    //         setSenRank("C+");
+    //         setuserInfo.avgDamage("C+");
     //     } else if (dataUser.averageKills / infoTier.averageKills * 100 >= 50) {
-    //         setSenRank("C");
+    //         setuserInfo.avgDamage("C");
     //     } else if (dataUser.averageKills / infoTier.averageKills * 100 >= 25) {
-    //         setSenRank("D");
+    //         setuserInfo.avgDamage("D");
     //     } else if (dataUser.averageKills / infoTier.averageKills * 100 <= 12.5) {
-    //         setSenRank("F");
+    //         setuserInfo.avgDamage("F");
     //     }
     // }
 
     // //데미지
     // const getDemageRank = () => {
     //     if (dataUser.averageDeal / infoTier.averageDeal * 100 >= 150) {
-    //         setThiRank("S")
+    //         setuserInfo.avgDamage("S")
     //     } else if (dataUser.averageDeal / infoTier.averageDeal * 100 >= 140) {
-    //         setThiRank("A+");
+    //         setuserInfo.avgDamage("A+");
     //         console.log(dataUser.averageDeal + "유저입니다")
     //     } else if (dataUser.averageDeal / infoTier.averageDeal * 100 >= 150) {
-    //         setThiRank("A");
+    //         setuserInfo.avgDamage("A");
     //     } else if (dataUser.averageDeal / infoTier.averageDeal * 100 >= 115) {
-    //         setThiRank("B+");
+    //         setuserInfo.avgDamage("B+");
     //     } else if (dataUser.averageDeal / infoTier.averageDeal * 100 >= 100) {
-    //         setThiRank("B");
+    //         setuserInfo.avgDamage("B");
     //     } else if (dataUser.averageDeal / infoTier.averageDeal * 100 >= 75) {
-    //         setThiRank("C+");
+    //         setuserInfo.avgDamage("C+");
     //     } else if (dataUser.averageDeal / infoTier.averageDeal * 100 >= 50) {
-    //         setThiRank("C");
+    //         setuserInfo.avgDamage("C");
     //     } else if (dataUser.averageDeal / infoTier.averageDeal * 100 >= 25) {
-    //         setThiRank("D");
+    //         setuserInfo.avgDamage("D");
     //     } else if (dataUser.averageDeal / infoTier.averageDeal * 100 <= 12.5) {
-    //         setThiRank("F");
+    //         setuserInfo.avgDamage("F");
     //     }
     // }
     // const getMasteryRank = () => {
@@ -128,108 +171,108 @@ function Pentagon({ name, infoTier, dataUser , usertier }) {
     // }
 
     const getSurviveCom = () => {
-        if (firRank === "S") {
+        if (userInfo.avgRank === "S") {
             setServTemp("0 , -90")
-        } else if (firRank === "A+") {
+        } else if (userInfo.avgRank === "A+") {
             setServTemp("0 , -78.75")
-        } else if (firRank === "A") {
+        } else if (userInfo.avgRank === "A") {
             setServTemp("0,-67.5")
-        } else if (firRank === "B+") {
+        } else if (userInfo.avgRank === "B+") {
             setServTemp("0 ,-56.25")
-        } else if (firRank === "B") {
+        } else if (userInfo.avgRank === "B") {
             setServTemp("0 ,-45")
-        } else if (firRank === "C+") {
+        } else if (userInfo.avgRank === "C+") {
             setServTemp("0 -33.75")
-        } else if (firRank === "C") {
+        } else if (userInfo.avgRank === "C") {
             setServTemp("0 , -22.5 ")
-        } else if (firRank === "D") {
+        } else if (userInfo.avgRank === "D") {
             setServTemp("0 , -11.25")
-        } else if (firRank === "F") {
+        } else if (userInfo.avgRank === "F") {
             setServTemp("0 , 0")
         }
     }
     const getKillCom = () => {
-        if (senRank === "S") {
+        if (userInfo.userInfo.avgKill === "S") {
             setKillTemp("85.5 , -27.5")
-        } else if (senRank === "A+") {
+        } else if (userInfo.avgKill === "A+") {
             setKillTemp("78 , -25")
-        } else if (senRank === "A") {
+        } else if (userInfo.avgKill === "A") {
             setKillTemp("64.5 , -21")
-        } else if (senRank === "B+") {
+        } else if (userInfo.avgKill === "B+") {
             setKillTemp("52.5 , -17")
-        } else if (senRank === "B") {
+        } else if (userInfo.avgKill === "B") {
             setKillTemp("42  ,-13")
-        } else if (senRank === "C+") {
+        } else if (userInfo.avgKill === "C+") {
             setKillTemp("31  , -10.5")
-        } else if (senRank === "C") {
+        } else if (userInfo.avgKill === "C") {
             setKillTemp("22 , -6 ")
-        } else if (senRank === "D") {
+        } else if (userInfo.avgKill === "D") {
             setKillTemp("12,-7")
-        } else if (senRank === "F") {
+        } else if (userInfo.avgKill === "F") {
             setKillTemp("0 , 0")
         }
     }
     const getDemageCom = () => {
-        if (thiRank === "S") {
+        if (userInfo.avgDamage === "S") {
             setDemageTemp("53 , 73")
-        } else if (thiRank === "A+") {
+        } else if (userInfo.avgDamage === "A+") {
             setDemageTemp("47 ,  65")
-        } else if (thiRank === "A") {
+        } else if (userInfo.avgDamage === "A") {
             setDemageTemp("40 ,  56")
-        } else if (thiRank === "B+") {
+        } else if (userInfo.avgDamage === "B+") {
             setDemageTemp("35 ,  48.5")
-        } else if (thiRank === "B") {
+        } else if (userInfo.avgDamage === "B") {
             setDemageTemp("26 ,  36 ")
-        } else if (thiRank === "C+") {
+        } else if (userInfo.avgDamage === "C+") {
             setDemageTemp("18 ,  25")
-        } else if (thiRank === "C") {
+        } else if (userInfo.avgDamage === "C") {
             setDemageTemp("12 ,  20 ")
-        } else if (thiRank === "D") {
+        } else if (userInfo.avgDamage === "D") {
             setDemageTemp("5 ,  10")
-        } else if (thiRank === "F") {
+        } else if (userInfo.avgDamage === "F") {
             setDemageTemp("0 , 0")
         }
     }
     const getMasteryCom = () => {
-        if (forRank === "S") {
+        if (userInfo.avgWeapon === "S") {
             setMasteryTemp("-53 ,  73")
-        } else if (forRank === "A+") {
+        } else if (userInfo.avgWeapon === "A+") {
             setMasteryTemp("-49 ,  68")
-        } else if (forRank === "A") {
+        } else if (userInfo.avgWeapon === "A") {
             setMasteryTemp("-40 ,  57")
-        } else if (forRank === "B+") {
+        } else if (userInfo.avgWeapon === "B+") {
             setMasteryTemp("-33 ,  47")
-        } else if (forRank === "B") {
+        } else if (userInfo.avgWeapon === "B") {
             setMasteryTemp("-26 ,  36")
-        } else if (forRank === "C+") {
+        } else if (userInfo.avgWeapon === "C+") {
             setMasteryTemp("-19 ,  25")
-        } else if (forRank === "C") {
+        } else if (userInfo.avgWeapon === "C") {
             setMasteryTemp("-15 ,  17 ")
-        } else if (forRank === "D") {
+        } else if (userInfo.avgWeapon === "D") {
             setMasteryTemp("-6 ,  12")
-        } else if (forRank === "F") {
+        } else if (userInfo.avgWeapon === "F") {
             setMasteryTemp("0 , 0")
         }
     }
-    const getTestCom = () => {
-        if (fifRank === "S") {
-            setTestTemp("-85.5 , -27.5")
-        } else if (fifRank === "A+") {
-            setTestTemp("-75 , -24")
-        } else if (fifRank === "A") {
-            setTestTemp("-64.7 ,  -21.0")
-        } else if (fifRank === "B+") {
-            setTestTemp("-53 , -18")
-        } else if (fifRank === "B") {
-            setTestTemp("-42 ,  -13")
-        } else if (fifRank === "C+") {
-            setTestTemp("-31 , -10")
-        } else if (fifRank === "C") {
-            setTestTemp("-20 , -6")
-        } else if (fifRank === "D") {
-            setTestTemp("-10 , -5")
-        } else if (fifRank === "F") {
-            setTestTemp("0 , 0")
+    const getHuntCom = () => {
+        if (userInfo.avgHunt === "S") {
+            setHuntTemp("-85.5 , -27.5")
+        } else if (userInfo.avgHunt === "A+") {
+            setHuntTemp("-75 , -24")
+        } else if (userInfo.avgHunt === "A") {
+            setHuntTemp("-64.7 ,  -21.0")
+        } else if (userInfo.avgHunt === "B+") {
+            setHuntTemp("-53 , -18")
+        } else if (userInfo.avgHunt === "B") {
+            setHuntTemp("-42 ,  -13")
+        } else if (userInfo.avgHunt === "C+") {
+            setHuntTemp("-31 , -10")
+        } else if (userInfo.avgHunt === "C") {
+            setHuntTemp("-20 , -6")
+        } else if (userInfo.avgHunt === "D") {
+            setHuntTemp("-10 , -5")
+        } else if (userInfo.avgHunt === "F") {
+            setHuntTemp("0 , 0")
         }
     }
 
@@ -239,7 +282,7 @@ function Pentagon({ name, infoTier, dataUser , usertier }) {
     //     getDemageCom();
     //     getMasteryCom();
     //     getTestCom();
-    // }, [firRank])
+    // }, [userInfo.avgRank])
 
     // useEffect(() => {
     //     getSurviveRank();
@@ -249,12 +292,12 @@ function Pentagon({ name, infoTier, dataUser , usertier }) {
     //     getTestRank();
     // }, [infoTier])
 
-
     return (
         <div className="pentagon">
+
             {/* Rank 
                   (top)             (t,r)             (b,r)          (b,l)                (t,l)
-                  First             Second            Third          Forth                Fifth
+                  rank             kill            damage          weapon                hunt
                 S  : 2 -90       S  : 85.5 -27.5    S  : 53 73     S  :  -53 73       S  : -85.5  -27.5
                 A+ : 2 -78.75    A+ : 78 -25        A+ : 47 65     A+ : -49 68        A+ : -75   -24  
                 A  : 2 -67.5     A  : 64.5 -21      A  : 40 56     A  : -40 57        A  : -64.7 -21.0
@@ -265,26 +308,27 @@ function Pentagon({ name, infoTier, dataUser , usertier }) {
                 D  : 2 -11.25    D  : 12,-7         D  : 5 10      D  : -6 12         D  : -10   -5 
                 F  : 2 0         F : 0 0            F : 0 0        F : 0 0            F : 0     0   
                 */}
-            {firRank !== "" && (
+
+            {userInfo.avgRank !== "" && (
                 <>
                     <div className='rank_survive'>
-                        <span className='rank'>{firRank}</span>
+                        <span className='rank'>{userInfo.avgRank}</span>
                         <span className='text_survive'>순위</span>
                     </div>
                     <div className='rank_kill'>
-                        <span className='rank'>{senRank}</span>
+                        <span className='rank'>{userInfo.avgDamage}</span>
                         <span className='text_kill'>킬</span>
                     </div>
                     <div className='rank_demage'>
-                        <span className='rank'>{thiRank}</span>
+                        <span className='rank'>{userInfo.avgDamage}</span>
                         <span className='text_demage'>가한 피해량</span>
                     </div>
                     <div className='rank_mastery'>
-                        <span className='rank'>{forRank}</span>
+                        <span className='rank'>{userInfo.avgWeapon}</span>
                         <span className='text_mastery'>무기 숙련도</span>
                     </div>
                     <div className='rank_test'>
-                        <span className='rank'>{fifRank}</span>
+                        <span className='rank'>{userInfo.avgHunt}</span>
                         <span className='text_test'>헌트</span>
                     </div>
                 </>
@@ -294,50 +338,14 @@ function Pentagon({ name, infoTier, dataUser , usertier }) {
                 <div className='colume'>
                     <div className='test_' style={{ backgroundColor: "orange" }}></div>
                     <div>
-                    <span >Platinum</span>
+                    <span >{userInfo.tier}</span>
                     </div>
                 </div>
                 <div className='colume'>
                     <div className='test_' style={{ backgroundColor: "gray" }}></div>
-                    <span style={{ width: "130px" }}>김밥님</span>
+                    <span style={{ width: "130px" }}>{userInfo.nickName}</span>
                 </div>
             </div>
-
-            {/*
-                    solo , duo , squad 3개 squad만 존재하는 유형 솔로에만 존재하는 유형
-                    킬 생존 헌트 무숙 딜량
-
-                    solo : 
-                        솔로형
-                        1. 킬에 비례해서 딜량이 높거나 낮다
-                        2. 킬에 비례하여 헌트가 높거나 낮다.
-                             킬↑ 헌트↓ => 싸움을 좋아하는 유형 
-                             킬↓ 헌트↑ => 싸움보다는 벽보고 성장하며 후반싸움을 좋아하는 유형 
-                             킬↑ 헌트= => 킬이 높고 헌트가 평균면 뭐라쓸꺼임 평균치없애 ㅅㅂ?
-                             킬↑ 헌트↑ => 개고수
-                             킬↓ 헌트↓ => 개줫밥
-                                킬이 높고 낮다는 어떤것에 평균점을 둘것인가
-                                오브젝트를 챙기는 사람은 싸움을 좋아한다? //이클 , 오메가 
-                                해당하는 칭호가 있엇으면 좋겟음 ex) 미친놈 : 킬은 개높은데 헌트가 낮음
-                        3. 생존시간 비례해서 킬이 높거나 낮다.
-                        4. 생존시간에 비하여 헌트가 높거나 낮다.
-                        5. 
-                    duo :
-                        듀오형 
-
-                    squad : 
-                        스퀏형
-                         
-                <div className='avg_result'>
-                    <div>
-                        업둥이 형
-                    </div>
-                    <div>
-                        
-                    </div>
-                </div>
-                */}
-           
             <svg>
             <g>
                     <circle r="22.5px" opacity="0.2" transform="translate(115,115)" ></circle>
@@ -352,7 +360,7 @@ function Pentagon({ name, infoTier, dataUser , usertier }) {
                     <line transform="translate(115,115)" x2="-85.5" y2="-27.5" x="0" y="0" stroke='#bebebe' ></line>
 
                     <path d="M 0,-45 L42,-13 L26,36 L-26,36 L-42,-13.5 Z"  stroke='rgb(92,166,196)' fill='none' transform="translate(115,115)"></path>
-                    <path d={"M " + survTemp + " L" + killTemp + " L" + demageTemp + " L" + masteryTemp + " L" + testTemp + " Z"} stroke='rgb(119, 126, 88)' fill='rgb(161, 239, 255)' opacity="0.4" transform="translate(115,115)"></path>
+                    <path d={"M " + survTemp + " L" + killTemp + " L" + demageTemp + " L" + masteryTemp + " L" + huntTemp + " Z"} stroke='rgb(119, 126, 88)' fill='rgb(161, 239, 255)' opacity="0.4" transform="translate(115,115)"></path>
                 </g>
             </svg>
             {console.log(survTemp)}
@@ -360,3 +368,4 @@ function Pentagon({ name, infoTier, dataUser , usertier }) {
     )
 }
 export default Pentagon
+
