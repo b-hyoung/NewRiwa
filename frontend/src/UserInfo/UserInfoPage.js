@@ -30,7 +30,7 @@ function UserinfoPage() {
   const [userLog , setUserLog ] = useState([
     {
     rank : "#2",
-    people : "Duo",
+    people : "일반 게임",
     timeAgo : "3시간 전",
     weaponLevel : "14",
     kah : "3 / 0 / 21",
@@ -195,11 +195,10 @@ function UserinfoPage() {
           <div className='user_Content'>
             <div>
               <div className='select_modeAll'>
-                <span className={toggleState === 1 ? "active_toggle" : "B"} style={{ width: "55px" }} ><a href='#' onClick={() => toggleTabs(1)}>전체</a></span>
-                <span className={toggleState === 2 ? "active_toggle" : "B"} style={{ width: "55px" }} ><a href='#' onClick={() => toggleTabs(2)}>일반</a></span>
-                <span className={toggleState === 3 ? "active_toggle" : "B"} style={{ width: "55px" }} ><a href='#' onClick={() => toggleTabs(3)}>솔로</a></span>
-                <span className={toggleState === 4 ? "active_toggle" : "B"} style={{ width: "55px" }} ><a href='#' onClick={() => toggleTabs(4)}>듀오</a></span>
-                <span className={toggleState === 5 ? "active_toggle" : "C"} style={{ width: "70px" }}><a href='#' onClick={() => toggleTabs(5)}>스쿼드</a></span>
+                <span className={toggleState === 1 ? "active_toggle" : "B"}><a href='#' onClick={() => toggleTabs(1)}>전체</a></span>
+                <span className={toggleState === 2 ? "active_toggle" : "B"}><a href='#' onClick={() => toggleTabs(2)}>일반</a></span>
+                <span className={toggleState === 3 ? "active_toggle" : "B"}><a href='#' onClick={() => toggleTabs(3)}>랭크</a></span>
+                <span className={toggleState === 4 ? "active_toggle" : "B"}><a href='#' onClick={() => toggleTabs(4)}>코발트</a></span>
               </div>
             </div>
 
@@ -299,11 +298,11 @@ function UserinfoPage() {
                         <>
                           <div style={{ fontWeight: "bold", fontSize: "20px", color: "silver" }}>#4</div>
                         </>
-                      <div>Solo</div>
+                      <div>랭크 게임</div>
                       <div>6시간 전</div>
                     </div>
                     <div className='second'>
-                      <img className='char_img' src={`${process.env.PUBLIC_URL}/image/Char/icon/Yuki.png`} />
+                      <img className='char_img' src={`${process.env.PUBLIC_URL}/image/Char/icon/Sua.png`} />
                       <img className='char_wephon' src={`${process.env.PUBLIC_URL}/image/WeaponMastery/02. Two-Handed Sword.png`} />
                       <div className='charLevel'>17</div>
                     </div>
@@ -363,10 +362,10 @@ function UserinfoPage() {
                       } */}
                  
                         <>
-                          <div style={{ fontWeight: "bold", fontSize: "20px", color: "silver" }}>#7</div>
+                          <div style={{ fontWeight: "bold", fontSize: "20px", color: "silver" }}>패배</div>
                         </>
 
-                      <div>Duo</div>
+                      <div>코발트</div>
                       <div>8시간 전</div>
                     </div>
                     <div className='second'>

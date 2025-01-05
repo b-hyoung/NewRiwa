@@ -141,7 +141,7 @@ function User_Stat({useData,name , infoTier}) {
         <div className='img_Box'>
           <img src={process.env.PUBLIC_URL + '/image/Tier/Platinum.png'} />
         </div>
-        <img className='char' src={`${process.env.PUBLIC_URL}/image/Char/Full/charhalf_028_Sua.png`} />
+        <img className='char' src={`${process.env.PUBLIC_URL}/image/Char/Full/charhalf_017_Adriana.png`} />
         <div className='avg_Info' style={{position:"relative",top:""}}>
           <div style={{marginBottom:"15px" ,width:"100%"}}>
             <div>

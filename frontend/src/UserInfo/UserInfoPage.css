@@ -296,37 +296,43 @@
     position: relative;
     display: flex;
     flex-direction: row;
-    width: 600px;
+    justify-content: end;
     color: white;
-    left: 730px;
-    
+}
+
+.select_modeAll a:hover {
+    color: white;
 }
 
 .select_modeAll span{
-    width: 60px;
-    border : 1px solid rgb(135, 135, 135);
-    border-radius: 13px ;
+    width: auto;
+    border: 1px solid rgb(135, 135, 135);
+    border-radius: 13px;
     margin-right: 7px;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     margin-top: -10px;
-    padding: .7rem .7rem;
-    
+    padding: 0.35rem 0.8rem;
+    font-size: 18px;
+    letter-spacing: 1px;
 }
 
 
-.select_modeAll span a{
+.select_modeAll .B  a{
     outline: none;
-    color: #DCE2F0;
     text-decoration: none;
-    font-size: 15px;
     position: relative;
+    margin: 0px 10px;
+    color: white;
 }
 
 .active_toggle{
-    background-color: #77A7D7;
 }
 .active_toggle a{
     font-weight: bolder;
+    color: white; 
+    text-decoration: none;
+    padding: 1rem 1rem;
+
 }
 
 /* .select_modeAll .B a::before , .select_modeAll .C a::before{
