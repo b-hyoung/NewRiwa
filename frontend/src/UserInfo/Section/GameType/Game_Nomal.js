@@ -2,8 +2,6 @@ import React from 'react'
 
 function Game_Nomal({ userLog }) {
 
-    console.log(userLog)
-
     return (
         <div>
             {userLog.map((item, index) => {
@@ -39,7 +37,15 @@ function Game_Nomal({ userLog }) {
                             </div>
                             <div className='fifth'>
                                 <div style={{ fontWeight: "300" }}>Route</div>
-                                <div style={{ fontSize: "18px", fontWeight: 'bold' }}><a href='#' style={{ textDecoration: "none", backgroundColor: "none", color: "white" }}>{item.routeId}</a></div>
+                                <div style={{ fontSize: "18px", fontWeight: 'bold' }}>
+                                    {item.routeId === "비공개" ? 
+                                    <>
+                                    <a href='#' style={{ textDecoration: "none", backgroundColor: "none", color: "white" , opacity:"0.5" }}>{item.routeId}</a>
+                                    </>
+                                    :
+                                    <a href='#' style={{ textDecoration: "none", backgroundColor: "none", color: "white" }}>{item.routeId}</a>
+                                    }
+                                </div>
                             </div>
                             <div className='sixth'>
                                 <div><img src={`${process.env.PUBLIC_URL}/image/Item/Weapon/ItemIcon_101303_CarapaceKatar.png`} /></div>
