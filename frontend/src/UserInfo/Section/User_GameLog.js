@@ -3,11 +3,27 @@ import './css/User_GameLog.css'
 
 function User_GameLog({ useData, mostData }) {
 
-    const [userInfo , setUserInfo] = useState({
-        most : "",
-        games  : "",
-        win : "",
-    })
+    const [userInfo , setUserInfo] = useState([
+        {
+            krChar : "알렉스",
+            char : "Alex",
+            games  : "78",
+            winning : "12.3"
+        },
+        {
+            krChar : "쇼이치",
+            char : "Shoichi",
+            games  : "53",
+            winning : "7.3"
+        },
+        {
+            krChar : "유키",
+            char : "Yuki",
+            games  : "32",
+            winning : "4.2"
+        }
+    ]
+    )
 
     return (
         <>
@@ -16,20 +32,23 @@ function User_GameLog({ useData, mostData }) {
                     <span style={{width:"70%" , marginLeft:"5px",marginTop:"5px",marginBottom:"5px"}}>캐릭터</span>
                     <span style={{marginLeft:"130px"}}>승 률</span>
                 </div>
-                <div className='most_op'>
-                    <div>
-                        { <img className='most_img' src={`${process.env.PUBLIC_URL}/image/Char/icon/Alex.png`} />}
-                    </div>
-                    <div className='left_op'>
-                        <div style={{ color: "white" }}>Alex</div>
-                        <div style={{ color: "white", fontSize: "11.5px" }}>133 Games</div>
-                    </div>
-                    <div className='right_op'>
-                        <div>27.3 %</div>
-                    </div>
-                </div>
-
-                <div className='most_op'>
+                {userInfo.map((item,idx) => {
+                    return(
+                            <div className='most_op'>
+                                <div>
+                                    { <img className='most_img' src={`${process.env.PUBLIC_URL}/image/Char/icon/${item.char}.png`} />}
+                                </div>
+                                <div className='left_op'>
+                                    <div style={{ color: "white" }}>{item.krChar}</div>
+                                    <div style={{ color: "white", fontSize: "11.5px" }}>{item.games} Games</div>
+                                </div>
+                                <div className='right_op'>
+                                    <div>{item.winning} %</div>
+                                </div>
+                            </div>
+                    )
+                })}
+                {/* <div className='most_op'>
                     <div>
                         { <img className='most_img' src={`${process.env.PUBLIC_URL}/image/Char/icon/Shoichi.png`} />}
                     </div>
@@ -53,8 +72,8 @@ function User_GameLog({ useData, mostData }) {
                     <div className='right_op'>
                         <div>33.7 %</div>
                     </div>
-                </div>
-            </div>
+                </div> */}
+            </div> 
         </>
     )
 }

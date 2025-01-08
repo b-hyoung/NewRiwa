@@ -53,7 +53,6 @@ function Game_Nomal({ userLog }) {
                                 <div><img src={`${process.env.PUBLIC_URL}/image/Item/Amor/ItemIcon_205503_Kundala.png`} /></div>
                                 <div><img src={`${process.env.PUBLIC_URL}/image/Item/Amor/ItemIcon_205213_MarksmanHandbook.png`} /></div>
                                 <div><img src={`${process.env.PUBLIC_URL}/image/Item/Amor/ItemIcon_204410_GlacialShoes.png`} /></div>
-                                <div><img src={`${process.env.PUBLIC_URL}/image/Item/Amor/ItemIcon_202501_Kabana.png`} /></div>
                             </div>
                             <div className='seventh'>
                                 {/* <button onClick={(e) => handleClickOpen(e, index)}></button> */}

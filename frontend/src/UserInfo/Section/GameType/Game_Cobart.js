@@ -52,7 +52,6 @@ function Game_Cobart({ userLog }) {
                 <div><img src={`${process.env.PUBLIC_URL}/image/Item/Amor/ItemIcon_205503_Kundala.png`} /></div>
                 <div><img src={`${process.env.PUBLIC_URL}/image/Item/Amor/ItemIcon_203501_BraceletofSkadi.png`} /></div>
                 <div><img src={`${process.env.PUBLIC_URL}/image/Item/Amor/ItemIcon_204410_GlacialShoes.png`} /></div>
-                <div><img src={`${process.env.PUBLIC_URL}/image/Item/Amor/ItemIcon_205501_EmeraldTablet.png`} /></div>
               </div>
               <div className='seventh'>
                 {/* <button onClick={(e) => handleClickOpen(e, index)}></button> */}
