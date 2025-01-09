@@ -29,8 +29,13 @@ function User_GameLog({ useData, mostData }) {
         <>
             <div>
                 <div className='log_header' style={{backgroundColor:"#50586C" , width:"100%",height:"30px",padding:"0.15rem 0.15rem" ,color:"#DCE2F0"}}>
-                    <span style={{width:"70%" , marginLeft:"5px",marginTop:"5px",marginBottom:"5px"}}>캐릭터</span>
-                    <span style={{marginLeft:"130px"}}>승 률</span>
+                    <div>
+                        <span style={{width:"70%" , marginLeft:"5px",marginTop:"5px",marginBottom:"5px"}}>캐릭터</span>
+                    </div>
+                    <div style={{margin :"0 0 auto auto"}}>
+                        <span >KDA</span>
+                        <span style={{marginLeft:"20px"}}>승 률</span>
+                    </div>
                 </div>
                 {userInfo.map((item,idx) => {
                     return(
@@ -42,8 +47,11 @@ function User_GameLog({ useData, mostData }) {
                                     <div style={{ color: "white" }}>{item.krChar}</div>
                                     <div style={{ color: "white", fontSize: "11.5px" }}>{item.games} Games</div>
                                 </div>
+                                <div style={{color:"white",marginTop:"12px" , fontSize:"14px",marginRight:"10px"}}>
+                                    <div>3.2</div>
+                                </div>
                                 <div className='right_op'>
-                                    <div>{item.winning} %</div>
+                                    <div>{item.winning}%</div>
                                 </div>
                             </div>
                     )
