@@ -9,6 +9,11 @@ function MainPage() {
     const navigate = useNavigate("");
     const [nickName, setNickName] = useState("")
     const [historyArray , setHistoryArray] = useState([])
+    const [coupon , setCopon] =useState([
+        {
+            code : "WELCOME ERIWA!"
+        }
+    ])
     
     useEffect(() => {
         if(JSON.parse(localStorage.getItem("historyName")) !== null){
@@ -98,6 +103,16 @@ function MainPage() {
         
     }    
 
+    //쿠폰 코드 복사
+    const handleClickCopy = async (couponCode) => {
+        try { 
+            await navigator.clipboard.writeText(couponCode);
+            alert("쿠폰 코드를 복사했습니다")
+        }catch(error){
+            alert("쿠폰 코드 복사 실패 !")
+        }
+    }
+
     return (
         <div className='page_wrapper'>
             <div className='MP_Box'>
@@ -122,6 +137,15 @@ function MainPage() {
                         )
                     })}
                 </div>
+            </div>
+            <div className='Cupon_Box'>
+                    {coupon.map((item,index) => {
+                        return(
+                            <>
+                                <div onClick={() => handleClickCopy(item.code)}>{item.code}</div>
+                            </>
+                        )
+                    })}
             </div>
         </div>
     )
