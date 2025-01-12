@@ -11,7 +11,10 @@ function MainPage() {
     const [historyArray , setHistoryArray] = useState([])
     const [coupon , setCopon] =useState([
         {
-            code : "WELCOME ERIWA!"
+            code : "Welcome To Eriwa :)"
+        },
+        {
+            code : "Good By Eriwa :|"
         }
     ])
     
@@ -139,10 +142,13 @@ function MainPage() {
                 </div>
             </div>
             <div className='Cupon_Box'>
+                <div className='Cupon_Title'>
+                    쿠폰 우마이
+                </div>
                     {coupon.map((item,index) => {
                         return(
                             <>
-                                <div onClick={() => handleClickCopy(item.code)}>{item.code}</div>
+                                <div className='Cupon_Code' onClick={() => handleClickCopy(item.code)}>{item.code}</div>
                             </>
                         )
                     })}
