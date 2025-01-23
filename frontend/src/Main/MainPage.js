@@ -11,10 +11,12 @@ function MainPage() {
     const [historyArray , setHistoryArray] = useState([])
     const [coupon , setCopon] =useState([
         {
-            code : "Welcome To Eriwa :)"
+            code : "Welcome To Eriwa :)",
+            days : 20201125
         },
         {
-            code : "Good By Eriwa :|"
+            code : "Good By Eriwa :|",
+            days : 20201128
         }
     ])
     
@@ -115,6 +117,9 @@ function MainPage() {
             alert("쿠폰 코드 복사 실패 !")
         }
     }
+    const handleClickEnd = (e) => {
+        alert("이미 만료된 쿠폰입니다")
+    }
 
     return (
         <div className='page_wrapper'>
@@ -148,10 +153,19 @@ function MainPage() {
                     {coupon.map((item,index) => {
                         return(
                             <>
-                                <div className='Cupon_Code' onClick={() => handleClickCopy(item.code)}>{item.code}</div>
+                                {item.days >= 20201127 ? 
+                                <>
+                                    <div className='Cupon_Code' onClick={() => handleClickCopy(item.code)}>{item.code}</div>
+                                </>
+                                :
+                                <>
+                                    <div className='Cupon_Code_End' onClick={() => handleClickEnd(item.code)}>{item.code}</div>
+                                </>
+                                }
                             </>
                         )
                     })}
+                     
             </div>
         </div>
     )

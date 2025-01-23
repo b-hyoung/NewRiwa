@@ -125,3 +125,7 @@
     margin-bottom: 10px;
     font-weight: 600;
 }
+.Cupon_Box .Cupon_Code_End{
+    cursor: pointer;
+    opacity: 0.7;
+}
