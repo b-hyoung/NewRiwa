@@ -19,6 +19,7 @@ function MainPage() {
             days : 20201128
         }
     ])
+    const [newCupon , setNewCupon] = useState()
     
     useEffect(() => {
         if(JSON.parse(localStorage.getItem("historyName")) !== null){
@@ -121,6 +122,15 @@ function MainPage() {
         alert("이미 만료된 쿠폰입니다")
     }
 
+    //쿠폰이 더 있어요 !
+    const handleClickAddCupon = (e) => {
+        let addCupon = window.prompt("유효 쿠폰을 입력해주세요")
+        setNewCupon(addCupon)
+        //서버에 보내기
+        console.log(addCupon)
+
+    }
+
     return (
         <div className='page_wrapper'>
             <div className='MP_Box'>
@@ -165,7 +175,9 @@ function MainPage() {
                             </>
                         )
                     })}
-                     
+                     <div>
+                        <button onClick={() => handleClickAddCupon()}>쿠폰이 더 있어요 !</button>
+                     </div>
             </div>
         </div>
     )
