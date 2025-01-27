@@ -115,7 +115,7 @@ function MainPage() {
             await navigator.clipboard.writeText(couponCode);
             alert("쿠폰 코드를 복사했습니다")
         }catch(error){
-            alert("쿠폰 코드 복사 실패 !")
+            alert("현재 사용 불가능한 쿠폰입니다.")
         }
     }
     const handleClickEnd = (e) => {
