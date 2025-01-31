@@ -172,6 +172,7 @@ function UserinfoPage() {
     }
   }
 
+  //클릭하면 대전기록 열자
   const handleClickOpen = (e, index) => {
     e.preventDefault();
     if (clickButton === true) {
@@ -183,11 +184,13 @@ function UserinfoPage() {
     }
   }
 
+  //유저 이름 검색
   const handleChangeInput = (event) => {
     event.preventDefault()
     setSearchInputForm(event.target.value)
   }
 
+  //모드 선택
   const toggleTabs = (index) => {
     setToggleState(index)
     // if(index === 1){
