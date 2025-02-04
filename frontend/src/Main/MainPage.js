@@ -6,6 +6,8 @@ import axios from 'axios'
 import User_Stat from '../UserInfo/Section/User_Stat'
 
 function MainPage() {
+    const apiurls = 'http://127.0.0.1:8000/api/hello/'
+    
     const navigate = useNavigate("");
     const [nickName, setNickName] = useState("")
     const [historyArray , setHistoryArray] = useState([])
@@ -29,6 +31,18 @@ function MainPage() {
         // localStorage.removeItem("historyName")
         DeleteOldHistory()
     })
+   
+
+    // axio 가져오기 테스트
+    // const testAxios = () =>{
+    //         axios.get(apiurls)
+    //         .then(function(response){
+    //             alert(response.data.message)    
+    //         })
+    //         .catch(function(error){
+    //             alert(error)
+    //         })
+    // }
 
     const getHistoryList = () => {
         const arr = JSON.parse(localStorage.getItem("historyName"))
