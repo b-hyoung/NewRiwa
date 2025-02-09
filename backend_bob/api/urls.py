@@ -2,7 +2,9 @@
 
 from django.urls import path
 from .views import HelloAPI
+from .views import UserInfoFromJsonAPI
 
 urlpatterns = [
     path('hello/', HelloAPI.as_view(), name='hello_api'),
+    path('userinfo/',UserInfoFromJsonAPI.as_view(), name='user_info')
 ]

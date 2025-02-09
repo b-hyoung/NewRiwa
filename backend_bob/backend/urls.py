@@ -19,5 +19,4 @@ from django.urls import path , include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/' , include('api.urls')) # api 앱의 url 포함시키기
-    # path('api/')
 ]
