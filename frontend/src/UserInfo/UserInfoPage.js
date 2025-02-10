@@ -29,6 +29,8 @@ function UserinfoPage() {
   const [bool, setBool] = useState(true)
   const [bool2, setBool2] = useState(true)
 
+  const userInfoApi = `http://127.0.0.1:8000/api/userinfo/?username=${nickname}`
+
   const [userLogNomal, setUserLogNomal] = useState([
     {
       rank: "#2",
@@ -66,6 +68,16 @@ function UserinfoPage() {
 
   // rank , people , timeago , weaponLevel , kah , mmr , rootId
 
+  useEffect(()=> {
+    axios.get(userInfoApi)
+      .then(response => 
+      {
+        console.log(response.data)
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  },[])
 
   useEffect(() => {
     getUserGame()
