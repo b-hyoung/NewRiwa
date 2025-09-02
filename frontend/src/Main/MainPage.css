@@ -42,7 +42,7 @@
 .MP_NameBox {
     margin: 0 auto;
     width: 35vw;
-    min-width: 300px;
+    min-width: 500px;
     height: 70px;
     border: 1.5px solid #50586C;
     border-radius: 15px;
@@ -64,7 +64,7 @@
     padding-top: 20px;
     border: 1px solid #50586C;
     border-radius: 20px;
-    min-width: 300px;
+    min-width: 500px;
 }
 .MP_Name_submitBtn {
   margin-top: 10px;
@@ -220,5 +220,15 @@
         top: 0vh;
         margin: 0 auto;
         left: 0; right: 0;
+    }
+    
+    .MP_Box {
+    position: relative;
+    z-index: 1;
+    margin-top: 10px;
+    left: 0;
+    max-width: 600px;
+    padding-top: 30px;
+    margin: 0 auto;
     }
 }
