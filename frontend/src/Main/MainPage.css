@@ -1,42 +1,45 @@
 .page_wrapper {
-  position: relative;
-  height: 93vh;
-  background: url('../image/Background/Docks.jpg') no-repeat center center fixed;
-  background-size: cover;
-  overflow: hidden;
+    position: relative;
+    height: 93vh;
+    background: url('../image/Background/Docks.jpg') no-repeat center center fixed;
+    background-size: cover;
+    overflow: hidden;
 }
 
 .page_wrapper::before {
-  content: "";
-  position: absolute;
-  inset: 0; 
-  background: rgba(92, 92, 92, 0.3);
-  z-index: 0;
-}
-.MP_Box{
-  position: absolute;
-  top: 40%;
-  left: 30%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px; 
-  padding: 14px 18px; 
-  border-radius: 16px;
-  background: rgba(18, 22, 28, 0.68);
-  border: 1px solid rgba(80, 88, 108, 0.6); 
-  box-shadow: 0 12px 28px rgba(0,0,0,.35);
-  backdrop-filter: blur(6px); 
-  z-index: 1; 
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(92, 92, 92, 0.3);
+    z-index: 0;
 }
 
-.MP_Box::before{
-  content:"";
-  position:absolute;
-  left: 12px; right: 12px; top: 10px;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,.08), transparent);
-  pointer-events:none;
+.MP_Box {
+    position: absolute;
+    top: 40%;
+    left: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 18px;
+    border-radius: 16px;
+    background: rgba(18, 22, 28, 0.68);
+    border: 1px solid rgba(80, 88, 108, 0.6);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, .35);
+    backdrop-filter: blur(6px);
+    z-index: 1;
+}
+
+.MP_Box::before {
+    content: "";
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    top: 10px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .08), transparent);
+    pointer-events: none;
 }
 
 .MP_NameBox {
@@ -51,14 +54,16 @@
     align-items: center;
     background-color: #50586C;
 }
-.MP_Name{
+
+.MP_Name {
     font-size: 22px;
     margin-left: 1.5vw;
     border: none;
     outline: none;
     background-color: #50586C;
 }
-.MP_NameHistory{
+
+.MP_NameHistory {
     width: 35vw;
     height: 300px;
     padding-top: 20px;
@@ -66,19 +71,20 @@
     border-radius: 20px;
     min-width: 500px;
 }
+
 .MP_Name_submitBtn {
-  margin-top: 10px;
-  margin-bottom: 10px;
-  width: 6vw;
-  min-width: 120px;            
-  background: rgba(80, 88, 108, 0.8); 
-  color: #f2f2f2;
-  border-radius: 20px;
-  font-size: 22px;
-  padding: 10px 14px;
-  font-weight: bold;
-  border: 3px solid #50586C;    
-  cursor: pointer;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 6vw;
+    min-width: 120px;
+    background: rgba(80, 88, 108, 0.8);
+    color: #f2f2f2;
+    border-radius: 20px;
+    font-size: 22px;
+    padding: 10px 14px;
+    font-weight: bold;
+    border: 3px solid #50586C;
+    cursor: pointer;
 }
 
 .History_NameList {
@@ -93,10 +99,12 @@
     color: rgb(173, 173, 173);
     margin-bottom: 15px;
 }
-.History_NameList  .History_Name{
+
+.History_NameList .History_Name {
     font-size: 24px;
     cursor: pointer;
 }
+
 .History_NameList button {
     border: 1px solid rgb(161, 239, 255);
     color: none;
@@ -108,63 +116,70 @@
     width: 30px;
     height: 30px;
 }
+
 /* 이름 박스*/
 
 
 
-.event_Logo{
+.event_Logo {
     width: 500px;
-    height:250px;
+    height: 250px;
     display: flex;
     text-align: center;
     margin: 0px auto;
     margin-top: 200px;
 }
 
-.event_Logo img{
+.event_Logo img {
     object-fit: cover;
     margin-left: 20px;
 }
-.header{
+
+.header {
     position: relative;
     width: 500px;
     height: 45px;
     border-radius: 1rem;
     border: none;
     display: flex;
-    margin :0px auto; /* 가운데 정렬 */
+    margin: 0px auto;
+    /* 가운데 정렬 */
     animation-name: fadeOut;
     animation-duration: 1s;
     animation-iteration-count: 1;
 }
-@keyframes fadeOut{
+
+@keyframes fadeOut {
     from {
         width: 20px;
-    }to {
+    }
+
+    to {
         width: 600px;
 
     }
 }
 
-.header  input{
-    width:100%;
-    border:0px;
+.header input {
+    width: 100%;
+    border: 0px;
     outline: none;
     padding: 5px 5px;
 }
 
-.header Button{
+.header Button {
     right: 5px;
     top: 2.5px;
     position: absolute;
     width: 65px;
     height: 40px;
-    border:none;
+    border: none;
     border-radius: 0.5rem;
     background: rgb(61, 61, 61);
     color: white;
 }
-.Cupon_Box{
+
+.Cupon_Box {
     right: 2%;
     top: 40%;
     position: fixed;
@@ -182,27 +197,31 @@
     margin-bottom: 10px;
     font-size: 20px;
 }
-.Cupon_Box .Cupon_Title{
+
+.Cupon_Box .Cupon_Title {
     border-bottom: 1px solid red;
     margin-bottom: 5px;
     padding-bottom: 10px;
     margin-bottom: 20px;
     font-size: 30px;
 }
-.Cupon_Box .Cupon_Code{
+
+.Cupon_Box .Cupon_Code {
     cursor: pointer;
     font-weight: 600;
     font-size: 25px;
     margin-top: 10px;
 }
-.Cupon_Box .Cupon_Code_End{
+
+.Cupon_Box .Cupon_Code_End {
     cursor: pointer;
     opacity: 0.7;
     margin-bottom: 20px;
     font-size: 25px;
 
 }
-.Cupon_Box button{
+
+.Cupon_Box button {
     position: absolute;
     bottom: 10px;
     transform: translateX(-50%);
@@ -214,21 +233,24 @@
     color: white;
     cursor: pointer;
 }
-@media (max-width:1650px){
-    .Cupon_Box{
+
+@media (max-width:1650px) {
+    .Cupon_Box {
         position: absolute;
-        top: 0vh;
+        top: 2vh;
         margin: 0 auto;
-        left: 0; right: 0;
+        left: 0;
+        right: 0;
+        height: 300px;
     }
-    
+
     .MP_Box {
-    position: relative;
-    z-index: 1;
-    margin-top: 10px;
-    left: 0;
-    max-width: 600px;
-    padding-top: 30px;
-    margin: 0 auto;
+        position: relative;
+        z-index: 1;
+        margin-top: 10px;
+        left: 0;
+        max-width: 600px;
+        padding-top: 30px;
+        margin: 0 auto;
     }
 }
