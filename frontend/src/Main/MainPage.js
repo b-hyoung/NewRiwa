@@ -151,7 +151,7 @@ function MainPage() {
                 <div className='MP_NameBox'>
                     <input className='MP_Name' onChange={(e)=> handleInputChange(e)} onKeyDown={handleEnterInput}/>
                 </div>
-                <button onClick={handleUserInfoClick}>검색</button>
+                <button className='MP_Name_submitBtn' onClick={handleUserInfoClick}>검색</button>
                 <div className='MP_NameHistory'>
                     {(historyArray).map((item , index) => {
                         return(
@@ -172,7 +172,7 @@ function MainPage() {
             </div>
             <div className='Cupon_Box'>
                 <div className='Cupon_Title'>
-                    쿠폰 우마이
+                    쿠폰 목록
                 </div>
                     {coupon.map((item,index) => {
                         return(
@@ -190,7 +190,7 @@ function MainPage() {
                         )
                     })}
                      <div>
-                        <button onClick={() => handleClickAddCupon()}>쿠폰이 더 있어요 !</button>
+                        <button onClick={() => handleClickAddCupon()}>쿠폰 등록</button>
                      </div>
             </div>
         </div>

@@ -1,52 +1,112 @@
-.page_wrapper{
-    height: 94vh;
-}
-.MP_Box{
-    position: absolute;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    top: 40%;
-    left: 30%;
+.page_wrapper {
+  position: relative;
+  height: 93vh;
+  background: url('../image/Background/Docks.jpg') no-repeat center center fixed;
+  background-size: cover;
+  overflow: hidden;
 }
 
-/* 이름 박스 */
+.page_wrapper::before {
+  content: "";
+  position: absolute;
+  inset: 0; 
+  background: rgba(92, 92, 92, 0.3);
+  z-index: 0;
+}
+.MP_Box{
+  position: absolute;
+  top: 40%;
+  left: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px; 
+  padding: 14px 18px; 
+  border-radius: 16px;
+  background: rgba(18, 22, 28, 0.68);
+  border: 1px solid rgba(80, 88, 108, 0.6); 
+  box-shadow: 0 12px 28px rgba(0,0,0,.35);
+  backdrop-filter: blur(6px); 
+  z-index: 1; 
+}
+
+.MP_Box::before{
+  content:"";
+  position:absolute;
+  left: 12px; right: 12px; top: 10px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.08), transparent);
+  pointer-events:none;
+}
+
 .MP_NameBox {
     margin: 0 auto;
-    width: 670px;
-    height: 7vh;
-    border: 1.5px solid black;
+    width: 35vw;
+    min-width: 300px;
+    height: 70px;
+    border: 1.5px solid #50586C;
     border-radius: 15px;
     color: black;
     display: grid;
     align-items: center;
+    background-color: #50586C;
 }
 .MP_Name{
     font-size: 22px;
     margin-left: 1.5vw;
     border: none;
     outline: none;
+    background-color: #50586C;
 }
 .MP_NameHistory{
-    width: 670px;
+    width: 35vw;
     height: 300px;
-    border: 1px solid rgb(166, 166, 166)
+    padding-top: 20px;
+    border: 1px solid #50586C;
+    border-radius: 20px;
+    min-width: 300px;
 }
-.History_NameList{
+.MP_Name_submitBtn {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 6vw;
+  min-width: 120px;            
+  background: rgba(80, 88, 108, 0.8); 
+  color: #f2f2f2;
+  border-radius: 20px;
+  font-size: 22px;
+  padding: 10px 14px;
+  font-weight: bold;
+  border: 3px solid #50586C;    
+  cursor: pointer;
+}
+
+.History_NameList {
     text-align: center;
     margin-top: 10px;
+    width: max-content;
+    margin: 0 auto;
+    background-color: #18475a;
+    text-align: center;
+    border-radius: 15px;
+    padding: 7px 10px;
+    color: rgb(173, 173, 173);
+    margin-bottom: 15px;
 }
 .History_NameList  .History_Name{
     font-size: 24px;
     cursor: pointer;
 }
-.History_NameList button{
-    border: none;
+.History_NameList button {
+    border: 1px solid rgb(161, 239, 255);
     color: none;
-    background-color: white;
+    background-color: none;
     font-size: 20px;
-    margin-left: 50px;
-    opacity: 0.5;
+    margin-left: 15px;
+    opacity: 0.1;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
 }
 /* 이름 박스*/
 
@@ -105,27 +165,60 @@
     color: white;
 }
 .Cupon_Box{
-    right: 10%;
+    right: 2%;
     top: 40%;
-    position: absolute;
-    width: 200px;
-    height: 300px;
+    position: fixed;
+    width: 500px;
+    height: 500px;
     border: 0.5px solid black;
     border-radius: 10px;
     text-align: center;
     padding: 1rem 1rem;
+    background: rgba(18, 22, 28, 0.68);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, .35);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    color: white;
+    margin-bottom: 10px;
+    font-size: 20px;
 }
 .Cupon_Box .Cupon_Title{
     border-bottom: 1px solid red;
     margin-bottom: 5px;
-    padding-bottom: 3px;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    font-size: 30px;
 }
 .Cupon_Box .Cupon_Code{
     cursor: pointer;
-    margin-bottom: 10px;
     font-weight: 600;
+    font-size: 25px;
+    margin-top: 10px;
 }
 .Cupon_Box .Cupon_Code_End{
     cursor: pointer;
     opacity: 0.7;
+    margin-bottom: 20px;
+    font-size: 25px;
+
+}
+.Cupon_Box button{
+    position: absolute;
+    bottom: 10px;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 50px;
+    border: none;
+    border-radius: 10px;
+    background: rgb(54, 54, 54);
+    color: white;
+    cursor: pointer;
+}
+@media (max-width:1650px){
+    .Cupon_Box{
+        position: absolute;
+        top: 0vh;
+        margin: 0 auto;
+        left: 0; right: 0;
+    }
 }
