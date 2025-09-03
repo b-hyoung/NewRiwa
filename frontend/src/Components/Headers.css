@@ -15,7 +15,9 @@
     }
 }
 
-
+.me-auto{
+    width: max-content;
+}
 
 .searchForm{
     position: relative;
