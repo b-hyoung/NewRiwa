@@ -37,16 +37,16 @@ import './css/pentagon.css'
                 </div>
                 */}
 
-function Pentagon({ name, infoTier, dataUser , usertier }) {
+function Pentagon({ name, infoTier, dataUser, usertier }) {
     // 닉네임 , 티어 , 순위 , 킬 , 가한피해량 , 무기숙련도 , 야생동물
-    const [userInfo , setUserInfo ] = useState({
-        nickName : "김밥님",
-        tier : "Platinum",
-        avgRank : "S",
-        avgKill : "C",
-        avgDamage : "A",
-        avgWeapon : "B",
-        avgHunt : "D"
+    const [userInfo, setUserInfo] = useState({
+        nickName: "김밥님",
+        tier: "Platinum",
+        avgRank: "S",
+        avgKill: "C",
+        avgDamage: "A",
+        avgWeapon: "B",
+        avgHunt: "D"
     })
 
     //오각형 그래프 위치
@@ -338,7 +338,7 @@ function Pentagon({ name, infoTier, dataUser , usertier }) {
                 <div className='colume'>
                     <div className='test_' style={{ backgroundColor: "orange" }}></div>
                     <div>
-                    <span >{userInfo.tier}</span>
+                        <span >{userInfo.tier}</span>
                     </div>
                 </div>
                 <div className='colume'>
@@ -347,19 +347,19 @@ function Pentagon({ name, infoTier, dataUser , usertier }) {
                 </div>
             </div>
             <svg>
-            <g>
+                <g>
                     <circle r="22.5px" opacity="0.2" transform="translate(115,115)" ></circle>
                     <circle r="45px" opacity="0.2" transform="translate(115,115)" ></circle>
                     <circle r="67.5px" opacity="0.2" transform="translate(115,115)" ></circle>
-                    <circle r="90px" opacity="0.4"  transform="translate(115,115)" ></circle>
-             
+                    <circle r="90px" opacity="0.4" transform="translate(115,115)" ></circle>
+
                     <line transform="translate(115,115)" x="0" y="0" x2="0" y2="-90" stroke='#bebebe' />
                     <line transform="translate(115,115)" x2="85.5" y2="-28" x="0" y="0" stroke='#bebebe' ></line>
                     <line transform="translate(115,115)" x2="53" y2="73" x="0" y="0" stroke='#bebebe'></line>
                     <line transform="translate(115,115)" x2="-53" y2="73" x="0" y="0" stroke='#bebebe' ></line>
                     <line transform="translate(115,115)" x2="-85.5" y2="-27.5" x="0" y="0" stroke='#bebebe' ></line>
 
-                    <path d="M 0,-45 L42,-13 L26,36 L-26,36 L-42,-13.5 Z"  stroke='rgb(92,166,196)' fill='none' transform="translate(115,115)"></path>
+                    <path d="M 0,-45 L42,-13 L26,36 L-26,36 L-42,-13.5 Z" stroke='rgb(92,166,196)' fill='none' transform="translate(115,115)"></path>
                     <path d={"M " + survTemp + " L" + killTemp + " L" + demageTemp + " L" + masteryTemp + " L" + huntTemp + " Z"} stroke='rgb(119, 126, 88)' fill='rgb(161, 239, 255)' opacity="0.4" transform="translate(115,115)"></path>
                 </g>
             </svg>
