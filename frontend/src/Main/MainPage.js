@@ -3,10 +3,10 @@ import './MainPage.css'
 import { useNavigate } from 'react-router-dom'
 import event_logo from '../image/Logo/EventLogo.png'
 import axios from 'axios'
+import { USER_INFO_API } from '../api/apiConfig';
 import User_Stat from '../UserInfo/Section/User_Stat'
 
 function MainPage() {
-    const apiurls = 'http://127.0.0.1:8000/api/hello/'
     
     const navigate = useNavigate("");
     const [nickName, setNickName] = useState("")
@@ -31,18 +31,6 @@ function MainPage() {
         // localStorage.removeItem("historyName")
         DeleteOldHistory()
     })
-   
-
-    // axio 가져오기 테스트
-    // const testAxios = () =>{
-    //         axios.get(apiurls)
-    //         .then(function(response){
-    //             alert(response.data.message)    
-    //         })
-    //         .catch(function(error){
-    //             alert(error)
-    //         })
-    // }
 
     const getHistoryList = () => {
         const arr = JSON.parse(localStorage.getItem("historyName"))
@@ -75,12 +63,12 @@ function MainPage() {
     }
 
     // 현재 서버가없어서 에러가 뜨는 상태
-    //유저 닉네임 확인후 이동
+    // 유저 닉네임 확인후 이동
     const handleUserInfoClick = (e) => {
         if (nickName.length > 0 && nickName.includes(" ") ===false) {
             // try {
             //     axios.post(
-            //         'http://127.0.0.1:8000/api/UserInfo/',
+            //         USER_INFO_API.CREATE,
             //         {
             //             nickname: nickName
             //         },
@@ -93,8 +81,8 @@ function MainPage() {
             //             // navigate(`/userInfo/${nickName}`)
             //         });
             //     } catch (error) {
-                //         console.error("에러가 이건가?" + error);
-                //     }
+            //         console.error("에러가 이건가?" + error);
+            //     }
                 if(historyArray.length === 0 || historyArray.filter((user) => user === nickName).length === 0){
                     addUser()
                     navigate(`/userInfo/${nickName}`)
@@ -120,7 +108,6 @@ function MainPage() {
         const result = ary.filter((user) => user !== DeleteUser);
         setHistoryArray(result)
         localStorage.setItem("historyName",JSON.stringify(result))
-        
     }    
 
     //쿠폰 코드 복사
@@ -142,7 +129,6 @@ function MainPage() {
         setNewCupon(addCupon)
         //서버에 보내기
         console.log(addCupon)
-
     }
 
     return (

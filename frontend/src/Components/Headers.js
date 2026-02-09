@@ -7,6 +7,8 @@ import Eriwa_Logo from '../image/Logo/MainLogo.png'
 import './Headers.css'
 import axios from 'axios'
 
+import { USER_GAME_RECORD_API } from '../api/apiConfig';
+
 function Headers() {
 
   const [nickName , setUserInput] = useState("");
@@ -20,7 +22,7 @@ function Headers() {
   // const getUserGame = () => {
   //   try {
   //     axios.get(
-  //       'http://127.0.0.1:8000/api/UserGameRecord/' + nickname + '/')
+  //       USER_GAME_RECORD_API.GET(nickname))
   //       .then(response => {
   //         console.log(response)
   //         setUserRecode(response.data);

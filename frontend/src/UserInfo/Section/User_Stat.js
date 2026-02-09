@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import './css/User_Stat.css'
 import Form from 'react-bootstrap/Form'
-import axios from 'axios';
+import { USER_INFO_API } from '../../api/apiConfig';
 
 
 //    <div style={{fontWeight:"bold" , textAlign:"center"}}>" ENFJ 형 "</div>
@@ -48,7 +48,7 @@ function User_Stat({useData,name , infoTier}) {
   const getSelTier = () =>{
     // try {
     //   axios.get(
-    //     'http://127.0.0.1:8000/api/UserInfo/'+name+'/?matchingTeamMode='+selectTier
+    //     USER_INFO_API.GET_BY_TEAM_MODE(name, selectTier)
     //     , {
     //     },
     //   )
@@ -69,7 +69,7 @@ function User_Stat({useData,name , infoTier}) {
   const postTeamMode1 = () => {
     // try{
     //   axios.post(
-    //     'http://127.0.0.1:8000/api/UserInfo/?matchingTeamMode=1',
+    //     USER_INFO_API.CREATE_BY_TEAM_MODE(1),
     //     {
     //       nickname:name
     //     },
@@ -85,7 +85,7 @@ function User_Stat({useData,name , infoTier}) {
   const postTeamMode2 = () => {
     // try{
     //   axios.post(
-    //     'http://127.0.0.1:8000/api/UserInfo/?matchingTeamMode=2',
+    //     USER_INFO_API.CREATE_BY_TEAM_MODE(2),
     //     {
     //       nickname:name
     //     },
@@ -101,7 +101,7 @@ function User_Stat({useData,name , infoTier}) {
   const postTeamMode3 = () => {
     // try{
     //   axios.post(
-    //     'http://127.0.0.1:8000/api/UserInfo/?matchingTeamMode=3',
+    //     USER_INFO_API.CREATE_BY_TEAM_MODE(3),
     //     {
     //       nickname:name
     //     },

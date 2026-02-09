@@ -3,8 +3,12 @@ import './UserInfoPage.css'
 import Pentagon from './Section/Pentagon'
 import queryString from 'query-string'
 import { useLocation } from "react-router-dom";
-import axios from 'axios'
-import { useParams } from 'react-router-dom';
+import {
+  USER_INFO_API,
+  USER_GAME_RECORD_API,
+  USER_STATS_API,
+  DEPRECATED_USER_INFO_API_GET
+} from '../api/apiConfig';
 import ErrorPage from './Section/ErrorPage'
 import User_GameLog from './Section/User_GameLog'
 import User_Stats from './Section/User_Stat'
@@ -28,8 +32,6 @@ function UserinfoPage() {
   const [tierInfo, setTierInfo] = useState([]);
   const [bool, setBool] = useState(true)
   const [bool2, setBool2] = useState(true)
-
-  const userInfoApi = `http://127.0.0.1:8000/api/userinfo/?username=${nickname}`
 
   const [userLogNomal, setUserLogNomal] = useState([
     {
@@ -69,7 +71,7 @@ function UserinfoPage() {
   // rank , people , timeago , weaponLevel , kah , mmr , rootId
 
   useEffect(()=> {
-    axios.get(userInfoApi)
+    axios.get(DEPRECATED_USER_INFO_API_GET(nickname))
       .then(response => 
       {
         console.log(response.data)
@@ -94,7 +96,7 @@ function UserinfoPage() {
   const userNotFount = () => {
     try {
       axios.post(
-        'http://127.0.0.1:8000/api/UserInfo/',
+        USER_INFO_API.CREATE,
         {
           nickname: nickname
         },
@@ -109,7 +111,7 @@ function UserinfoPage() {
   const gameNotFount = () => {
     try {
       axios.post(
-        'http://127.0.0.1:8000/api/UserGameRecord/',
+        USER_GAME_RECORD_API.CREATE,
         {
           nickname: nickname
         },
@@ -126,7 +128,7 @@ function UserinfoPage() {
   const getUserGame = () => {
     // try {
     //   axios.get(
-    //     'http://127.0.0.1:8000/api/UserGameRecord/' + nickname + '/')
+    //     USER_GAME_RECORD_API.GET(nickname))
     //     .then(response => {
     //       console.log(response)
     //       setUserRecode(response.data); 
@@ -146,8 +148,7 @@ function UserinfoPage() {
   const getUserInfo = () => {
     // try {
     //   axios.get(
-    //     'http://127.0.0.1:8000/api/UserInfo/' + nickname + '/'
-
+    //     USER_INFO_API.GET(nickname)
     //   )
     //     .then(response => {
     //       console.log(response)
@@ -169,7 +170,7 @@ function UserinfoPage() {
     if (arr[0] !== undefined) {
       try {
         axios.post(
-          'http://127.0.0.1:8000/api/UserStats/'
+          USER_STATS_API.GET_BY_RANK
           , {
             rank: arr[0]
           },
