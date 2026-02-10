@@ -7,7 +7,7 @@ function Game_Nomal({ userLog }) {
             {userLog.map((item, index) => {
                 return (
                     <>
-                        <div className='user'>
+                        <div className='user' key={index}>
                             <div className='first'>
                                 <div style={{ fontWeight: "bold", fontSize: "20px", color: "silver" }}>{item.rank}</div>
                                 <div>{item.type}</div>

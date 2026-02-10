@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react'
 import './UserInfoPage.css'
 import Pentagon from './Section/Pentagon'
 import queryString from 'query-string'
-import { useLocation } from "react-router-dom";
+import axios from 'axios'
+import { useLocation, useParams } from "react-router-dom";
 import {
   USER_INFO_API,
   USER_GAME_RECORD_API,
@@ -21,7 +22,7 @@ import Game_Cobart from './Section/GameType/Game_Cobart';
 function UserinfoPage() {
 
   const { nickname } = useParams();
-  const [userData, setUserData] = useState([])
+  const [userData, setUserData] = useState({})
   const [userRecode, setUserRecode] = useState("")
   const [searchInputForm, setSearchInputForm] = useState("")
   const [useError, setUserError] = useState(false)
@@ -30,6 +31,7 @@ function UserinfoPage() {
   const [toggleState, setToggleState] = useState(1)
   const [arr, setArr] = useState([])
   const [tierInfo, setTierInfo] = useState([]);
+  const [mostPlayedChars, setMostPlayedChars] = useState([]);
   const [bool, setBool] = useState(true)
   const [bool2, setBool2] = useState(true)
 
@@ -71,15 +73,20 @@ function UserinfoPage() {
   // rank , people , timeago , weaponLevel , kah , mmr , rootId
 
   useEffect(()=> {
-    axios.get(DEPRECATED_USER_INFO_API_GET(nickname))
+    axios.get(USER_INFO_API.GET(nickname))
       .then(response => 
       {
-        console.log(response.data)
+        console.log(response.data); // Keep existing log
+        setUserData(response.data.user); // Set user data
+        setTierInfo(response.data.stats); // Set stats data to tierInfo
+        setMostPlayedChars(response.data.most_played_characters); // Set most played characters
+        setUserError(false); // Assume success, clear any error state
       })
       .catch(error => {
-        console.log(error)
+        console.log(error);
+        setUserError(true); // Indicate error occurred
       })
-  },[])
+  },[nickname]) // Add nickname to dependency array to re-fetch if nickname changes
 
   useEffect(() => {
     getUserGame()
@@ -244,7 +251,7 @@ function UserinfoPage() {
             </div>
 
             <div className='user_Infos'>
-              <User_GameLog useData={userData} mostData={userData.mostpick} />
+              <User_GameLog useData={userData} mostData={mostPlayedChars} />
             </div>
 
             <div className='user_GameLog'>

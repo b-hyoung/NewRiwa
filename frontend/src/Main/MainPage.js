@@ -24,22 +24,17 @@ function MainPage() {
     const [newCupon , setNewCupon] = useState()
     
     useEffect(() => {
-        if(JSON.parse(localStorage.getItem("historyName")) !== null){
-            getHistoryList()
+        const storedHistory = JSON.parse(localStorage.getItem("historyName"));
+        if (storedHistory !== null) {
+            if (storedHistory.length > 1) {
+                setHistoryArray(storedHistory.reverse());
+            } else {
+                setHistoryArray(storedHistory);
+            }
         }
-        //로컬 스토리지 네임 히스토리 지워버려
-        // localStorage.removeItem("historyName")
-        DeleteOldHistory()
-    })
+    }, []); // Empty dependency array to run once on mount
 
-    const getHistoryList = () => {
-        const arr = JSON.parse(localStorage.getItem("historyName"))
-        if(arr.length > 1){
-            setHistoryArray(arr.reverse())
-        }else{
-            setHistoryArray(arr)
-        }
-    }
+
 
     const handleInputChange = (e) => {
         setNickName(e.target.value)
@@ -51,21 +46,26 @@ function MainPage() {
         }
     }
 
-    const addUser = (e) => {
-        localStorage.setItem("historyName",JSON.stringify([...historyArray,nickName]))
+    const updateHistory = (newNickName) => {
+        let updatedHistory = historyArray.filter(name => name !== newNickName); // Remove if already exists
+        updatedHistory = [...updatedHistory, newNickName]; // Add to end
+
+        // Apply size limit
+        if (updatedHistory.length > 5) { // Limit to 5 entries (0-indexed length 6)
+            updatedHistory = updatedHistory.slice(1); // Remove oldest
+        }
+
+        setHistoryArray(updatedHistory);
+        localStorage.setItem("historyName", JSON.stringify(updatedHistory));
+        return updatedHistory; // Return the final history (optional, but good for chaining)
     }
 
-    const DeleteOldHistory = (e) => {
-        if(historyArray.length >= 6){
-            historyArray.shift()
-            localStorage.setItem("historyName",JSON.stringify(historyArray))
-        }
-    }
+
 
     // 현재 서버가없어서 에러가 뜨는 상태
     // 유저 닉네임 확인후 이동
-    const handleUserInfoClick = (e) => {
-        if (nickName.length > 0 && nickName.includes(" ") ===false) {
+    const handleUserInfoClick = () => {
+        if (nickName.length > 0 && !nickName.includes(" ")) {
             // try {
             //     axios.post(
             //         USER_INFO_API.CREATE,
@@ -83,24 +83,14 @@ function MainPage() {
             //     } catch (error) {
             //         console.error("에러가 이건가?" + error);
             //     }
-                if(historyArray.length === 0 || historyArray.filter((user) => user === nickName).length === 0){
-                    addUser()
-                    navigate(`/userInfo/${nickName}`)
-                }else{
-                    const newArray = [
-                        ...historyArray.filter((user) => user === nickName),
-                        ...historyArray.filter((user) => user !== nickName)
-                    ]
-                    localStorage.setItem("historyName",JSON.stringify(newArray))
-                    navigate(`/userInfo/${nickName}`)
-                }
-        }else if(nickName.includes(" ") === true){
-            alert("유저이름에 공백을 제거해주세요")
+            updateHistory(nickName);
+            navigate(`/userInfo/${nickName}`);
+        } else if (nickName.includes(" ")) {
+            alert("유저이름에 공백을 제거해주세요");
+        } else {
+            alert("유저 이름을 입력해주세요");
         }
-        else{
-            alert("유저 이름을 입력해주세요")
-            }
-        }
+    };
 
     //유저 히스토리 삭제
     const handleClickDelete = (DeleteUser) => {
@@ -141,7 +131,7 @@ function MainPage() {
                 <div className='MP_NameHistory'>
                     {(historyArray).map((item , index) => {
                         return(
-                            <div className='History_NameList'>
+                            <div className='History_NameList' key={item}>
                                 {item !== "" &&  (
                                     <>
                                     <span className='History_Name' onClick={(e) => navigate(`/userInfo/${item}`)}>
@@ -165,11 +155,11 @@ function MainPage() {
                             <>
                                 {item.days >= 20201127 ? 
                                 <>
-                                    <div className='Cupon_Code' onClick={() => handleClickCopy(item.code)}>{item.code}</div>
+                                    <div className='Cupon_Code' key={item.code} onClick={() => handleClickCopy(item.code)}>{item.code}</div>
                                 </>
                                 :
                                 <>
-                                    <div className='Cupon_Code_End' onClick={() => handleClickEnd(item.code)}>{item.code}</div>
+                                    <div className='Cupon_Code_End' key={item.code} onClick={() => handleClickEnd(item.code)}>{item.code}</div>
                                 </>
                                 }
                             </>

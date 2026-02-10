@@ -3,27 +3,7 @@ import './css/User_GameLog.css'
 
 function User_GameLog({ useData, mostData }) {
 
-    const [userInfo , setUserInfo] = useState([
-        {
-            krChar : "알렉스",
-            char : "Alex",
-            games  : "78",
-            winning : "12.3"
-        },
-        {
-            krChar : "쇼이치",
-            char : "Shoichi",
-            games  : "53",
-            winning : "7.3"
-        },
-        {
-            krChar : "유키",
-            char : "Yuki",
-            games  : "32",
-            winning : "4.2"
-        }
-    ]
-    )
+
 
     return (
         <>
@@ -37,9 +17,9 @@ function User_GameLog({ useData, mostData }) {
                         <span style={{marginLeft:"20px"}}>승 률</span>
                     </div>
                 </div>
-                {userInfo.map((item,idx) => {
+                {mostData.map((item,idx) => {
                     return(
-                            <div className='most_op'>
+                            <div className='most_op' key={item.char}>
                                 <div>
                                     { <img className='most_img' src={`${process.env.PUBLIC_URL}/image/Char/icon/${item.char}.png`} />}
                                 </div>
@@ -48,7 +28,7 @@ function User_GameLog({ useData, mostData }) {
                                     <div style={{ color: "white", fontSize: "11.5px" }}>{item.games} Games</div>
                                 </div>
                                 <div style={{color:"white",marginTop:"12px" , fontSize:"14px",marginRight:"10px"}}>
-                                    <div>3.2</div>
+                                    <div>{item.kda}</div>
                                 </div>
                                 <div className='right_op'>
                                     <div>{item.winning}%</div>
