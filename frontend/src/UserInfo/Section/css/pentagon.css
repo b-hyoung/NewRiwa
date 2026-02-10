@@ -9,115 +9,16 @@
 }
 
 .pentagon svg{
-    transform: scale(1.5);
+    /* transform: scale(1.5); // Removed to avoid double scaling */
     width: 100%;
     height : 100%;
-}
-.pentagon svg g circle{
-    size: 300;
-    stroke: white;
-    fill: none;
-
 }
 .rank{
     font-weight: bold;
 }
-.text_kill , .text_test{
-    width: 80px;
-    position: absolute;
-    left: 0px ;
-    top: 25px;
-    color: #F4EFEA;
-    text-align: center;
-}
-
-.text_kill{
-    left: 5px;
-}
-.text_demage, .text_mastery{
-    width: 130px;
-    position: absolute;
-    left: 5px !important;
-    top: 25px;
-    color: #F4EFEA;
-    
-}
-.text_survive{
-    width: 130px;
-    position:absolute;
-    top: 20px;
-    left:25px;
+.text_test, .text_kill, .text_demage, .text_mastery, .text_survive{
+    font-size: 14px;
+    font-weight: bold;
     color: #F4EFEA;
 }
 
-
-.rank_survive {
-    position: absolute;
-    top: -73px;
-    left: 70px;
-    display: flex;
-    flex-direction: column;
-    -webkit-box-align: center;
-    align-items: center;
-    width: 85px;
-}
-.rank_kill {
-    position: absolute;
-    top: 40px;
-    left: 235px;
-    display: flex;
-    flex-direction: column;
-    -webkit-box-align: center;
-    align-items: center;
-    width: 85px;
-}
-.rank_demage {
-    position: absolute;
-    top: 220px;
-    left: 160px;
-    display: flex;
-    flex-direction: column;
-    -webkit-box-align: center;
-    align-items: center;
-    width: 85px;
-}
-.rank_mastery {
-    position: absolute;
-    top: 220px;
-    left: -20px;
-    display: flex;
-    flex-direction: column;
-    -webkit-box-align: center;
-    align-items: center;
-    width: 85px;
-}
-.rank_test{
-    position: absolute;
-    top: 40px;
-    left: -95px;
-    display: flex;
-    flex-direction: column;
-    -webkit-box-align: center;
-    align-items: center;
-    width: 85px;
-}
-
-.avg_tier{
-    position: absolute;
-    top: -75px;
-    left: 280px;
-    width: 130px;
-}
-
-.avg_tier .colume{
-    display: flex;
-    width: 200px;
-    flex-direction: row;
-}
-.avg_tier .colume .test_{
-    border:1px solid white;
-    width:15px;
-    height:15px;
-    margin-top: 5px;
-    margin-right:5px;
-}
